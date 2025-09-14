@@ -3,351 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R1_L34D3R :: Portfolio</title>
-    <!-- Fonts and Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+    <title>Welcome</title>
     <style>
-        :root {
-            --primary-color: #00ff41;
-            --secondary-color: #555;
-            --background-color: #0d0d0d;
-            --text-color: #e6e6e6;
-            --header-color: #fff;
-            --container-bg: rgba(20, 20, 20, 0.7);
-            --border-glow: rgba(0, 255, 65, 0.5);
-        }
-
-        /* Basic setup */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            font-family: 'Share Tech Mono', monospace;
-            scroll-behavior: smooth;
-        }
-        
-        /* Digital rain background */
-        #matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.2;
-        }
-
-        /* Main container */
-        .container {
-            width: 90%;
-            max-width: 900px;
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Header section */
-        header {
-            text-align: center;
-            padding: 10vh 0;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        h1.name {
-            font-family: 'Nova Square', sans-serif;
-            font-size: clamp(2.5rem, 10vw, 5rem);
-            color: var(--header-color);
-            margin: 0;
-            text-shadow: 0 0 15px var(--border-glow);
-        }
-
-        .header-divider {
-            height: 2px;
-            width: 50%;
-            max-width: 300px;
-            margin: 20px auto;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            border: none;
-        }
-        
-        .roles {
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: #ccc;
-        }
-        
-        .role-separator {
-            margin: 0 15px;
-            color: var(--secondary-color);
-        }
-        
-        /* General section styling */
-        .content-section {
-            padding: 60px 0;
-            border-top: 1px solid var(--secondary-color);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .content-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--header-color);
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        
-        .section-title::before {
-            content: '// ';
-            color: var(--secondary-color);
-        }
-        
-        /* Expertise Section */
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            text-align: center;
-        }
-
-        .expertise-item {
-            background-color: var(--container-bg);
-            border: 1px solid var(--secondary-color);
-            padding: 30px 20px;
-            border-radius: 5px;
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .expertise-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-color);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .expertise-item .icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .expertise-item h3 {
-            font-family: 'Audiowide', sans-serif;
-            color: var(--header-color);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .expertise-item p {
+            padding: 20px;
             line-height: 1.6;
-            font-size: 1rem;
-            color: #ccc;
+            color: #333;
         }
-
-        /* About Section */
-        #about p {
+        
+        h1 {
+            color: #2c3e50;
             text-align: center;
-            line-height: 1.8;
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
+            margin-bottom: 30px;
         }
         
-        /* Connect Section */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
+        .container {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .social-link {
-            color: var(--text-color);
-            font-size: 2.5rem;
-            transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
+        p {
+            margin-bottom: 15px;
         }
         
-        .social-link:hover {
-            color: var(--primary-color);
-            transform: scale(1.1);
-            text-shadow: 0 0 10px var(--border-glow);
+        .highlight {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
-    <canvas id="matrix-bg"></canvas>
-
     <div class="container">
-        <header>
-            <h1 class="name">R1_L34D3R</h1>
-            <hr class="header-divider">
-            <p class="roles">
-                <span>VIBE CODER</span>
-                <span class="role-separator">|</span>
-                <span>CYBER ENTHUSIAST</span>
-                <span class="role-separator">|</span>
-                <span>RED TEAMER</span>
-            </p>
-        </header>
-
-        <main>
-            <section id="about" class="content-section">
-                <h2 class="section-title">About Me</h2>
-                <p>
-                    I'm a developer and security researcher navigating the digital frontier. I believe in a proactive, defense-in-depth approach to security—it's not about building impenetrable walls, but about creating resilient, intelligent systems that can anticipate and adapt to threats. My work lives at the intersection of creation and curiosity, driven by a passion for deconstructing complex systems to understand and secure them. Currently, I'm diving deep into cloud security and developing secure infrastructure patterns.
-                </p>
-            </section>
-
-            <section id="awareness" class="content-section">
-                <h2 class="section-title">The Proactive Mindset</h2>
-                <div class="expertise-grid">
-                    <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-key"></i></div>
-                        <h3>Strong Passwords & MFA</h3>
-                        <p>Your password is your first line of defense. Use a unique, complex password for every account and enable Multi-Factor Authentication (MFA) wherever possible for an essential extra layer of security.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-brain"></i></div>
-                        <h3>Recognize Social Engineering</h3>
-                        <p>Attackers often exploit human psychology, not just code. Be skeptical of unsolicited requests for information, verify identities, and think critically before clicking on suspicious links or attachments.</p>
-                    </div>
-                     <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>Secure Browsing Habits</h3>
-                        <p>Navigate the web defensively. Ensure connections are HTTPS, be cautious on public Wi-Fi, and keep your browser and extensions updated to patch vulnerabilities against the latest threats.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="attack-vectors" class="content-section">
-                <h2 class="section-title">Common Attack Vectors</h2>
-                <div class="expertise-grid">
-                    <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-fish"></i></div>
-                        <h3>Phishing</h3>
-                        <p>Deceptive emails or messages designed to trick individuals into revealing sensitive information like passwords, credit card numbers, or personal data.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-virus"></i></div>
-                        <h3>Malware</h3>
-                        <p>Malicious software (viruses, ransomware, spyware) designed to disrupt operations, steal data, or gain unauthorized access to computer systems.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-user-secret"></i></div>
-                        <h3>Man-in-the-Middle</h3>
-                        <p>An attack where the perpetrator secretly intercepts and relays communication between two parties who believe they are directly communicating.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-database"></i></div>
-                        <h3>SQL Injection</h3>
-                        <p>A technique that exploits vulnerabilities in a database by inserting malicious SQL queries into an entry field, often to extract or manipulate data.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-code"></i></div>
-                        <h3>Cross-Site Scripting (XSS)</h3>
-                        <p>Injecting malicious scripts into trusted websites. The script executes when a user visits the page, often to steal session cookies or credentials.</p>
-                    </div>
-                    <div class="expertise-item">
-                        <div class="icon"><i class="fas fa-server"></i></div>
-                        <h3>DDoS Attack</h3>
-                        <p>Overwhelming a server, service, or network with a flood of internet traffic, rendering it unavailable for legitimate users. (Denial-of-Service).</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="connect" class="content-section">
-                <h2 class="section-title">Connect</h2>
-                <p style="text-align: center; max-width: 500px; margin: 0 auto 40px auto; line-height: 1.6;">
-                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision. Feel free to connect with me.
-                </p>
-                <div class="social-links">
-                    <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/itz_rl_leader/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-            </section>
-        </main>
+        <h1>Welcome to the New Site</h1>
+        
+        <p>This is a fresh start with a new index.html file.</p>
+        
+        <div class="highlight">
+            <p><strong>Note:</strong> The old index.html file has been successfully replaced with this new version.</p>
+        </div>
+        
+        <p>This new page provides a clean foundation that can be customized and expanded based on your needs.</p>
+        
+        <p>The page includes:</p>
+        <ul>
+            <li>Responsive design that works on all devices</li>
+            <li>Clean, modern styling</li>
+            <li>Proper HTML5 structure</li>
+            <li>SEO-friendly meta tags</li>
+        </ul>
     </div>
-
-    <script>
-        // Matrix Rain Effect
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        const alphabet = katakana + latin + nums;
-
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const rainDrops = [];
-
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
-        }
-
-        const draw = () => {
-            ctx.fillStyle = 'rgba(13, 13, 13, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#00ff41';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
-            }
-        };
-        setInterval(draw, 33);
-        
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            // Recalculate columns and reset drops on resize if needed
-        });
-
-        // Scroll Fade-in Effect
-        const sections = document.querySelectorAll('.content-section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.2
-        });
-        
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    </script>
 </body>
 </html>
-
