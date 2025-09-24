@@ -3,189 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Farming Advisor - Project Mind Map</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>R1_L34D3R :: Portfolio</title>
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
-            background-color: #f9fafb;
+        :root {
+            --primary-color: #00ff41;
+            --secondary-color: #555;
+            --background-color: #0d0d0d;
+            --text-color: #e6e6e6;
+            --header-color: #fff;
+            --container-bg: rgba(20, 20, 20, 0.7);
+            --border-glow: rgba(0, 255, 65, 0.5);
         }
-        .mindmap-container {
-            position: relative;
+
+        /* Basic setup */
+        body, html {
+            margin: 0;
+            padding: 0;
             width: 100%;
-            height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace;
+            scroll-behavior: smooth;
         }
-        .node {
-            position: absolute;
-            background-image: linear-gradient(to top, white, #f9fafb);
-            border-radius: 0.75rem;
-            padding: 1.25rem 1.75rem; 
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.8);
-            animation: fadeIn 0.8s ease-out forwards;
-            white-space: nowrap;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .node:hover {
-            transform: translate(-50%, -50%) scale(1.05);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-        }
-        .node-central {
-            background-image: linear-gradient(to top, #4f46e5, #6366f1);
-            color: white;
-            padding: 1.75rem 2.25rem;
-            z-index: 10;
-        }
-        .node-primary { border-top: 4px solid #4f46e5; }
-        /* Distinct colors for secondary nodes */
-        .data-node { border-top: 4px solid #10b981; }
-        .ai-node { border-top: 4px solid #8b5cf6; }
-        .ui-node { border-top: 4px solid #f97316; }
-
-        .node .icon {
-            margin: 0 auto 0.75rem auto;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: pulse-icon 2.5s infinite ease-in-out;
-        }
-        .data-node .icon { background-color: #d1fae5; color: #059669; }
-        .ai-node .icon { background-color: #ede9fe; color: #7c3aed; }
-        .ui-node .icon { background-color: #ffedd5; color: #ea580c; }
         
-        .line {
-            position: absolute;
-            background-color: #d1d5db;
-            height: 2px;
-            transform-origin: 0 0;
-            z-index: 1;
-            opacity: 0;
-            animation: drawLine 1s ease-out forwards;
-        }
-
-        .background-pattern {
-            position: absolute;
+        /* Digital rain background */
+        #matrix-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e0e7ff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            z-index: 0;
+            z-index: -1;
+            opacity: 0.2;
         }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-        @keyframes drawLine { to { opacity: 0.5; } }
-        @keyframes pulse-icon {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        /* Main container */
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Animation delays */
-        .node-central { animation-delay: 0.2s; }
-        #data-layer, #ai-core, #user-interface { animation-delay: 1.0s; }
-        #farmer-input, #external-apis, #disease-detector, #crop-advisor, #flutter-app, #gen-ai-chat { animation-delay: 1.8s; }
+        /* Header section */
+        header {
+            text-align: center;
+            padding: 10vh 0;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
         
-        .line-primary { animation-delay: 1.0s; }
-        .line-secondary { animation-delay: 1.8s; }
+        h1.name {
+            font-family: 'Nova Square', sans-serif;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            color: var(--header-color);
+            margin: 0;
+            text-shadow: 0 0 15px var(--border-glow);
+        }
+
+        .header-divider {
+            height: 2px;
+            width: 50%;
+            max-width: 300px;
+            margin: 20px auto;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            border: none;
+        }
+        
+        .roles {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #ccc;
+        }
+        
+        .role-separator {
+            margin: 0 15px;
+            color: var(--secondary-color);
+        }
+        
+        /* General section styling */
+        .content-section {
+            padding: 60px 0;
+            border-top: 1px solid var(--secondary-color);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--header-color);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .section-title::before {
+            content: '// ';
+            color: var(--secondary-color);
+        }
+        
+        /* Expertise Section */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            text-align: center;
+        }
+
+        .expertise-item {
+            background-color: var(--container-bg);
+            border: 1px solid var(--secondary-color);
+            padding: 30px 20px;
+            border-radius: 5px;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .expertise-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .expertise-item .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .expertise-item h3 {
+            font-family: 'Audiowide', sans-serif;
+            color: var(--header-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .expertise-item p {
+            line-height: 1.6;
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        /* About Section */
+        #about p {
+            text-align: center;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Connect Section */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .social-link {
+            color: var(--text-color);
+            font-size: 2.5rem;
+            transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
+        }
+        
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+            text-shadow: 0 0 10px var(--border-glow);
+        }
     </style>
 </head>
-<body class="bg-gray-50">
-    <div class="background-pattern"></div>
-    <div id="mindmap-container" class="mindmap-container">
-        <!-- Nodes will be injected here by JavaScript -->
+<body>
+    <canvas id="matrix-bg"></canvas>
+
+    <div class="container">
+        <header>
+            <h1 class="name">R1_L34D3R</h1>
+            <hr class="header-divider">
+            <p class="roles">
+                <span>VIBE CODER</span>
+                <span class="role-separator">|</span>
+                <span>CYBER ENTHUSIAST</span>
+                <span class="role-separator">|</span>
+                <span>RED TEAMER</span>
+            </p>
+        </header>
+
+        <main>
+            <section id="about" class="content-section">
+                <h2 class="section-title">About Me</h2>
+                <p>
+                    I'm a developer and security researcher navigating the digital frontier. I believe in a proactive, defense-in-depth approach to security—it's not about building impenetrable walls, but about creating resilient, intelligent systems that can anticipate and adapt to threats. My work lives at the intersection of creation and curiosity, driven by a passion for deconstructing complex systems to understand and secure them. Currently, I'm diving deep into cloud security and developing secure infrastructure patterns.
+                </p>
+            </section>
+
+            <section id="awareness" class="content-section">
+                <h2 class="section-title">The Proactive Mindset</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-key"></i></div>
+                        <h3>Strong Passwords & MFA</h3>
+                        <p>Your password is your first line of defense. Use a unique, complex password for every account and enable Multi-Factor Authentication (MFA) wherever possible for an essential extra layer of security.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-brain"></i></div>
+                        <h3>Recognize Social Engineering</h3>
+                        <p>Attackers often exploit human psychology, not just code. Be skeptical of unsolicited requests for information, verify identities, and think critically before clicking on suspicious links or attachments.</p>
+                    </div>
+                     <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Secure Browsing Habits</h3>
+                        <p>Navigate the web defensively. Ensure connections are HTTPS, be cautious on public Wi-Fi, and keep your browser and extensions updated to patch vulnerabilities against the latest threats.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="attack-vectors" class="content-section">
+                <h2 class="section-title">Common Attack Vectors</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-fish"></i></div>
+                        <h3>Phishing</h3>
+                        <p>Deceptive emails or messages designed to trick individuals into revealing sensitive information like passwords, credit card numbers, or personal data.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-virus"></i></div>
+                        <h3>Malware</h3>
+                        <p>Malicious software (viruses, ransomware, spyware) designed to disrupt operations, steal data, or gain unauthorized access to computer systems.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-user-secret"></i></div>
+                        <h3>Man-in-the-Middle</h3>
+                        <p>An attack where the perpetrator secretly intercepts and relays communication between two parties who believe they are directly communicating.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-database"></i></div>
+                        <h3>SQL Injection</h3>
+                        <p>A technique that exploits vulnerabilities in a database by inserting malicious SQL queries into an entry field, often to extract or manipulate data.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-code"></i></div>
+                        <h3>Cross-Site Scripting (XSS)</h3>
+                        <p>Injecting malicious scripts into trusted websites. The script executes when a user visits the page, often to steal session cookies or credentials.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="icon"><i class="fas fa-server"></i></div>
+                        <h3>DDoS Attack</h3>
+                        <p>Overwhelming a server, service, or network with a flood of internet traffic, rendering it unavailable for legitimate users. (Denial-of-Service).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="connect" class="content-section">
+                <h2 class="section-title">Connect</h2>
+                <p style="text-align: center; max-width: 500px; margin: 0 auto 40px auto; line-height: 1.6;">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision. Feel free to connect with me.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/itz_rl_leader/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('mindmap-container');
-            
-            const nodeData = {
-                "central-node": { 
-                    content: `<h1 class="text-3xl font-bold">AI Farming Advisor</h1><p class="text-indigo-200 mt-1">A Complete Decision Support System</p>`, 
-                    class: 'node node-central', 
-                    pos: { x: 0, y: 0 } 
-                },
-                "data-layer": { content: `<h2 class="text-2xl font-semibold">Data Layer</h2><p class="text-gray-500">Gathers All Information</p>`, class: 'node node-primary', pos: { x: -0.35, y: 0 } },
-                "ai-core": { content: `<h2 class="text-2xl font-semibold">AI Core</h2><p class="text-gray-500">The "Brain" of the Project</p>`, class: 'node node-primary', pos: { x: 0, y: -0.4 } },
-                "user-interface": { content: `<h2 class="text-2xl font-semibold">User Interface</h2><p class="text-gray-500">The Farmer's App</p>`, class: 'node node-primary', pos: { x: 0.35, y: 0 } },
-                
-                "farmer-input": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><h3 class="font-semibold text-lg">Farmer Input</h3><p class="text-sm text-gray-500">Leaf Photos, Location,<br>Manual Sensor Data</p>`, class: 'node data-node', pos: { x: -0.48, y: -0.2 } },
-                "external-apis": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9"></path></svg></div><h3 class="font-semibold text-lg">External APIs</h3><p class="text-sm text-gray-500">Bhuvan (Soil), Weather API,<br>AgriMarket Prices</p>`, class: 'node data-node', pos: { x: -0.48, y: 0.2 } },
-                
-                "disease-detector": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div><h3 class="font-semibold text-lg">Expert #1: Disease Detector</h3><p class="text-sm text-gray-500">Advanced MultimodalNet<br>you already built.</p>`, class: 'node ai-node', pos: { x: -0.2, y: -0.48 } },
-                "crop-advisor": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div><h3 class="font-semibold text-lg">Expert #2: Crop Advisor</h3><p class="text-sm text-gray-500">New model for recommending<br>crops, profit, and yield.</p>`, class: 'node ai-node', pos: { x: 0.2, y: -0.48 } },
-                
-                "flutter-app": { content: `<div class="icon"><svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg></div><h3 class="font-semibold text-lg">Flutter Mobile App</h3><p class="text-sm text-gray-500">Simple, multilingual interface<br>with offline capabilities.</p>`, class: 'node ui-node', pos: { x: 0.48, y: -0.2 } },
-                "gen-ai-chat": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><h3 class="font-semibold text-lg">Generative AI Chat</h3><p class="text-sm text-gray-500">Natural language voice/text<br>interface for questions.</p>`, class: 'node ui-node', pos: { x: 0.48, y: 0.2 } },
-            };
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
 
-            const connections = [
-                { from: 'central-node', to: 'data-layer', class: 'line-primary' },
-                { from: 'central-node', to: 'ai-core', class: 'line-primary' },
-                { from: 'central-node', to: 'user-interface', class: 'line-primary' },
-                { from: 'data-layer', to: 'farmer-input', class: 'line-secondary' },
-                { from: 'data-layer', to: 'external-apis', class: 'line-secondary' },
-                { from: 'ai-core', to: 'disease-detector', class: 'line-secondary' },
-                { from: 'ai-core', to: 'crop-advisor', class: 'line-secondary' },
-                { from: 'user-interface', to: 'flutter-app', class: 'line-secondary' },
-                { from: 'user-interface', to: 'gen-ai-chat', class: 'line-secondary' },
-            ];
-            
-            const containerWidth = container.clientWidth;
-            const containerHeight = container.clientHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            for (const id in nodeData) {
-                const data = nodeData[id];
-                const el = document.createElement('div');
-                el.id = id;
-                el.className = data.class;
-                el.innerHTML = data.content;
-                el.style.left = `${containerWidth / 2 + containerWidth * data.pos.x}px`;
-                el.style.top = `${containerHeight / 2 + containerHeight * data.pos.y}px`;
-                
-                if (id === 'central-node') el.style.animationDelay = '0.2s';
-                else if (['data-layer', 'ai-core', 'user-interface'].includes(id)) el.style.animationDelay = '1.0s';
-                else el.style.animationDelay = '1.8s';
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
 
-                container.appendChild(el);
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const rainDrops = [];
+
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(13, 13, 13, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
             }
+        };
+        setInterval(draw, 33);
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Recalculate columns and reset drops on resize if needed
+        });
 
-            setTimeout(() => {
-                connections.forEach(conn => {
-                    const fromEl = document.getElementById(conn.from);
-                    const toEl = document.getElementById(conn.to);
-                    if (!fromEl || !toEl) return;
-
-                    const x1 = fromEl.offsetLeft;
-                    const y1 = fromEl.offsetTop;
-                    const x2 = toEl.offsetLeft;
-                    const y2 = toEl.offsetTop;
-
-                    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-                    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-
-                    const line = document.createElement('div');
-                    line.className = `line ${conn.class}`;
-                    line.style.width = `${length}px`;
-                    line.style.left = `${x1}px`;
-                    line.style.top = `${y1}px`;
-                    line.style.transform = `rotate(${angle}deg)`;
-                    container.appendChild(line);
-                });
-            }, 100);
+        // Scroll Fade-in Effect
+        const sections = document.querySelectorAll('.content-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+        
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
