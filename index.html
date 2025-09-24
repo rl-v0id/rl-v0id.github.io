@@ -1,212 +1,191 @@
-<div class="message"></div>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'm Sorry</title>
+    <title>AI Farming Advisor - Project Mind Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #f9fafb;
+        }
+        .mindmap-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        .node {
+            position: absolute;
+            background-image: linear-gradient(to top, white, #f9fafb);
+            border-radius: 0.75rem;
+            padding: 1.25rem 1.75rem; 
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+            animation: fadeIn 0.8s ease-out forwards;
+            white-space: nowrap;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .node:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .node-central {
+            background-image: linear-gradient(to top, #4f46e5, #6366f1);
+            color: white;
+            padding: 1.75rem 2.25rem;
+            z-index: 10;
+        }
+        .node-primary { border-top: 4px solid #4f46e5; }
+        /* Distinct colors for secondary nodes */
+        .data-node { border-top: 4px solid #10b981; }
+        .ai-node { border-top: 4px solid #8b5cf6; }
+        .ui-node { border-top: 4px solid #f97316; }
+
+        .node .icon {
+            margin: 0 auto 0.75rem auto;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            justify-content: center;
+            animation: pulse-icon 2.5s infinite ease-in-out;
+        }
+        .data-node .icon { background-color: #d1fae5; color: #059669; }
+        .ai-node .icon { background-color: #ede9fe; color: #7c3aed; }
+        .ui-node .icon { background-color: #ffedd5; color: #ea580c; }
+        
+        .line {
+            position: absolute;
+            background-color: #d1d5db;
+            height: 2px;
+            transform-origin: 0 0;
+            z-index: 1;
+            opacity: 0;
+            animation: drawLine 1s ease-out forwards;
         }
 
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 90%;
-            animation: fadeIn 1s ease-in-out;
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e0e7ff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        @keyframes drawLine { to { opacity: 0.5; } }
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .heart {
-            color: #e74c3c;
-            font-size: 1.5em;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .message {
-            font-size: 1.2em;
-            color: #555;
-            line-height: 1.6;
-            margin: 30px 0;
-        }
-
-        .apology-text {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
-            font-size: 1.4em;
-            margin: 20px 0;
-        }
-
-        .flowers {
-            font-size: 3em;
-            margin: 20px 0;
-            animation: sway 3s ease-in-out infinite;
-        }
-
-        @keyframes sway {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
-        }
-
-        .promise {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #ff6b6b;
-            margin: 20px 0;
-            font-style: italic;
-        }
-
-        .button {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: transform 0.3s;
-            margin: 10px;
-        }
-
-        .button:hover {
-            transform: scale(1.05);
-        }
-
-        .sparkles {
-            position: fixed;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-        }
+        /* Animation delays */
+        .node-central { animation-delay: 0.2s; }
+        #data-layer, #ai-core, #user-interface { animation-delay: 1.0s; }
+        #farmer-input, #external-apis, #disease-detector, #crop-advisor, #flutter-app, #gen-ai-chat { animation-delay: 1.8s; }
+        
+        .line-primary { animation-delay: 1.0s; }
+        .line-secondary { animation-delay: 1.8s; }
     </style>
 </head>
-<body>
-    <div class="sparkles" id="sparkles"></div>
-    
-    <div class="container">
-        <h1>I'm Really Sorry <span class="heart">💕</span></h1>
-        
-        <div class="flowers">🌸🌺🌸</div>
-        
-        <div class="message">
-            Hey Jeeva,<br><br>
-            I know I messed up, and I'm truly sorry for what happened. 
-            You mean so much to me as a friend, and I hate that I hurt you.
-        </div>
-
-        <div class="apology-text">
-            I was wrong, and I take full responsibility.
-        </div>
-
-        <div class="promise">
-            <strong>My Promise to You:</strong><br>
-            I will be more thoughtful, listen better, and make sure this doesn't happen again. 
-            Your friendship is precious to me, and I don't want to lose it over my mistake.
-        </div>
-
-        <div class="message">
-            Can we please talk and work things out? 
-            I miss having you as my friend. <span class="heart">💝</span>
-        </div>
-
-        <button class="button" onclick="showMessage()">Accept My Apology? 🥺</button>
-        <button class="button" onclick="sendMessage()">Let's Talk 💬</button>
+<body class="bg-gray-50">
+    <div class="background-pattern"></div>
+    <div id="mindmap-container" class="mindmap-container">
+        <!-- Nodes will be injected here by JavaScript -->
     </div>
 
     <script>
-        // Create sparkles animation
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.innerHTML = '✨';
-            sparkle.style.position = 'fixed';
-            sparkle.style.left = Math.random() * window.innerWidth + 'px';
-            sparkle.style.top = Math.random() * window.innerHeight + 'px';
-            sparkle.style.fontSize = Math.random() * 20 + 10 + 'px';
-            sparkle.style.animation = 'sparkle 2s ease-in-out';
-            sparkle.style.pointerEvents = 'none';
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('mindmap-container');
             
-            document.getElementById('sparkles').appendChild(sparkle);
+            const nodeData = {
+                "central-node": { 
+                    content: `<h1 class="text-3xl font-bold">AI Farming Advisor</h1><p class="text-indigo-200 mt-1">A Complete Decision Support System</p>`, 
+                    class: 'node node-central', 
+                    pos: { x: 0, y: 0 } 
+                },
+                "data-layer": { content: `<h2 class="text-2xl font-semibold">Data Layer</h2><p class="text-gray-500">Gathers All Information</p>`, class: 'node node-primary', pos: { x: -0.35, y: 0 } },
+                "ai-core": { content: `<h2 class="text-2xl font-semibold">AI Core</h2><p class="text-gray-500">The "Brain" of the Project</p>`, class: 'node node-primary', pos: { x: 0, y: -0.4 } },
+                "user-interface": { content: `<h2 class="text-2xl font-semibold">User Interface</h2><p class="text-gray-500">The Farmer's App</p>`, class: 'node node-primary', pos: { x: 0.35, y: 0 } },
+                
+                "farmer-input": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><h3 class="font-semibold text-lg">Farmer Input</h3><p class="text-sm text-gray-500">Leaf Photos, Location,<br>Manual Sensor Data</p>`, class: 'node data-node', pos: { x: -0.48, y: -0.2 } },
+                "external-apis": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9"></path></svg></div><h3 class="font-semibold text-lg">External APIs</h3><p class="text-sm text-gray-500">Bhuvan (Soil), Weather API,<br>AgriMarket Prices</p>`, class: 'node data-node', pos: { x: -0.48, y: 0.2 } },
+                
+                "disease-detector": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div><h3 class="font-semibold text-lg">Expert #1: Disease Detector</h3><p class="text-sm text-gray-500">Advanced MultimodalNet<br>you already built.</p>`, class: 'node ai-node', pos: { x: -0.2, y: -0.48 } },
+                "crop-advisor": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div><h3 class="font-semibold text-lg">Expert #2: Crop Advisor</h3><p class="text-sm text-gray-500">New model for recommending<br>crops, profit, and yield.</p>`, class: 'node ai-node', pos: { x: 0.2, y: -0.48 } },
+                
+                "flutter-app": { content: `<div class="icon"><svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg></div><h3 class="font-semibold text-lg">Flutter Mobile App</h3><p class="text-sm text-gray-500">Simple, multilingual interface<br>with offline capabilities.</p>`, class: 'node ui-node', pos: { x: 0.48, y: -0.2 } },
+                "gen-ai-chat": { content: `<div class="icon"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><h3 class="font-semibold text-lg">Generative AI Chat</h3><p class="text-sm text-gray-500">Natural language voice/text<br>interface for questions.</p>`, class: 'node ui-node', pos: { x: 0.48, y: 0.2 } },
+            };
+
+            const connections = [
+                { from: 'central-node', to: 'data-layer', class: 'line-primary' },
+                { from: 'central-node', to: 'ai-core', class: 'line-primary' },
+                { from: 'central-node', to: 'user-interface', class: 'line-primary' },
+                { from: 'data-layer', to: 'farmer-input', class: 'line-secondary' },
+                { from: 'data-layer', to: 'external-apis', class: 'line-secondary' },
+                { from: 'ai-core', to: 'disease-detector', class: 'line-secondary' },
+                { from: 'ai-core', to: 'crop-advisor', class: 'line-secondary' },
+                { from: 'user-interface', to: 'flutter-app', class: 'line-secondary' },
+                { from: 'user-interface', to: 'gen-ai-chat', class: 'line-secondary' },
+            ];
             
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+
+            for (const id in nodeData) {
+                const data = nodeData[id];
+                const el = document.createElement('div');
+                el.id = id;
+                el.className = data.class;
+                el.innerHTML = data.content;
+                el.style.left = `${containerWidth / 2 + containerWidth * data.pos.x}px`;
+                el.style.top = `${containerHeight / 2 + containerHeight * data.pos.y}px`;
+                
+                if (id === 'central-node') el.style.animationDelay = '0.2s';
+                else if (['data-layer', 'ai-core', 'user-interface'].includes(id)) el.style.animationDelay = '1.0s';
+                else el.style.animationDelay = '1.8s';
+
+                container.appendChild(el);
+            }
+
             setTimeout(() => {
-                sparkle.remove();
-            }, 2000);
-        }
+                connections.forEach(conn => {
+                    const fromEl = document.getElementById(conn.from);
+                    const toEl = document.getElementById(conn.to);
+                    if (!fromEl || !toEl) return;
 
-        // Create sparkles every 500ms
-        setInterval(createSparkle, 500);
+                    const x1 = fromEl.offsetLeft;
+                    const y1 = fromEl.offsetTop;
+                    const x2 = toEl.offsetLeft;
+                    const y2 = toEl.offsetTop;
 
-        function showMessage() {
-            alert("Thank you for considering my apology! 💕 You're the best friend ever!");
-        }
+                    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+                    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
 
-        function sendMessage() {
-            alert("Please text me when you're ready to talk. I'll be waiting! 🥺💕");
-        }
-
-        // Add floating hearts on click
-        document.addEventListener('click', function(e) {
-            const heart = document.createElement('div');
-            heart.innerHTML = '💕';
-            heart.style.position = 'fixed';
-            heart.style.left = e.clientX + 'px';
-            heart.style.top = e.clientY + 'px';
-            heart.style.fontSize = '20px';
-            heart.style.pointerEvents = 'none';
-            heart.style.animation = 'fadeIn 1s ease-out forwards';
-            heart.style.zIndex = '1000';
-            
-            document.body.appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 1000);
+                    const line = document.createElement('div');
+                    line.className = `line ${conn.class}`;
+                    line.style.width = `${length}px`;
+                    line.style.left = `${x1}px`;
+                    line.style.top = `${y1}px`;
+                    line.style.transform = `rotate(${angle}deg)`;
+                    container.appendChild(line);
+                });
+            }, 100);
         });
     </script>
 </body>
