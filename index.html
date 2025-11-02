@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>R1_L34D3R • Hacker Portfolio</title>
+  <title>Cyberpunk Hacker Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -39,7 +38,6 @@
     }
     a{color:inherit; text-decoration:none}
     .container{max-width:1200px; margin:0 auto; padding: clamp(16px, 2vw, 32px)}
-
     /* Hero */
     .hero{
       position:relative; isolation:isolate;
@@ -63,7 +61,6 @@
     }
     .kicker{font-family:"JetBrains Mono", monospace; color:var(--muted); text-transform:uppercase; letter-spacing:.24em; font-size:12px}
     .subtitle{color:#cfe4ff; opacity:.9; margin-top:14px; font-size: clamp(16px, 1.2vw, 18px)}
-
     .cta{display:flex; gap:14px; margin-top:26px; flex-wrap:wrap}
     .btn{
       position:relative; padding:14px 18px; border-radius:14px; font-weight:700; border:1px solid rgba(255,255,255,.14); backdrop-filter: blur(6px);
@@ -72,7 +69,6 @@
     }
     .btn.red{border-color: rgba(255,43,69,.45); box-shadow: var(--glow-r)}
     .btn.blue{border-color: rgba(25,211,255,.45); box-shadow: var(--glow-b)}
-
     /* Avatar */
     .avatar-wrap{position:relative}
     .avatar{
@@ -83,9 +79,6 @@
       transform: perspective(1000px) rotateY(-6deg) rotateX(2deg);
     }
     .avatar img{width:100%; height:100%; object-fit:cover; mix-blend-mode:screen; filter: contrast(1.05) saturate(1.15)}
-    .scan-line{position:absolute; left:0; right:0; height:2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); animation: scan 3.5s linear infinite}
-    @keyframes scan{0%{top: 6%} 100%{top: 94%}}
-
     /* Angled glass cards */
     .grid{display:grid; gap:18px; grid-template-columns: repeat(12, 1fr); margin-top:36px}
     .card{
@@ -103,36 +96,29 @@
     .card .head{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:13px; color:#cfe4ff}
     .card .head i{color:var(--green); text-shadow: var(--glow-g)}
     .card .body{margin-top:12px; color:#c7d3e0; font-size:15px}
-
     /* Specific cards span */
     .card.skills{grid-column: span 4}
     .card.bio{grid-column: span 4}
     .card.projects{grid-column: span 4}
     .card.contact{grid-column: span 12}
-
     /* Lists */
     .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
     .tag{font-family:"JetBrains Mono", monospace; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.25)}
-
     /* Animated icons */
     .spin{animation: spin 6s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
     .pulse{position:relative}
     .pulse::after{content:""; position:absolute; inset:-4px; border-radius:10px; border:1px solid rgba(124,254,173,.6); filter: blur(6px); opacity:.6; animation: pulse 2.6s ease-in-out infinite}
     @keyframes pulse{0%,100%{opacity:.2} 50%{opacity:.7}}
-
     /* Footer */
     footer{padding:28px 0; color:#7e9ab4; font-size:12px; text-align:center}
-
     /* Responsive */
     @media (max-width: 960px){
       .hero{grid-template-columns: 1fr; min-height:auto}
       .avatar{transform:none}
       .card.skills,.card.bio,.card.projects{grid-column: span 12}
     }
-  </style>
-</head>
-<body>
+  </style></head><body>
   <header class="container" aria-label="site">
     <nav style="display:flex; justify-content:space-between; align-items:center; gap:12px">
       <div class="kicker">R1_L34D3R // Offensive Security</div>
@@ -142,12 +128,11 @@
       </div>
     </nav>
   </header>
-
   <section class="hero">
     <div class="container" style="display:contents"></div>
     <div class="container">
       <div class="kicker">Signal traced • Access granted</div>
-      <h1 class="title">CrowdStrike‑style Hacker Portfolio</h1>
+      <h1 class="title">Cyberpunk Hacker Portfolio</h1>
       <p class="subtitle">Threat hunting, adversary emulation, and red‑team tradecraft. Building resilient systems by thinking like the attacker.</p>
       <div class="cta">
         <a class="btn red pulse" href="#contact"><i class="fa-solid fa-bolt"></i> Engage</a>
@@ -156,12 +141,10 @@
     </div>
     <div class="container avatar-wrap">
       <div class="avatar" aria-label="Hacker avatar portrait (stylized hoodie/mask, no corporate imagery)">
-        <img alt="Hacker avatar neon" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1600&auto=format&fit=crop" />
-        <span class="scan-line"></span>
+        <img alt="Hacker avatar neon" src="assets/images/cyberpunk_hacker.png" />
       </div>
     </div>
   </section>
-
   <main class="container">
     <div id="skills" class="grid">
       <article class="card skills" aria-labelledby="skills-h">
@@ -179,25 +162,22 @@
           </div>
         </div>
       </article>
-
       <article class="card bio" aria-labelledby="bio-h">
         <div class="head"><i class="fa-solid fa-user-ninja" style="color:var(--red)"></i> <span id="bio-h">Bio</span></div>
         <div class="body">
           Operator focused on adversary tradecraft and rapid incident response. I build high‑signal detections and tools that give defenders an edge.
         </div>
       </article>
-
       <article class="card projects" aria-labelledby="proj-h" id="projects">
-        <div class="head"><i class="fa-solid fa-network-wired" style="color:var(--blue)"></i> <span id="proj-h">Projects</span></div>
+        <div class="head"><i class="fa-solid fa-code" style="color:var(--blue)"></i> <span id="proj-h">Projects</span></div>
         <div class="body">
           <ul>
-            <li>Falcon‑style EDR lab: telemetry pipelines, enrichment, and hunt dashboards.</li>
+            <li>Advanced EDR lab: telemetry pipelines, enrichment, and hunt dashboards.</li>
             <li>Red‑team toolkit: OPSEC‑safe C2 profiles, payload staging, and sandbox escapes.</li>
             <li>Detection packs: Sigma + KQL rules for common TTP chains.</li>
           </ul>
         </div>
       </article>
-
       <article class="card contact" aria-labelledby="contact-h" id="contact">
         <div class="head"><i class="fa-solid fa-satellite" style="color:var(--green)"></i> <span id="contact-h">Contact</span></div>
         <div class="body">
@@ -211,12 +191,9 @@
       </article>
     </div>
   </main>
-
   <footer>
     <div class="container">© <span id="y"></span> R1_L34D3R — Built with neon and grit.</div>
   </footer>
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+  </script></body></html>
