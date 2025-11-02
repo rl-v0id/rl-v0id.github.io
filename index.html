@@ -14,11 +14,11 @@
       --panel: rgba(255,255,255,0.06);
       --glass: rgba(255,255,255,0.08);
       --text: #e6ecf3;
-      --muted: #9fb3c8;
-      --brand: #7cfead;
+      --muted:#9fb3c8;
+      --brand:#7cfead;
       --brand-2:#00e7ff;
       --accent:#b967ff;
-      --radius: 16px;
+      --radius:16px;
       --shadow: 0 10px 40px rgba(0,0,0,.45);
       --glow: 0 0 30px rgba(0,231,255,.35), 0 0 60px rgba(124,254,173,.25);
     }
@@ -33,14 +33,13 @@
       color:var(--text);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
       overflow-x:hidden;
+      scroll-behavior:smooth;
     }
     a{color:inherit; text-decoration:none}
     .wrap{max-width:1200px; margin:0 auto; padding:40px 20px}
 
-    /* Neon header */
-    header.nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
+    /* Header / Nav */
+    header.nav{position:sticky; top:0; z-index:50; backdrop-filter: blur(10px);
       background: linear-gradient(180deg, rgba(20,24,32,.6), rgba(20,24,32,.2));
       border-bottom:1px solid rgba(124,254,173,.2);
     }
@@ -49,173 +48,156 @@
     .brand .logo{width:36px; height:36px; display:grid; place-items:center; border-radius:10px;
       background: linear-gradient(135deg, rgba(124,254,173,.18), rgba(0,231,255,.18));
       box-shadow: var(--glow);
-      border:1px solid rgba(124,254,173,.35);
     }
-    .brand h1{font-size:16px; margin:0; font-weight:700}
+    .brand .logo i{color:var(--brand)}
+    .brand .title{font-weight:800}
+    .brand .mono{font-family:"JetBrains Mono", monospace; color:var(--muted); font-size:.85rem}
 
-    .nav-links{display:flex; gap:18px; font-family: "JetBrains Mono", monospace; font-size:13px; color:var(--muted)}
-    .nav-links a{padding:8px 12px; border-radius:10px; border:1px solid transparent}
-    .nav-links a:hover{border-color:rgba(0,231,255,.35); color:var(--text); box-shadow:0 0 20px rgba(0,231,255,.15)}
+    .nav-links{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .chip{padding:10px 14px; border-radius:999px; background:var(--panel); border:1px solid rgba(124,254,173,.18);
+      color:var(--text); transition: all .2s ease; box-shadow: 0 1px 0 rgba(255,255,255,.04) inset;
+    }
+    .chip:hover{transform:translateY(-2px); box-shadow: var(--glow)}
 
-    /* Hero */
+    /* Hero with right-side highlights */
     .hero{position:relative; overflow:hidden}
-    .grid-bg{position:absolute; inset:0; background:
-      linear-gradient(rgba(124,254,173,.08) 1px, transparent 1px) 0 0/ 32px 32px,
-      linear-gradient(90deg, rgba(0,231,255,.08) 1px, transparent 1px) 0 0/ 32px 32px;
-      mask-image: radial-gradient(ellipse at 60% 10%, black 20%, transparent 70%);
-      pointer-events:none;
+    .neon-grid{position:absolute; inset:-10% -10% 0 -10%; background:
+      linear-gradient(90deg, rgba(124,254,173,.12) 1px, transparent 1px) 0 0/80px 80px,
+      linear-gradient(rgba(0,231,255,.12) 1px, transparent 1px) 0 0/80px 80px;
+      mask-image: radial-gradient(60% 60% at 70% 30%, #000 60%, transparent 100%);
+      pointer-events:none; filter: drop-shadow(0 0 10px rgba(124,254,173,.2));
     }
-    .hero-inner{display:grid; grid-template-columns:1.2fr .8fr; gap:32px; align-items:center; padding:80px 20px}
-    @media (max-width: 900px){ .hero-inner{grid-template-columns:1fr; padding:60px 20px} }
+    .hero-inner{display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; align-items:center}
+    @media (max-width: 900px){.hero-inner{grid-template-columns:1fr}}
+    .hero-card{background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(124,254,173,.15); border-radius: var(--radius); padding:28px; box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+    .kbar{display:flex; gap:10px; align-items:center; color:var(--muted); font-family:"JetBrains Mono", monospace}
+    .kbar .key{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-bottom-color:rgba(0,0,0,.4);
+      padding:6px 10px; border-radius:8px; box-shadow: 0 2px 0 rgba(0,0,0,.4); color:#cde9ff
+    }
+    .stats{display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:12px}
+    .stat{background:var(--panel); border:1px solid rgba(255,255,255,.08); padding:12px 14px; border-radius:12px; text-align:center}
+    .stat .h{font-weight:700; color:var(--brand)}
 
-    .tag{display:inline-flex; gap:8px; align-items:center; font-family:"JetBrains Mono", monospace; font-size:12px; color:var(--brand-2);
-      border:1px solid rgba(0,231,255,.35); border-radius:999px; padding:8px 12px; background:rgba(0,231,255,.06); box-shadow: var(--glow)}
-    .title{font-size:44px; line-height:1.1; margin:18px 0}
-    .title strong{color:var(--brand)}
-    .subtitle{color:var(--muted); max-width:60ch}
+    .right-highlights{display:grid; gap:14px}
+    .highlight{display:flex; align-items:center; gap:12px; background:var(--glass); border:1px solid rgba(0,231,255,.18);
+      border-radius:14px; padding:14px; box-shadow: var(--shadow)}
+    .highlight i{color:var(--brand-2)}
 
-    .cta{display:flex; gap:14px; margin-top:26px}
-    .btn{padding:12px 16px; border-radius:12px; border:1px solid rgba(124,254,173,.35); background:rgba(124,254,173,.08); color:var(--text); font-weight:600}
-    .btn:hover{box-shadow:0 0 22px rgba(124,254,173,.25)}
-    .btn.alt{border-color:rgba(0,231,255,.35); background:rgba(0,231,255,.08)}
+    /* Sections */
+    section{scroll-margin-top:90px}
+    .section-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin:28px 0 14px}
+    .section-head h2{margin:0; font-size:1.4rem; letter-spacing:.6px}
+    .section-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:16px}
+    @media (max-width: 900px){.section-grid{grid-template-columns:1fr}}
+    .card{position:relative; border-radius:16px; padding:18px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10); box-shadow: var(--shadow); overflow:hidden}
+    .card:before{content:""; position:absolute; inset:-1px; border-radius:16px; padding:1px;
+      background: linear-gradient(135deg, rgba(124,254,173,.35), rgba(0,231,255,.2), rgba(185,103,255,.25)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;}
+    .card h3{margin:2px 0 8px; font-size:1.05rem}
+    .card p{margin:0; color:var(--muted)}
+    .badge{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(124,254,173,.12); color:#9effc8; border:1px solid rgba(124,254,173,.25); font-family:"JetBrains Mono", monospace; font-size:.8rem}
 
-    /* Animated terminal card */
-    .terminal{position:relative; border-radius:16px; border:1px solid rgba(255,255,255,.15);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow: var(--glow), var(--shadow); overflow:hidden; font-family:"JetBrains Mono", monospace}
-    .term-head{display:flex; align-items:center; gap:8px; padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.1);
-      background:linear-gradient(180deg, rgba(20,24,32,.8), rgba(20,24,32,.4))}
-    .dot{width:10px; height:10px; border-radius:999px}
-    .dot.red{background:#ff5f57}.dot.yellow{background:#febc2e}.dot.green{background:#28c840}
-    .term-body{padding:18px; min-height:240px}
-    .cursor{display:inline-block; width:10px; height:1em; background:var(--brand-2); animation:blink 1s step-start infinite}
-    @keyframes blink {50%{opacity:0}}
-    .scan{position:absolute; left:0; right:0; height:90px; background:linear-gradient( to bottom, transparent, rgba(124,254,173,.08), transparent);
-      animation: scan 6s linear infinite; pointer-events:none}
-    @keyframes scan {0%{top:-90px} 100%{top:100%}}
-
-    /* Flip card skills */
-    .section{padding:70px 20px}
-    .section h2{font-size:28px; margin:0 0 12px}
-    .muted{color:var(--muted)}
-    .grid{display:grid; grid-template-columns: repeat(4, 1fr); gap:16px}
-    @media (max-width: 1000px){ .grid{grid-template-columns: repeat(2, 1fr)} }
-    @media (max-width: 560px){ .grid{grid-template-columns: 1fr} }
-
-    .card{perspective:1000px}
-    .flip{position:relative; transform-style:preserve-3d; transition: transform .7s cubic-bezier(.2,.8,.2,1)}
-    .card:hover .flip{transform: rotateY(180deg)}
-    .face{position:relative; border-radius:16px; border:1px solid rgba(255,255,255,.12); padding:18px; min-height:160px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); box-shadow: var(--shadow);
-      backface-visibility:hidden; display:flex; flex-direction:column; gap:10px}
-    .back{position:absolute; inset:0; transform: rotateY(180deg)}
-    .face h3{margin:0; font-size:18px}
-    .k{font-family:"JetBrains Mono", monospace; font-size:12px; color:var(--muted)}
-
-    /* Timeline */
-    .timeline{display:grid; gap:14px}
-    .event{display:grid; grid-template-columns: 120px 1fr; gap:16px; align-items:start}
-    @media (max-width: 700px){ .event{grid-template-columns: 1fr} }
-    .badge{font-family:"JetBrains Mono"; color:var(--brand-2); border:1px solid rgba(0,231,255,.35); padding:6px 10px; border-radius:999px; background:rgba(0,231,255,.06)}
-
-    /* Footer */
-    footer{border-top:1px solid rgba(255,255,255,.12); background:linear-gradient(180deg, rgba(20,24,32,.4), rgba(20,24,32,.2)); padding:30px 20px; text-align:center; color:var(--muted)}
-
-    /* Glow accents */
-    .neon{ text-shadow: 0 0 10px rgba(0,231,255,.6), 0 0 20px rgba(124,254,173,.4)}
-    .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.05)}
+    /* Footer / contact */
+    .footer-card{margin-top:28px}
+    .socials{display:flex; gap:12px}
+    .socials a{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px; background:var(--panel); border:1px solid rgba(255,255,255,.08)}
+    .socials a:hover{box-shadow: var(--glow); transform: translateY(-2px)}
   </style>
 </head>
 <body>
   <header class="nav">
-    <div class="nav-inner wrap" style="padding:10px 20px">
+    <div class="nav-inner wrap">
       <div class="brand">
         <div class="logo"><i class="fa-solid fa-shield-halved"></i></div>
-        <h1>R1_L34D3R</h1>
+        <div>
+          <div class="title">R1_L34D3R</div>
+          <div class="mono">cybersecurity • red/purple team</div>
+        </div>
       </div>
       <nav class="nav-links">
-        <a href="#skills">Skills</a>
-        <a href="#work">Operations</a>
-        <a href="#ctf">CTFs</a>
-        <a href="#contact">Contact</a>
+        <a class="chip" href="#skills"><i class="fa-solid fa-terminal"></i> Skills</a>
+        <a class="chip" href="#operations"><i class="fa-solid fa-sitemap"></i> Operations</a>
+        <a class="chip" href="#ctfs"><i class="fa-solid fa-flag"></i> CTFs</a>
+        <a class="chip" href="#contact"><i class="fa-solid fa-signal"></i> Contact</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="grid-bg"></div>
-    <div class="wrap hero-inner">
-      <div>
-        <span class="tag"><i class="fa-solid fa-user-secret"></i> Offensive Security • Red Team</span>
-        <h2 class="title neon">Cybersecurity Researcher & Red Team Operator <strong>// R1_L34D3R</strong></h2>
-        <p class="subtitle">I break systems to make them stronger. Focused on adversary emulation, exploit research, OSINT-driven recon, and high-signal CTF problem solving. No buzzwords—only signal.</p>
-        <div class="cta">
-          <a class="btn" href="#work"><i class="fa-solid fa-bolt"></i> Recent Operations</a>
-          <a class="btn alt" href="#skills"><i class="fa-solid fa-microchip"></i> Capabilities</a>
+  <main class="wrap hero">
+    <div class="neon-grid" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <section class="hero-card">
+        <div class="kbar"><span class="key">$</span> status --opsec [OK] creds • [OK] profile • [OK] infra</div>
+        <h1 style="margin:10px 0 6px">Operator Portfolio</h1>
+        <p style="margin:0; color:var(--muted)">neo4j • mimikatz • responder • cobaltstrike • sliver • rustscan • ghidra • radare2</p>
+        <div class="stats">
+          <div class="stat"><div class="h">50+</div><div class="m">Ops</div></div>
+          <div class="stat"><div class="h">30+</div><div class="m">CTFs</div></div>
+          <div class="stat"><div class="h">7</div><div class="m">Years</div></div>
         </div>
-      </div>
-      <div class="terminal">
-        <div class="term-head">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-          <span style="margin-left:8px; color:var(--muted)">/bin/pwn — interactive</span>
-        </div>
-        <div class="term-body">
-<pre style="margin:0; white-space:pre-wrap"><span style="color:#7cfead">$</span> whoami
-r1_l34d3r
-<span style="color:#7cfead">$</span> skills --list
-- red_team  - exploit_dev  - osint  - malware_analysis  - cloud_attack_paths
-- web_appsec  - infra_pivoting  - wireless  - crypto  - reversing
-<span style="color:#7cfead">$</span> tools --top
-nmap, masscan, burp, ffuf, nuclei, metasploit, impacket, bloodhound, mitm6,
-neo4j, mimikatz, responder, cobaltstrike, sliver, rustscan, ghidra, radare2
-<span style="color:#7cfead">$</span> status --opsec
-[OK] clean creds | [OK] opsec profile | [OK] infra compartmentalized
-<span class="cursor"></span></pre>
-        </div>
-        <div class="scan"></div>
-      </div>
+      </section>
+      <aside class="right-highlights">
+        <div class="highlight"><i class="fa-solid fa-bolt"></i><div><div class="badge"><i class="fa-solid fa-star"></i> High Impact</div><div style="color:var(--muted)">Right-side highlights with neon-glass vibes.</div></div></div>
+        <div class="highlight"><i class="fa-solid fa-lock"></i><div><div class="badge"><i class="fa-solid fa-user-ninja"></i> OPSEC</div><div style="color:var(--muted)">Compartmentalized infra, clean creds, quiet telemetry.</div></div></div>
+        <div class="highlight"><i class="fa-solid fa-microchip"></i><div><div class="badge"><i class="fa-solid fa-brain"></i> Toolchain</div><div style="color:var(--muted)">Automation + repeatable tradecraft.</div></div></div>
+      </aside>
+    </div>
+  </main>
+
+  <section id="skills" class="wrap">
+    <div class="section-head">
+      <h2><i class="fa-solid fa-terminal"></i> Skills</h2>
+      <a class="chip" href="#operations">Next • Operations</a>
+    </div>
+    <div class="section-grid">
+      <div class="card"><h3>Offensive</h3><p>AD privesc, phishing infra, EDR evasion, C2 (CS/Sliver), payload dev.</p></div>
+      <div class="card"><h3>Recon/Intel</h3><p>OSINT, external attack surface, subdomain takeover, cloud misconfig hunt.</p></div>
+      <div class="card"><h3>Reverse/Exploit</h3><p>Ghidra, r2, heap/stack, kernel basics, rust/go tooling.</p></div>
     </div>
   </section>
 
-  <section id="skills" class="section">
-    <div class="wrap">
-      <h2 class="neon">Capabilities</h2>
-      <p class="muted">Zero fluff. Everything below is focused on offensive security, research, and capture‑the‑flag.</p>
-      <div class="grid">
-        <!-- Red Teaming -->
-        <div class="card"><div class="flip">
-          <div class="face">
-            <h3><i class="fa-solid fa-user-ninja"></i> Red Team Ops</h3>
-            <span class="k">adversary emulation • initial access • C2 tradecraft</span>
-          </div>
-          <div class="face back">
-            <h3>Techniques</h3>
-            <div class="k">phishing kits, payload staging, EDR evasion, Kerberoasting, NTLM relays, AS-REP roast, constrained delegation abuse</div>
-          </div>
-        </div></div>
-        <!-- Exploit Dev -->
-        <div class="card"><div class="flip">
-          <div class="face">
-            <h3><i class="fa-solid fa-bug"></i> Exploit Research</h3>
-            <span class="k">fuzzing • vuln triage • PoC weaponization</span>
-          </div>
-          <div class="face back">
-            <h3>Stack</h3>
-            <div class="k">AFL++, Honggfuzz, pwntools, GDB/Pwndbg, Ghidra, r2, Frida, Angr, syzkaller</div>
-          </div>
-        </div></div>
-        <!-- Web AppSec -->
-        <div class="card"><div class="flip">
-          <div class="face">
-            <h3><i class="fa-solid fa-globe"></i> Web AppSec</h3>
-            <span class="k">authz breaks • SSRF • deserialization • race conditions</span>
-          </div>
-          <div class="face back">
-            <h3>Toolkit</h3>
-            <div class="k">Burp Suite Pro, ffuf, nuclei, kxss, qsreplace, param-miner, httpx, mitmproxy</div>
-          </div>
-        </div></div>
-       
+  <section id="operations" class="wrap">
+    <div class="section-head">
+      <h2><i class="fa-solid fa-sitemap"></i> Operations</h2>
+      <a class="chip" href="#ctfs">Next • CTFs</a>
+    </div>
+    <div class="section-grid">
+      <div class="card"><h3>Initial Access</h3><p>Phishing, vuln chaining, external RCE; op-secure staging.</p></div>
+      <div class="card"><h3>Lateral & PrivEsc</h3><p>Coerced auth, abuse of ADCS/Delegation/ACLs; golden paths.</p></div>
+      <div class="card"><h3>Exfil & Impact</h3><p>Low-noise exfil, detections testing, purple team reporting.</p></div>
+    </div>
+  </section>
+
+  <section id="ctfs" class="wrap">
+    <div class="section-head">
+      <h2><i class="fa-solid fa-flag"></i> CTFs</h2>
+      <a class="chip" href="#contact">Next • Contact</a>
+    </div>
+    <div class="section-grid">
+      <div class="card"><h3>Web/Cloud</h3><p>SSRF, deserialization, token forgery, IAM abuses.</p></div>
+      <div class="card"><h3>Pwn</h3><p>ROP, format strings, sandbox escapes, chall dev.</p></div>
+      <div class="card"><h3>Forensics</h3><p>Memory, network, timeline, DFIR tooling.</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap footer-card">
+    <div class="section-head">
+      <h2><i class="fa-solid fa-signal"></i> Contact</h2>
+      <a class="chip" href="#skills">Back to Skills</a>
+    </div>
+    <div class="card">
+      <p style="margin-top:0; color:var(--muted)">DMs open. Prefer signal-to-noise over fluff.</p>
+      <div class="socials">
+        <a href="mailto:rl-v0id@example.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://x.com/" target="_blank" rel="noreferrer" aria-label="X/Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://github.com/rl-v0id" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="#skills" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
