@@ -1,309 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R1_L34D3R :: Portfolio</title>
-    <!-- Fonts and Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #00ff41;
-            --secondary-color: #555;
-            --background-color: #0d0d0d;
-            --text-color: #e6e6e6;
-            --header-color: #fff;
-            --container-bg: rgba(20, 20, 20, 0.7);
-            --border-glow: rgba(0, 255, 65, 0.5);
-        }
-        /* Basic setup */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            font-family: 'Share Tech Mono', monospace;
-            scroll-behavior: smooth;
-        }
-        
-        /* Digital rain background */
-        #matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-        }
-        
-        /* Glassmorphism container */
-        .glass-container {
-            background: rgba(13, 13, 13, 0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 1000px;
-            box-shadow: 0 8px 32px 0 rgba(0, 255, 65, 0.1);
-        }
-        
-        /* Neon text effects */
-        .neon-text {
-            color: var(--primary-color);
-            text-shadow: 0 0 10px var(--primary-color),
-                         0 0 20px var(--primary-color),
-                         0 0 30px var(--primary-color);
-        }
-        
-        h1, h2 {
-            font-family: 'Nova Square', cursive;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            padding: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        nav a {
-            color: var(--primary-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--primary-color);
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-        
-        nav a:hover {
-            background: var(--primary-color);
-            color: var(--background-color);
-            box-shadow: 0 0 15px var(--primary-color);
-        }
-        
-        /* Sections */
-        section {
-            margin: 3rem auto;
-            padding: 2rem;
-        }
-        
-        /* Skills grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .skill-card {
-            background: rgba(0, 255, 65, 0.05);
-            border: 1px solid var(--border-glow);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px var(--border-glow);
-        }
-        
-        .skill-card i {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        
-        /* Projects */
-        .project {
-            background: rgba(0, 255, 65, 0.03);
-            border-left: 3px solid var(--primary-color);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 5px;
-        }
-        
-        /* Contact links */
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        .contact-links a {
-            color: var(--primary-color);
-            font-size: 2rem;
-            transition: all 0.3s;
-        }
-        
-        .contact-links a:hover {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 10px var(--primary-color));
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--border-glow);
-            margin-top: 3rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .glass-container { padding: 1rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R1_L34D3R :: Portfolio</title>
+  <!-- Fonts and Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #00ff41;
+      --secondary-color: #7bffa6;
+      --background-color: #0d0d0d;
+      --text-color: #e6e6e6;
+      --header-color: #ffffff;
+      --container-bg: rgba(20,20,20,0.7);
+      --border-glow: rgba(0,255,65,0.5);
+    }
+    html, body {
+      margin: 0; padding: 0; width: 100%; height: 100%;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-family: 'Share Tech Mono', monospace;
+      scroll-behavior: smooth;
+    }
+    /* Digital rain background */
+    #matrix-bg {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      z-index: -1; opacity: 0.14;
+    }
+    /* Layout */
+    .container {
+      max-width: 1100px; margin: 0 auto; padding: 2rem;
+    }
+    .glass {
+      background: rgba(13,13,13,0.45);
+      border: 1px solid rgba(0,255,65,0.25);
+      box-shadow: 0 0 24px -6px var(--border-glow), inset 0 0 24px -10px var(--border-glow);
+      border-radius: 12px;
+      padding: 2rem; backdrop-filter: blur(8px);
+    }
+    .neon-title {
+      color: var(--primary-color);
+      text-shadow: 0 0 8px var(--primary-color), 0 0 24px var(--primary-color);
+      letter-spacing: 1px; margin: 0 0 1rem 0; font-size: 1.6rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .neon-title .dot { color: #1aff66; }
+    .grid {
+      display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    }
+    .badge {
+      display: inline-flex; gap: .5rem; align-items: center;
+      border: 1px dashed rgba(0,255,65,0.4);
+      color: var(--primary-color); padding: .35rem .6rem; border-radius: 8px;
+      background: rgba(0,255,65,0.06);
+    }
+    .section { margin-top: 1.25rem; }
+    .terminal {
+      background: #0b0f0b; border: 1px solid rgba(0,255,65,0.25);
+      border-radius: 10px; overflow: hidden; box-shadow: 0 0 18px -6px var(--border-glow);
+    }
+    .terminal-head {
+      display: flex; gap: 8px; align-items: center; padding: .6rem .8rem;
+      background: linear-gradient(180deg,#0f160f,#0b0f0b);
+      border-bottom: 1px solid rgba(0,255,65,0.2);
+    }
+    .term-dot { width: 10px; height: 10px; border-radius: 50%; background: #1aff66; box-shadow: 0 0 8px #1aff66; }
+    .terminal-body { padding: 1rem 1.2rem; font-size: .98rem; line-height: 1.6; }
+    code, .mono { color: #c8ffd6; }
+    .quote { color: #9bffbf; font-style: italic; opacity: .95; }
+    .list { margin: .4rem 0 0 0; padding-left: 1.1rem; }
+    .list li { margin: .25rem 0; }
+    .hrule { border-top: 1px dashed rgba(0,255,65,0.25); margin: .9rem 0; }
+    a.link { color: var(--primary-color); text-decoration: none; border-bottom: 1px dotted rgba(0,255,65,0.45); }
+    a.link:hover { color: #b8ffd1; }
+    footer { text-align: center; opacity: .75; font-size: .85rem; margin: 2rem 0; color: #bfffd0; }
+  </style>
 </head>
 <body>
-    <canvas id="matrix-bg"></canvas>
-    
-    <header>
-        <div class="glass-container">
-            <h1 class="neon-text">R1_L34D3R</h1>
-            <p style="text-align: center; font-size: 1.2rem;">Cybersecurity Specialist | Ethical Hacker</p>
-            <nav>
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
+  <canvas id="matrix-bg"></canvas>
+  <main class="container">
+    <header class="section">
+      <h1 class="neon-title"><span class="dot">></span> R1_L34D3R <span class="mono">:: hacktivist portfolio</span></h1>
+      <div class="badge"><i class="fa-solid fa-terminal"></i><span>NEON.MODE enabled</span></div>
     </header>
-    
-    <main>
-        <section id="about" class="glass-container">
-            <h2 class="neon-text">About Me</h2>
-            <p>Welcome to my digital realm. I'm a cybersecurity enthusiast passionate about ethical hacking, penetration testing, and securing digital infrastructures. My mission is to identify vulnerabilities before malicious actors can exploit them.</p>
-        </section>
-        
-        <section id="skills" class="glass-container">
-            <h2 class="neon-text">Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Penetration Testing</h3>
-                    <p>Network & Web App Security</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-bug"></i>
-                    <h3>Vulnerability Assessment</h3>
-                    <p>OWASP Top 10 & CVE Analysis</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Programming</h3>
-                    <p>Python, Bash, JavaScript</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-network-wired"></i>
-                    <h3>Network Security</h3>
-                    <p>Firewalls, IDS/IPS, VPNs</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="projects" class="glass-container">
-            <h2 class="neon-text">Projects</h2>
-            <div class="project">
-                <h3>Network Scanner Tool</h3>
-                <p>Developed a Python-based network scanner for identifying active hosts and open ports in enterprise environments.</p>
-            </div>
-            <div class="project">
-                <h3>Web Application Firewall</h3>
-                <p>Implemented a custom WAF solution to protect web applications from common attack vectors.</p>
-            </div>
-            <div class="project">
-                <h3>CTF Challenges</h3>
-                <p>Regular participant in Capture The Flag competitions, specializing in binary exploitation and cryptography.</p>
-            </div>
-        </section>
-        
-        <section id="contact" class="glass-container">
-            <h2 class="neon-text">Get In Touch</h2>
-            <p style="text-align: center;">Let's connect and collaborate on security projects</p>
-            <div class="contact-links">
-                <a href="https://github.com/rl-v0id" target="_blank" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://linkedin.com" target="_blank" title="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="mailto:contact@example.com" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://twitter.com" target="_blank" title="Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </div>
-        </section>
-    </main>
-    
+
+    <!-- H A C K T I V I S T  B I O -->
+    <section id="about" class="section">
+      <div class="glass terminal">
+        <div class="terminal-head">
+          <div class="term-dot"></div><div class="term-dot"></div><div class="term-dot"></div>
+          <span class="mono" style="margin-left:.5rem">/usr/bin/bio --mode neon --verbosity high</span>
+        </div>
+        <div class="terminal-body">
+          <p><span class="mono">alias</span>: <strong class="mono" style="color:var(--primary-color)">R1_L34D3R</strong></p>
+          <p><span class="mono">origin</span>: <span class="mono">IN / earthnet / grid:APAC</span></p>
+          <p><span class="mono">field</span>: <span class="mono">offensive security • exploit research • red-teaming • OSINT ops</span></p>
+          <div class="hrule"></div>
+          <p><span class="mono">spirit</span>: <span class="mono">Hacktivism > noise into signal • code into change • truth into daylight</span></p>
+          <p class="quote">“We void the gatekeepers, not the truth. Access is a human right.”</p>
+          <div class="hrule"></div>
+
+          <h3 class="neon-title" style="font-size:1.15rem"><span class="dot">></span> Manifesto</h3>
+          <p class="mono">No gods, no masters — only protocols. Decentralize power, weaponize transparency, encrypt everything.</p>
+
+          <h3 class="neon-title" style="font-size:1.15rem"><span class="dot">></span> Skill Arsenal</h3>
+          <ul class="list mono">
+            <li>Web vulns: SSRF, RCE, SQLi, deserialization, proto pollution</li>
+            <li>Infra: AD abuse, Kerberoast, NTLM relay, cloud IAM privesc</li>
+            <li>Ops: OPSEC, custom tooling, C2 implant mods, tradecraft automation</li>
+            <li>Recon: OSINT pipelines, dark/clear net intel, passive DNS, graphing</li>
+            <li>Dev: Python, Go, JS, Bash, Rust (learning), Docker, k8s</li>
+          </ul>
+
+          <h3 class="neon-title" style="font-size:1.15rem"><span class="dot">></span> Current Operations</h3>
+          <ul class="list mono">
+            <li>Building a minimal C2 framework with covert channels and operator UX</li>
+            <li>Researching modern supply-chain attack surfaces in JS and container stacks</li>
+            <li>Publishing red-team notes and responsible disclosures</li>
+          </ul>
+
+          <h3 class="neon-title" style="font-size:1.15rem"><span class="dot">></span> Philosophy</h3>
+          <p class="mono">Break things to understand them. Share responsibly. Leave systems stronger than you found them.</p>
+
+          <h3 class="neon-title" style="font-size:1.15rem"><span class="dot">></span> Legendary Influences</h3>
+          <ul class="list mono">
+            <li>cypherpunks • the mentor • rms • mitnik • kaminsky • poulsen • swartz</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <footer>
-        <p>&copy; 2025 R1_L34D3R | All Rights Reserved</p>
-        <p style="font-size: 0.8rem; margin-top: 0.5rem;">"In the digital void, we find clarity"</p>
+      © 2025 R1_L34D3R — “In the digital void, we find clarity.”
     </footer>
-    
-    <script>
-        // Matrix digital rain effect
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-        
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.random() * canvas.height / fontSize;
-        }
-        
-        function draw() {
-            ctx.fillStyle = 'rgba(13, 13, 13, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#00ff41';
-            ctx.font = fontSize + 'px monospace';
-            
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-        
-        setInterval(draw, 35);
-        
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
+  </main>
+
+  <script>
+    // Matrix digital rain effect
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+    const setSize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+    setSize();
+    window.addEventListener('resize', setSize);
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = new Array(columns).fill(0).map(()=>Math.random()*canvas.height/fontSize);
+
+    function draw(){
+      ctx.fillStyle = 'rgba(13,13,13,0.05)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#00ff41';
+      ctx.font = fontSize + 'px monospace';
+      for(let i=0;i<drops.length;i++){
+        const text = chars[Math.floor(Math.random()*chars.length)];
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+        if(drops[i]*fontSize > canvas.height && Math.random()>0.975){ drops[i]=0; }
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 35);
+  </script>
 </body>
 </html>
