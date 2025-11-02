@@ -24,159 +24,172 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; background: radial-gradient(1200px 800px at 85% -10%, rgba(0,231,255,.12), transparent 60%),
-                 radial-gradient(900px 700px at 10% 110%, rgba(124,254,173,.12), transparent 55%),
-                 var(--bg);
-      color:var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      margin:0;
+      background: radial-gradient(1200px 800px at 85% -10%, rgba(0,231,255,.12), transparent 60%),
+                  radial-gradient(900px 700px at 10% 110%, rgba(124,254,173,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       overflow-x:hidden;
     }
     a{color:inherit; text-decoration:none}
-    /* Animated background matrix dots */
+
+    /* Animated grid dots background */
     .grid-bg{
       position:fixed; inset:0; pointer-events:none; z-index:-1;
-      background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
-      animation: drift 30s linear infinite;
-      opacity:.35;
+      background-image: radial-gradient(rgba(124,254,173,.12) 1px, transparent 1px);
+      background-size: 22px 22px;
+      filter: drop-shadow(0 0 6px rgba(0,231,255,.15));
+      animation: drift 18s linear infinite;
+      opacity:.55;
     }
-    @keyframes drift{ from{transform:translate3d(0,0,0)} to{transform:translate3d(-64px,-64px,0)} }
-    header{
-      position:sticky; top:0; backdrop-filter:saturate(140%) blur(10px);
-      background: linear-gradient(180deg, rgba(13,18,28,.75), rgba(13,18,28,.35));
-      border-bottom:1px solid rgba(255,255,255,.06);
-      z-index:10;
-    }
-    .nav{
-      max-width:1200px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between;
-    }
-    .brand{display:flex; gap:12px; align-items:center; font-weight:700; letter-spacing:.2px}
-    .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(45deg,var(--brand),var(--brand-2)); box-shadow:0 0 12px rgba(124,254,173,.9)}
-    .nav a.btn{padding:10px 14px; border-radius:12px; background:var(--glass); border:1px solid rgba(255,255,255,.08)}
-    main{max-width:1200px; margin:0 auto; padding:40px 20px 96px}
-    /* Hero */
-    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:32px; align-items:center; padding:48px 0}
-    .hero h1{font-size: clamp(32px, 5vw, 64px); line-height:1.05; margin:0 0 14px; letter-spacing:.2px}
-    .hero h1 .accent{background: linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow: 0 0 24px rgba(124,254,173,.45)}
-    .type{color:var(--muted); font-family:"JetBrains Mono", monospace; min-height:1.6em}
-    .sub{color:var(--muted); margin-top:16px}
-    .avatar-wrap{position:relative; display:grid; place-items:center}
-    .avatar{
-      width:min(280px, 60vw); aspect-ratio:1; border-radius:24px; overflow:hidden; padding:10px;
-      background: linear-gradient(120deg, rgba(124,254,173,.15), rgba(0,231,255,.15));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:var(--shadow), var(--glow);
-      transform: rotate(-2deg);
-    }
-    .avatar img{width:100%; height:100%; object-fit:cover; border-radius:18px; filter:saturate(1.05) contrast(1.02)}
-    .ring{position:absolute; inset:-12px; border-radius:28px; padding:2px; background: conic-gradient(from 0deg, var(--brand), transparent 40%, var(--brand-2)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: spin 6s linear infinite}
-    @keyframes spin{to{transform:rotate(1turn)}}
-    /* Glass bio card */
-    .bio{margin-top:18px; padding:18px; border-radius:16px; background:var(--glass); border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow)}
-    /* Skills grid */
-    .skills{display:grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap:14px; margin-top:28px}
-    .skill{padding:14px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.08); display:flex; gap:10px; align-items:center; justify-content:center; color:#d7e4f3; transition:.2s transform, .2s box-shadow}
-    .skill i{font-size:18px; opacity:.9}
-    .skill:hover{transform:translateY(-3px); box-shadow: var(--glow)}
-    /* Socials */
-    .socials{display:flex; gap:14px; margin-top:26px}
-    .socials a{--c: var(--brand); padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); box-shadow:0 0 0 rgba(0,0,0,0); display:inline-flex; gap:10px; align-items:center; transition:.25s transform, .25s box-shadow}
-    .socials a:hover{transform: translateY(-2px); box-shadow: 0 0 0 2px rgba(124,254,173,.25), 0 0 30px rgba(0,231,255,.25)}
-    .socials i{color:var(--brand-2)}
-    /* Footer */
-    footer{margin-top:72px; padding:24px 0; color:var(--muted); border-top:1px solid rgba(255,255,255,.06)}
-    /* Responsive */
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr; text-align:center}
-      .avatar{margin: 0 auto}
-      .skills{grid-template-columns: repeat(3, minmax(0,1fr))}
-    }
-    @media (max-width: 520px){
-      .skills{grid-template-columns: repeat(2, minmax(0,1fr))}
-    }
+    @keyframes drift{ 0%{transform:translateY(0)} 100%{transform:translateY(22px)} }
+
+    .container{max-width:1100px; margin:0 auto; padding:28px}
+
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:8px}
+    .logo{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.5px}
+    .logo .badge{width:36px; height:36px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: var(--glow)}
+    .nav-links{display:flex; gap:14px; flex-wrap:wrap}
+    .chip{padding:8px 12px; border-radius:999px; background:var(--panel); border:1px solid rgba(255,255,255,.08)}
+
+    .hero{margin:40px 0 28px; display:grid; gap:18px}
+    .title{font-size:clamp(28px, 5vw, 48px); font-weight:900; line-height:1.05; letter-spacing:.3px}
+    .subtitle{font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; color:var(--muted); font-size:clamp(13px,1.8vw,14px)}
+
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow); border-radius:var(--radius); backdrop-filter: blur(10px)}
+    .panel.pulse{box-shadow: var(--glow)}
+
+    .bio{display:grid; grid-template-columns: 1.2fr .8fr; gap:18px}
+    @media (max-width:900px){ .bio{grid-template-columns:1fr;}}
+
+    .bio-main{padding:22px}
+    .bio p{margin:0; color:#c7d6e6}
+    .kbd{font-family:"JetBrains Mono", monospace; font-size:12px; padding:2px 8px; border-radius:6px; background:rgba(0,231,255,.08); border:1px solid rgba(0,231,255,.25); color:var(--brand-2)}
+
+    .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; padding:18px}
+    .stat{padding:16px; border-radius:14px; background:var(--panel); border:1px solid rgba(255,255,255,.08); text-align:center}
+    .stat .num{font-weight:800; font-size:22px}
+    .stat .label{font-size:12px; color:var(--muted)}
+
+    .skills{margin-top:22px}
+    .skills-grid{display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:12px}
+    @media (max-width:900px){ .skills-grid{grid-template-columns:repeat(2, minmax(0,1fr));}}
+    .skill{display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:12px; background:var(--panel); border:1px solid rgba(255,255,255,.1)}
+    .skill i{width:18px; text-align:center; color:var(--brand)}
+
+    .section{margin-top:28px}
+    .section h3{margin:0 0 10px; font-size:18px; letter-spacing:.4px}
+    .grid{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:14px}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr}}
+
+    .card{padding:16px; border-radius:14px; background:var(--glass); border:1px solid rgba(255,255,255,.1); transition: transform .2s ease, box-shadow .2s ease}
+    .card:hover{transform: translateY(-2px); box-shadow: var(--glow)}
+    .card .meta{display:flex; align-items:center; gap:10px; color:var(--muted); font-size:12px}
+    .card .title{font-size:16px; font-weight:700}
+    .mono{font-family:"JetBrains Mono", monospace}
+    .footer{margin:36px 0 26px; display:flex; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:12px; align-items:center}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; background:linear-gradient(180deg, rgba(0,231,255,.12), rgba(124,254,173,.12)); border:1px solid rgba(0,231,255,.35)}
   </style>
 </head>
 <body>
   <div class="grid-bg" aria-hidden="true"></div>
-  <header>
+  <div class="container">
     <nav class="nav">
-      <div class="brand"><span class="dot"></span>R1_L34D3R</div>
-      <a href="#contact" class="btn">Contact</a>
+      <div class="logo">
+        <div class="badge"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>R1_L34D3R</div>
+      </div>
+      <div class="nav-links">
+        <span class="chip mono">Cybersecurity Student • Red Team Aspirant • OSINT Hunter • Hacktivist Spirit</span>
+      </div>
     </nav>
-  </header>
-  <main>
-    <section class="hero">
-      <div>
-        <h1>Hey, I'm <span class="accent">R1_L34D3R</span></h1>
-        <div class="type" id="typewriter" aria-live="polite"></div>
-        <p class="sub">Cybersecurity Student • Red Team Aspirant • OSINT Hunter • Hacktivist Spirit</p>
-        <div class="bio">
-          Passionate about ethical hacking and offensive security. I'm constantly sharpening my skills through CTFs, vulnerability research, and building security tools. Committed to understanding systems deeply to protect them better.
+
+    <header class="hero">
+      <h1 class="title">Breaking things to make the internet safer.</h1>
+      <div class="subtitle">Focus: Red Team | Offensive Security | OSINT | CTFs | WebSec | NetSec</div>
+    </header>
+
+    <section class="bio">
+      <div class="bio-main panel">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px">
+          <div class="mono" style="color:var(--brand-2)">/whoami</div>
+          <span class="kbd">$ id; uname -a</span>
         </div>
-        <div class="socials">
-          <a href="https://github.com/rl-v0id" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-          <a href="mailto:example@example.com"><i class="fa-solid fa-envelope"></i> Email</a>
-          <a href="https://x.com/" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i> X</a>
+        <p>
+          I'm a cybersecurity student sharpening offensive skills with a hacktivist spirit. I live in terminals,
+          love adversary emulation, and chase signals in noisy data. When not poking at web apps and networks,
+          I'm building PoCs, mapping attack paths, and documenting reproducible exploits. Curiosity first, ethics always.
+        </p>
+        <div class="stats">
+          <div class="stat"><div class="num">150+ hrs</div><div class="label">TryHackMe & lab time</div></div>
+          <div class="stat"><div class="num">40+</div><div class="label">CTF solves</div></div>
+          <div class="stat"><div class="num">10</div><div class="label">Writeups published</div></div>
+        </div>
+        <div class="skills">
+          <div class="mono" style="margin-bottom:8px; color:var(--brand-2)">/skills</div>
+          <div class="skills-grid">
+            <div class="skill"><i class="fa-solid fa-user-ninja"></i> Red Team</div>
+            <div class="skill"><i class="fa-solid fa-bug"></i> Pen Testing</div>
+            <div class="skill"><i class="fa-brands fa-linux"></i> Linux</div>
+            <div class="skill"><i class="fa-brands fa-python"></i> Python</div>
+            <div class="skill"><i class="fa-solid fa-c"></i> C</div>
+            <div class="skill"><i class="fa-solid fa-magnifying-glass"></i> OSINT</div>
+            <div class="skill"><i class="fa-solid fa-flask"></i> Exploit Research</div>
+            <div class="skill"><i class="fa-solid fa-laptop-code"></i> TryHackMe</div>
+            <div class="skill"><i class="fa-solid fa-flag"></i> CTFs</div>
+            <div class="skill"><i class="fa-solid fa-trophy"></i> Hackathons</div>
+            <div class="skill"><i class="fa-solid fa-network-wired"></i> NetSec</div>
+            <div class="skill"><i class="fa-solid fa-globe"></i> WebSec</div>
+          </div>
         </div>
       </div>
-      <div class="avatar-wrap">
-        <div class="ring"></div>
-        <div class="avatar">
-          <img src="https://avatars.githubusercontent.com/u/placeholder?v=4" alt="R1_L34D3R avatar" />
+      <aside class="panel pulse" style="padding:18px">
+        <div class="mono" style="margin-bottom:10px; color:var(--brand-2)">/tooling</div>
+        <div class="grid" style="grid-template-columns:1fr">
+          <div class="card">
+            <div class="meta"><i class="fa-solid fa-terminal"></i> Offensive Stack</div>
+            <div class="title">nmap • feroxbuster • gobuster • Burp Suite • sqlmap • ffuf • metasploit • wfuzz • john • hashcat • impacket • responder • bloodhound</div>
+          </div>
+          <div class="card">
+            <div class="meta"><i class="fa-solid fa-screwdriver-wrench"></i> Blue-ish</div>
+            <div class="title">wireshark • tcpdump • Suricata • YARA • sigma rules (basics)</div>
+          </div>
+          <div class="card">
+            <div class="meta"><i class="fa-solid fa-book"></i> Methodologies</div>
+            <div class="title">MITRE ATT&CK • OWASP WSTG • PTES • OSINT Framework</div>
+          </div>
         </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h3 class="mono" style="color:var(--brand-2)">/recent</h3>
+      <div class="grid">
+        <a class="card" href="#" target="_blank" rel="noreferrer">
+          <div class="meta"><i class="fa-solid fa-bolt"></i><span>Exploit PoC</span></div>
+          <div class="title">Blind SQLi → Auth bypass chain in a CTF lab</div>
+          <div class="mono" style="color:var(--muted)">Notes: payload tuning, timing channels, WAF evasion</div>
+        </a>
+        <a class="card" href="#" target="_blank" rel="noreferrer">
+          <div class="meta"><i class="fa-solid fa-wifi"></i><span>Network</span></div>
+          <div class="title">Pivoting with chisel + SOCKS5 for internal enumeration</div>
+          <div class="mono" style="color:var(--muted)">AD pathfinding with BloodHound</div>
+        </a>
+        <a class="card" href="#" target="_blank" rel="noreferrer">
+          <div class="meta"><i class="fa-solid fa-magnifying-glass"></i><span>OSINT</span></div>
+          <div class="title">Tracing infra via TLS cert transparency + DNS history</div>
+          <div class="mono" style="color:var(--muted)">crt.sh • Censys • SecurityTrails</div>
+        </a>
       </div>
     </section>
-    <section>
-      <h2 style="margin:0 0 12px; letter-spacing:.2px">Skills & Focus Areas</h2>
-      <div class="skills" aria-label="Interactive skills grid">
-        <div class="skill" title="Red Team Operations"><i class="fa-solid fa-user-secret"></i> Red Team</div>
-        <div class="skill" title="Penetration Testing"><i class="fa-solid fa-shield-halved"></i> Pen Testing</div>
-        <div class="skill" title="Linux Systems"><i class="fa-brands fa-linux"></i> Linux</div>
-        <div class="skill" title="Python Scripting"><i class="fa-brands fa-python"></i> Python</div>
-        <div class="skill" title="C Programming"><i class="fa-solid fa-code"></i> C</div>
-        <div class="skill" title="OSINT Investigations"><i class="fa-solid fa-magnifying-glass"></i> OSINT</div>
-        <div class="skill" title="Exploit Research"><i class="fa-solid fa-bug"></i> Exploits</div>
-        <div class="skill" title="TryHackMe Platform"><i class="fa-solid fa-shield"></i> TryHackMe</div>
-        <div class="skill" title="CTF Competitions"><i class="fa-solid fa-flag"></i> CTFs</div>
-        <div class="skill" title="Hackathons"><i class="fa-solid fa-laptop-code"></i> Hackathons</div>
-        <div class="skill" title="Network Security"><i class="fa-solid fa-network-wired"></i> NetSec</div>
-        <div class="skill" title="Web Security"><i class="fa-solid fa-globe"></i> WebSec</div>
-      </div>
-    </section>
-    <footer id="contact">
-      <div>&copy; <span id="year"></span> R1_L34D3R. Built with care.</div>
+
+    <footer class="footer">
+      <a class="btn" href="mailto:contact@r1l34d3r.xyz"><i class="fa-solid fa-envelope"></i>Contact</a>
+      <a class="btn" href="https://tryhackme.com" target="_blank" rel="noreferrer"><i class="fa-solid fa-skull-crossbones"></i>TryHackMe</a>
+      <a class="btn" href="https://ctftime.org" target="_blank" rel="noreferrer"><i class="fa-solid fa-flag-checkered"></i>CTFtime</a>
+      <span>© 2025 R1_L34D3R • For education and ethical research only</span>
     </footer>
-  </main>
-  <script>
-    // Typewriter effect
-    const lines = [
-      "Cybersecurity Student • Red Team Aspirant • OSINT Hunter",
-      "Penetration testing, exploit research, and CTF enthusiast",
-      "Building security tools and hunting vulnerabilities"
-    ];
-    const el = document.getElementById('typewriter');
-    let idx = 0, pos = 0, dir = 1;
-    function type(){
-      el.textContent = lines[idx].slice(0, pos);
-      pos += dir;
-      if(dir>0 && pos > lines[idx].length+2){ dir = -1; }
-      if(dir<0 && pos === 0){ dir = 1; idx = (idx+1)%lines.length; }
-      setTimeout(type, dir>0? 40: 28);
-    }
-    type();
-    // Subtle interactive hover parallax for skills
-    document.querySelectorAll('.skill').forEach(card=>{
-      card.addEventListener('mousemove', e=>{
-        const r = card.getBoundingClientRect();
-        const x=(e.clientX - r.left)/r.width - .5;
-        const y=(e.clientY - r.top)/r.height - .5;
-        card.style.transform = `translateY(-3px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg)`;
-      });
-      card.addEventListener('mouseleave', ()=>{ card.style.transform='translateY(-3px)'; });
-    });
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  </div>
 </body>
 </html>
