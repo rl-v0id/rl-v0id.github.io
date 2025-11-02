@@ -3,201 +3,220 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>R1_L34D3R • Cybersecurity Portfolio</title>
+  <title>R1_L34D3R • Hacker Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root{
-      --bg: #0b0f17;
-      --panel: rgba(255,255,255,0.06);
-      --glass: rgba(255,255,255,0.08);
-      --text: #e6ecf3;
+      --bg:#050608;
+      --bg-2:#0a0c10;
+      --panel: rgba(255,255,255,.06);
+      --glass: rgba(255,255,255,.08);
+      --text:#e8eef6;
       --muted:#9fb3c8;
-      --brand:#7cfead;
-      --brand-2:#00e7ff;
+      --red:#ff2b45;
+      --blue:#19d3ff;
+      --green:#7cfead;
       --accent:#b967ff;
       --radius:16px;
       --shadow: 0 10px 40px rgba(0,0,0,.45);
-      --glow: 0 0 30px rgba(0,231,255,.35), 0 0 60px rgba(124,254,173,.25);
+      --glow-r: 0 0 28px rgba(255,43,69,.45);
+      --glow-b: 0 0 28px rgba(25,211,255,.45);
+      --glow-g: 0 0 28px rgba(124,254,173,.45);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
+      margin:0; color:var(--text);
       background:
-        radial-gradient(1200px 800px at 85% -10%, rgba(0,231,255,.12), transparent 60%),
+        radial-gradient(1200px 800px at 85% -10%, rgba(25,211,255,.12), transparent 60%),
         radial-gradient(900px 700px at 10% 110%, rgba(124,254,173,.12), transparent 55%),
-        linear-gradient(180deg, #070b12 0%, #0b0f17 40%, #090c14 100%);
-      color:var(--text);
+        linear-gradient(180deg, #040507 0%, #090b10 40%, #07090e 100%);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-      overflow-x:hidden;
-      scroll-behavior:smooth;
+      overflow-x:hidden; scroll-behavior:smooth;
     }
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:1200px; margin:0 auto; padding:40px 20px}
+    .container{max-width:1200px; margin:0 auto; padding: clamp(16px, 2vw, 32px)}
 
-    /* Header / Nav */
-    header.nav{position:sticky; top:0; z-index:50; backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(20,24,32,.6), rgba(20,24,32,.2));
-      border-bottom:1px solid rgba(124,254,173,.2);
+    /* Hero */
+    .hero{
+      position:relative; isolation:isolate;
+      min-height: 88vh; display:grid; align-items:center;
+      grid-template-columns: 1.1fr .9fr; gap: clamp(18px, 3vw, 40px);
+      padding-top:48px; padding-bottom:48px;
+      background: linear-gradient(180deg, rgba(255,43,69,.06) 0%, rgba(25,211,255,.04) 100%);
     }
-    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 20px}
-    .brand{display:flex; align-items:center; gap:12px; letter-spacing:.8px}
-    .brand .logo{width:36px; height:36px; display:grid; place-items:center; border-radius:10px;
-      background: linear-gradient(135deg, rgba(124,254,173,.18), rgba(0,231,255,.18));
-      box-shadow: var(--glow);
+    .hero::before{
+      content:""; position:absolute; inset:0; z-index:-1;
+      background: radial-gradient(1000px 600px at 70% 20%, rgba(255,43,69,.12), transparent 60%);
+      filter: blur(12px);
     }
-    .brand .logo i{color:var(--brand)}
-    .brand .title{font-weight:800}
-    .brand .mono{font-family:"JetBrains Mono", monospace; color:var(--muted); font-size:.85rem}
+    .title{
+      font-weight:900; line-height:1.02; letter-spacing:-0.02em;
+      font-size: clamp(40px, 5.5vw, 76px);
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #fff, #b2e8ff 30%, #7cfead 70%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow: 0 2px 12px rgba(0,0,0,.35);
+    }
+    .kicker{font-family:"JetBrains Mono", monospace; color:var(--muted); text-transform:uppercase; letter-spacing:.24em; font-size:12px}
+    .subtitle{color:#cfe4ff; opacity:.9; margin-top:14px; font-size: clamp(16px, 1.2vw, 18px)}
 
-    .nav-links{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .chip{padding:10px 14px; border-radius:999px; background:var(--panel); border:1px solid rgba(124,254,173,.18);
-      color:var(--text); transition: all .2s ease; box-shadow: 0 1px 0 rgba(255,255,255,.04) inset;
+    .cta{display:flex; gap:14px; margin-top:26px; flex-wrap:wrap}
+    .btn{
+      position:relative; padding:14px 18px; border-radius:14px; font-weight:700; border:1px solid rgba(255,255,255,.14); backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
     }
-    .chip:hover{transform:translateY(-2px); box-shadow: var(--glow)}
+    .btn.red{border-color: rgba(255,43,69,.45); box-shadow: var(--glow-r)}
+    .btn.blue{border-color: rgba(25,211,255,.45); box-shadow: var(--glow-b)}
 
-    /* Hero with right-side highlights */
-    .hero{position:relative; overflow:hidden}
-    .neon-grid{position:absolute; inset:-10% -10% 0 -10%; background:
-      linear-gradient(90deg, rgba(124,254,173,.12) 1px, transparent 1px) 0 0/80px 80px,
-      linear-gradient(rgba(0,231,255,.12) 1px, transparent 1px) 0 0/80px 80px;
-      mask-image: radial-gradient(60% 60% at 70% 30%, #000 60%, transparent 100%);
-      pointer-events:none; filter: drop-shadow(0 0 10px rgba(124,254,173,.2));
+    /* Avatar */
+    .avatar-wrap{position:relative}
+    .avatar{
+      width:100%; aspect-ratio: 1/1; border-radius: 24px; overflow:hidden;
+      background: radial-gradient(60% 60% at 50% 30%, rgba(255,43,69,.35), transparent 60%), #000;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--glow-b), var(--glow-r), 0 30px 80px rgba(0,0,0,.6);
+      transform: perspective(1000px) rotateY(-6deg) rotateX(2deg);
     }
-    .hero-inner{display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; align-items:center}
-    @media (max-width: 900px){.hero-inner{grid-template-columns:1fr}}
-    .hero-card{background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid rgba(124,254,173,.15); border-radius: var(--radius); padding:28px; box-shadow: var(--shadow);
-      backdrop-filter: blur(6px);
+    .avatar img{width:100%; height:100%; object-fit:cover; mix-blend-mode:screen; filter: contrast(1.05) saturate(1.15)}
+    .scan-line{position:absolute; left:0; right:0; height:2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); animation: scan 3.5s linear infinite}
+    @keyframes scan{0%{top: 6%} 100%{top: 94%}}
+
+    /* Angled glass cards */
+    .grid{display:grid; gap:18px; grid-template-columns: repeat(12, 1fr); margin-top:36px}
+    .card{
+      grid-column: span 6; min-height: 220px; padding:22px; border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(8px);
+      position:relative; overflow:hidden; box-shadow: var(--shadow);
     }
-    .kbar{display:flex; gap:10px; align-items:center; color:var(--muted); font-family:"JetBrains Mono", monospace}
-    .kbar .key{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-bottom-color:rgba(0,0,0,.4);
-      padding:6px 10px; border-radius:8px; box-shadow: 0 2px 0 rgba(0,0,0,.4); color:#cde9ff
+    .card::before{
+      content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
+      background: conic-gradient(from 220deg at 50% 50%, rgba(255,43,69,.25), rgba(25,211,255,.0) 30%, rgba(124,254,173,.25) 60%, rgba(25,211,255,.0) 90%);
+      filter: blur(14px); opacity:.55; mix-blend-mode: screen; transform: skewY(-4deg);
     }
-    .stats{display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:12px}
-    .stat{background:var(--panel); border:1px solid rgba(255,255,255,.08); padding:12px 14px; border-radius:12px; text-align:center}
-    .stat .h{font-weight:700; color:var(--brand)}
+    .card .head{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:13px; color:#cfe4ff}
+    .card .head i{color:var(--green); text-shadow: var(--glow-g)}
+    .card .body{margin-top:12px; color:#c7d3e0; font-size:15px}
 
-    .right-highlights{display:grid; gap:14px}
-    .highlight{display:flex; align-items:center; gap:12px; background:var(--glass); border:1px solid rgba(0,231,255,.18);
-      border-radius:14px; padding:14px; box-shadow: var(--shadow)}
-    .highlight i{color:var(--brand-2)}
+    /* Specific cards span */
+    .card.skills{grid-column: span 4}
+    .card.bio{grid-column: span 4}
+    .card.projects{grid-column: span 4}
+    .card.contact{grid-column: span 12}
 
-    /* Sections */
-    section{scroll-margin-top:90px}
-    .section-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin:28px 0 14px}
-    .section-head h2{margin:0; font-size:1.4rem; letter-spacing:.6px}
-    .section-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:16px}
-    @media (max-width: 900px){.section-grid{grid-template-columns:1fr}}
-    .card{position:relative; border-radius:16px; padding:18px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.10); box-shadow: var(--shadow); overflow:hidden}
-    .card:before{content:""; position:absolute; inset:-1px; border-radius:16px; padding:1px;
-      background: linear-gradient(135deg, rgba(124,254,173,.35), rgba(0,231,255,.2), rgba(185,103,255,.25)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;}
-    .card h3{margin:2px 0 8px; font-size:1.05rem}
-    .card p{margin:0; color:var(--muted)}
-    .badge{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(124,254,173,.12); color:#9effc8; border:1px solid rgba(124,254,173,.25); font-family:"JetBrains Mono", monospace; font-size:.8rem}
+    /* Lists */
+    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .tag{font-family:"JetBrains Mono", monospace; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.25)}
 
-    /* Footer / contact */
-    .footer-card{margin-top:28px}
-    .socials{display:flex; gap:12px}
-    .socials a{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px; background:var(--panel); border:1px solid rgba(255,255,255,.08)}
-    .socials a:hover{box-shadow: var(--glow); transform: translateY(-2px)}
+    /* Animated icons */
+    .spin{animation: spin 6s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .pulse{position:relative}
+    .pulse::after{content:""; position:absolute; inset:-4px; border-radius:10px; border:1px solid rgba(124,254,173,.6); filter: blur(6px); opacity:.6; animation: pulse 2.6s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.2} 50%{opacity:.7}}
+
+    /* Footer */
+    footer{padding:28px 0; color:#7e9ab4; font-size:12px; text-align:center}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero{grid-template-columns: 1fr; min-height:auto}
+      .avatar{transform:none}
+      .card.skills,.card.bio,.card.projects{grid-column: span 12}
+    }
   </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-inner wrap">
-      <div class="brand">
-        <div class="logo"><i class="fa-solid fa-shield-halved"></i></div>
-        <div>
-          <div class="title">R1_L34D3R</div>
-          <div class="mono">cybersecurity • red/purple team</div>
-        </div>
+  <header class="container" aria-label="site">
+    <nav style="display:flex; justify-content:space-between; align-items:center; gap:12px">
+      <div class="kicker">R1_L34D3R // Offensive Security</div>
+      <div style="display:flex; gap:14px">
+        <a class="btn blue" href="#projects"><i class="fa-solid fa-terminal"></i> Projects</a>
+        <a class="btn red" href="#contact"><i class="fa-solid fa-satellite-dish"></i> Contact</a>
       </div>
-      <nav class="nav-links">
-        <a class="chip" href="#skills"><i class="fa-solid fa-terminal"></i> Skills</a>
-        <a class="chip" href="#operations"><i class="fa-solid fa-sitemap"></i> Operations</a>
-        <a class="chip" href="#ctfs"><i class="fa-solid fa-flag"></i> CTFs</a>
-        <a class="chip" href="#contact"><i class="fa-solid fa-signal"></i> Contact</a>
-      </nav>
-    </div>
+    </nav>
   </header>
 
-  <main class="wrap hero">
-    <div class="neon-grid" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <section class="hero-card">
-        <div class="kbar"><span class="key">$</span> status --opsec [OK] creds • [OK] profile • [OK] infra</div>
-        <h1 style="margin:10px 0 6px">Operator Portfolio</h1>
-        <p style="margin:0; color:var(--muted)">neo4j • mimikatz • responder • cobaltstrike • sliver • rustscan • ghidra • radare2</p>
-        <div class="stats">
-          <div class="stat"><div class="h">50+</div><div class="m">Ops</div></div>
-          <div class="stat"><div class="h">30+</div><div class="m">CTFs</div></div>
-          <div class="stat"><div class="h">7</div><div class="m">Years</div></div>
+  <section class="hero">
+    <div class="container" style="display:contents"></div>
+    <div class="container">
+      <div class="kicker">Signal traced • Access granted</div>
+      <h1 class="title">CrowdStrike‑style Hacker Portfolio</h1>
+      <p class="subtitle">Threat hunting, adversary emulation, and red‑team tradecraft. Building resilient systems by thinking like the attacker.</p>
+      <div class="cta">
+        <a class="btn red pulse" href="#contact"><i class="fa-solid fa-bolt"></i> Engage</a>
+        <a class="btn blue" href="#skills"><i class="fa-solid fa-code"></i> Skills</a>
+      </div>
+    </div>
+    <div class="container avatar-wrap">
+      <div class="avatar" aria-label="Hacker avatar portrait (stylized hoodie/mask, no corporate imagery)">
+        <img alt="Hacker avatar neon" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1600&auto=format&fit=crop" />
+        <span class="scan-line"></span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <div id="skills" class="grid">
+      <article class="card skills" aria-labelledby="skills-h">
+        <div class="head"><i class="fa-solid fa-shield-halved spin"></i> <span id="skills-h">Skills</span></div>
+        <div class="body">
+          <div class="tags">
+            <span class="tag">Adversary Emulation</span>
+            <span class="tag">EDR Evasion</span>
+            <span class="tag">Threat Hunting</span>
+            <span class="tag">Memory Forensics</span>
+            <span class="tag">SOC Automation</span>
+            <span class="tag">Cloud Sec (AWS/Azure)</span>
+            <span class="tag">Detection Engineering</span>
+            <span class="tag">Malware Analysis</span>
+          </div>
         </div>
-      </section>
-      <aside class="right-highlights">
-        <div class="highlight"><i class="fa-solid fa-bolt"></i><div><div class="badge"><i class="fa-solid fa-star"></i> High Impact</div><div style="color:var(--muted)">Right-side highlights with neon-glass vibes.</div></div></div>
-        <div class="highlight"><i class="fa-solid fa-lock"></i><div><div class="badge"><i class="fa-solid fa-user-ninja"></i> OPSEC</div><div style="color:var(--muted)">Compartmentalized infra, clean creds, quiet telemetry.</div></div></div>
-        <div class="highlight"><i class="fa-solid fa-microchip"></i><div><div class="badge"><i class="fa-solid fa-brain"></i> Toolchain</div><div style="color:var(--muted)">Automation + repeatable tradecraft.</div></div></div>
-      </aside>
+      </article>
+
+      <article class="card bio" aria-labelledby="bio-h">
+        <div class="head"><i class="fa-solid fa-user-ninja" style="color:var(--red)"></i> <span id="bio-h">Bio</span></div>
+        <div class="body">
+          Operator focused on adversary tradecraft and rapid incident response. I build high‑signal detections and tools that give defenders an edge.
+        </div>
+      </article>
+
+      <article class="card projects" aria-labelledby="proj-h" id="projects">
+        <div class="head"><i class="fa-solid fa-network-wired" style="color:var(--blue)"></i> <span id="proj-h">Projects</span></div>
+        <div class="body">
+          <ul>
+            <li>Falcon‑style EDR lab: telemetry pipelines, enrichment, and hunt dashboards.</li>
+            <li>Red‑team toolkit: OPSEC‑safe C2 profiles, payload staging, and sandbox escapes.</li>
+            <li>Detection packs: Sigma + KQL rules for common TTP chains.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card contact" aria-labelledby="contact-h" id="contact">
+        <div class="head"><i class="fa-solid fa-satellite" style="color:var(--green)"></i> <span id="contact-h">Contact</span></div>
+        <div class="body">
+          <p>Open to collaborations, research, and mission‑critical incident response.</p>
+          <div class="tags">
+            <a class="tag" href="mailto:root@r1l34d3r.io"><i class="fa-solid fa-envelope"></i> root@r1l34d3r.io</a>
+            <a class="tag" href="https://github.com/rl-v0id" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github.com/rl-v0id</a>
+            <a class="tag" href="#"><i class="fa-brands fa-discord"></i> r1_l34d3r</a>
+          </div>
+        </div>
+      </article>
     </div>
   </main>
 
-  <section id="skills" class="wrap">
-    <div class="section-head">
-      <h2><i class="fa-solid fa-terminal"></i> Skills</h2>
-      <a class="chip" href="#operations">Next • Operations</a>
-    </div>
-    <div class="section-grid">
-      <div class="card"><h3>Offensive</h3><p>AD privesc, phishing infra, EDR evasion, C2 (CS/Sliver), payload dev.</p></div>
-      <div class="card"><h3>Recon/Intel</h3><p>OSINT, external attack surface, subdomain takeover, cloud misconfig hunt.</p></div>
-      <div class="card"><h3>Reverse/Exploit</h3><p>Ghidra, r2, heap/stack, kernel basics, rust/go tooling.</p></div>
-    </div>
-  </section>
-
-  <section id="operations" class="wrap">
-    <div class="section-head">
-      <h2><i class="fa-solid fa-sitemap"></i> Operations</h2>
-      <a class="chip" href="#ctfs">Next • CTFs</a>
-    </div>
-    <div class="section-grid">
-      <div class="card"><h3>Initial Access</h3><p>Phishing, vuln chaining, external RCE; op-secure staging.</p></div>
-      <div class="card"><h3>Lateral & PrivEsc</h3><p>Coerced auth, abuse of ADCS/Delegation/ACLs; golden paths.</p></div>
-      <div class="card"><h3>Exfil & Impact</h3><p>Low-noise exfil, detections testing, purple team reporting.</p></div>
-    </div>
-  </section>
-
-  <section id="ctfs" class="wrap">
-    <div class="section-head">
-      <h2><i class="fa-solid fa-flag"></i> CTFs</h2>
-      <a class="chip" href="#contact">Next • Contact</a>
-    </div>
-    <div class="section-grid">
-      <div class="card"><h3>Web/Cloud</h3><p>SSRF, deserialization, token forgery, IAM abuses.</p></div>
-      <div class="card"><h3>Pwn</h3><p>ROP, format strings, sandbox escapes, chall dev.</p></div>
-      <div class="card"><h3>Forensics</h3><p>Memory, network, timeline, DFIR tooling.</p></div>
-    </div>
-  </section>
-
-  <section id="contact" class="wrap footer-card">
-    <div class="section-head">
-      <h2><i class="fa-solid fa-signal"></i> Contact</h2>
-      <a class="chip" href="#skills">Back to Skills</a>
-    </div>
-    <div class="card">
-      <p style="margin-top:0; color:var(--muted)">DMs open. Prefer signal-to-noise over fluff.</p>
-      <div class="socials">
-        <a href="mailto:rl-v0id@example.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-        <a href="https://x.com/" target="_blank" rel="noreferrer" aria-label="X/Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="https://github.com/rl-v0id" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="#skills" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
-      </div>
-    </div>
-  </section>
+  <footer>
+    <div class="container">© <span id="y"></span> R1_L34D3R — Built with neon and grit.</div>
+  </footer>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
