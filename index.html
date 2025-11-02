@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>R1_L34D3R • Portfolio</title>
+  <title>R1_L34D3R • Cybersecurity Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -31,7 +31,6 @@
       overflow-x:hidden;
     }
     a{color:inherit; text-decoration:none}
-
     /* Animated background matrix dots */
     .grid-bg{
       position:fixed; inset:0; pointer-events:none; z-index:-1;
@@ -43,7 +42,6 @@
       opacity:.35;
     }
     @keyframes drift{ from{transform:translate3d(0,0,0)} to{transform:translate3d(-64px,-64px,0)} }
-
     header{
       position:sticky; top:0; backdrop-filter:saturate(140%) blur(10px);
       background: linear-gradient(180deg, rgba(13,18,28,.75), rgba(13,18,28,.35));
@@ -56,16 +54,13 @@
     .brand{display:flex; gap:12px; align-items:center; font-weight:700; letter-spacing:.2px}
     .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(45deg,var(--brand),var(--brand-2)); box-shadow:0 0 12px rgba(124,254,173,.9)}
     .nav a.btn{padding:10px 14px; border-radius:12px; background:var(--glass); border:1px solid rgba(255,255,255,.08)}
-
     main{max-width:1200px; margin:0 auto; padding:40px 20px 96px}
-
     /* Hero */
     .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:32px; align-items:center; padding:48px 0}
     .hero h1{font-size: clamp(32px, 5vw, 64px); line-height:1.05; margin:0 0 14px; letter-spacing:.2px}
     .hero h1 .accent{background: linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow: 0 0 24px rgba(124,254,173,.45)}
     .type{color:var(--muted); font-family:"JetBrains Mono", monospace; min-height:1.6em}
     .sub{color:var(--muted); margin-top:16px}
-
     .avatar-wrap{position:relative; display:grid; place-items:center}
     .avatar{
       width:min(280px, 60vw); aspect-ratio:1; border-radius:24px; overflow:hidden; padding:10px;
@@ -77,25 +72,20 @@
     .avatar img{width:100%; height:100%; object-fit:cover; border-radius:18px; filter:saturate(1.05) contrast(1.02)}
     .ring{position:absolute; inset:-12px; border-radius:28px; padding:2px; background: conic-gradient(from 0deg, var(--brand), transparent 40%, var(--brand-2)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: spin 6s linear infinite}
     @keyframes spin{to{transform:rotate(1turn)}}
-
     /* Glass bio card */
     .bio{margin-top:18px; padding:18px; border-radius:16px; background:var(--glass); border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow)}
-
     /* Skills grid */
     .skills{display:grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap:14px; margin-top:28px}
     .skill{padding:14px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.08); display:flex; gap:10px; align-items:center; justify-content:center; color:#d7e4f3; transition:.2s transform, .2s box-shadow}
     .skill i{font-size:18px; opacity:.9}
     .skill:hover{transform:translateY(-3px); box-shadow: var(--glow)}
-
     /* Socials */
     .socials{display:flex; gap:14px; margin-top:26px}
     .socials a{--c: var(--brand); padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); box-shadow:0 0 0 rgba(0,0,0,0); display:inline-flex; gap:10px; align-items:center; transition:.25s transform, .25s box-shadow}
     .socials a:hover{transform: translateY(-2px); box-shadow: 0 0 0 2px rgba(124,254,173,.25), 0 0 30px rgba(0,231,255,.25)}
     .socials i{color:var(--brand-2)}
-
     /* Footer */
     footer{margin-top:72px; padding:24px 0; color:var(--muted); border-top:1px solid rgba(255,255,255,.06)}
-
     /* Responsive */
     @media (max-width: 900px){
       .hero{grid-template-columns:1fr; text-align:center}
@@ -111,19 +101,18 @@
   <div class="grid-bg" aria-hidden="true"></div>
   <header>
     <nav class="nav">
-      <div class="brand"><span class="dot"></span><span>R1_L34D3R</span></div>
-      <a class="btn" href="#contact">Contact</a>
+      <div class="brand"><span class="dot"></span>R1_L34D3R</div>
+      <a href="#contact" class="btn">Contact</a>
     </nav>
   </header>
-
   <main>
     <section class="hero">
       <div>
         <h1>Hey, I'm <span class="accent">R1_L34D3R</span></h1>
         <div class="type" id="typewriter" aria-live="polite"></div>
-        <p class="sub">I build secure, high-performance systems with an eye for delightful UX.</p>
+        <p class="sub">Cybersecurity Student • Red Team Aspirant • OSINT Hunter • Hacktivist Spirit</p>
         <div class="bio">
-          Polyglot developer focused on systems, security, and AI tooling. I ship fast, test thoroughly, and document well.
+          Passionate about ethical hacking and offensive security. I'm constantly sharpening my skills through CTFs, vulnerability research, and building security tools. Committed to understanding systems deeply to protect them better.
         </div>
         <div class="socials">
           <a href="https://github.com/rl-v0id" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
@@ -134,40 +123,37 @@
       <div class="avatar-wrap">
         <div class="ring"></div>
         <div class="avatar">
-          <img src="https://avatars.githubusercontent.com/u/122827659?v=4" alt="R1_L34D3R avatar" />
+          <img src="https://avatars.githubusercontent.com/u/placeholder?v=4" alt="R1_L34D3R avatar" />
         </div>
       </div>
     </section>
-
     <section>
-      <h2 style="margin:0 0 12px; letter-spacing:.2px">Skills</h2>
+      <h2 style="margin:0 0 12px; letter-spacing:.2px">Skills & Focus Areas</h2>
       <div class="skills" aria-label="Interactive skills grid">
-        <div class="skill" title="JavaScript"><i class="fa-brands fa-square-js"></i> JavaScript</div>
-        <div class="skill" title="TypeScript"><i class="fa-solid fa-code"></i> TypeScript</div>
-        <div class="skill" title="Python"><i class="fa-brands fa-python"></i> Python</div>
-        <div class="skill" title="Go"><i class="fa-brands fa-golang"></i> Go</div>
-        <div class="skill" title="Rust"><i class="fa-brands fa-rust"></i> Rust</div>
-        <div class="skill" title="Node.js"><i class="fa-brands fa-node-js"></i> Node</div>
-        <div class="skill" title="React"><i class="fa-brands fa-react"></i> React</div>
-        <div class="skill" title="Svelte"><i class="fa-solid fa-fire"></i> Svelte</div>
-        <div class="skill" title="Docker"><i class="fa-brands fa-docker"></i> Docker</div>
-        <div class="skill" title="Kubernetes"><i class="fa-brands fa-kubernetes"></i> K8s</div>
-        <div class="skill" title="PostgreSQL"><i class="fa-solid fa-database"></i> Postgres</div>
-        <div class="skill" title="AWS"><i class="fa-brands fa-aws"></i> AWS</div>
+        <div class="skill" title="Red Team Operations"><i class="fa-solid fa-user-secret"></i> Red Team</div>
+        <div class="skill" title="Penetration Testing"><i class="fa-solid fa-shield-halved"></i> Pen Testing</div>
+        <div class="skill" title="Linux Systems"><i class="fa-brands fa-linux"></i> Linux</div>
+        <div class="skill" title="Python Scripting"><i class="fa-brands fa-python"></i> Python</div>
+        <div class="skill" title="C Programming"><i class="fa-solid fa-code"></i> C</div>
+        <div class="skill" title="OSINT Investigations"><i class="fa-solid fa-magnifying-glass"></i> OSINT</div>
+        <div class="skill" title="Exploit Research"><i class="fa-solid fa-bug"></i> Exploits</div>
+        <div class="skill" title="TryHackMe Platform"><i class="fa-solid fa-shield"></i> TryHackMe</div>
+        <div class="skill" title="CTF Competitions"><i class="fa-solid fa-flag"></i> CTFs</div>
+        <div class="skill" title="Hackathons"><i class="fa-solid fa-laptop-code"></i> Hackathons</div>
+        <div class="skill" title="Network Security"><i class="fa-solid fa-network-wired"></i> NetSec</div>
+        <div class="skill" title="Web Security"><i class="fa-solid fa-globe"></i> WebSec</div>
       </div>
     </section>
-
     <footer id="contact">
-      <div>© <span id="year"></span> R1_L34D3R. Built with care.</div>
+      <div>&copy; <span id="year"></span> R1_L34D3R. Built with care.</div>
     </footer>
   </main>
-
   <script>
     // Typewriter effect
     const lines = [
-      "Full‑stack engineer • Security‑minded • Performance‑driven",
-      "I craft APIs, systems, and delightful frontends",
-      "Open‑source collaborator and lifelong learner"
+      "Cybersecurity Student • Red Team Aspirant • OSINT Hunter",
+      "Penetration testing, exploit research, and CTF enthusiast",
+      "Building security tools and hunting vulnerabilities"
     ];
     const el = document.getElementById('typewriter');
     let idx = 0, pos = 0, dir = 1;
@@ -179,7 +165,6 @@
       setTimeout(type, dir>0? 40: 28);
     }
     type();
-
     // Subtle interactive hover parallax for skills
     document.querySelectorAll('.skill').forEach(card=>{
       card.addEventListener('mousemove', e=>{
@@ -190,7 +175,6 @@
       });
       card.addEventListener('mouseleave', ()=>{ card.style.transform='translateY(-3px)'; });
     });
-
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
