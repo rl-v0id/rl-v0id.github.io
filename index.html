@@ -58,10 +58,7 @@
     .logo::before{
       content: '';
       position: absolute;
-      top: -6px;
-      left: -6px;
-      right: -6px;
-      bottom: -6px;
+      top: -6px; left: -6px; right: -6px; bottom: -6px;
       background: linear-gradient(
         110deg,
         transparent 30%,
@@ -78,6 +75,7 @@
       0%, 100%{ background-position: 0% 50%; }
       50%{ background-position: 100% 50%; }
     }
+
     /* Enhanced quote styling */
     .quote{
       margin: 12px auto 0;
@@ -97,8 +95,9 @@
       margin-right: 6px;
       text-shadow: 0 0 15px rgba(0,204,255,.75);
     }
+
     /* Layout */
-    .hero{ max-width: var(--maxw); margin: 64px auto 24px; padding: 0 20px; text-align:center; }
+    .hero{ max-width: var(--maxw); margin: 64px auto 24px; padding: 0 20px; text-align:center; position: relative; }
     .hero h1{ font-size: 4rem; margin:0; line-height:1.1; }
     .container{ max-width: var(--maxw); margin: 0 auto; padding: 0 20px 80px; }
     section{ margin: 60px 0; }
@@ -109,6 +108,7 @@
       font-weight: 600;
       letter-spacing: .03em;
     }
+
     /* Glass cards */
     .card{
       background: var(--glass);
@@ -155,36 +155,63 @@
     /* Accent text */
     .muted{ color: var(--muted); font-size: 0.95rem; margin: 8px 0 0; }
     .highlight{ color: var(--neon-pink); font-weight: 600; }
-    /* Contact links */
-    .links{
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
+
+    /* 1) Premium Hex Badge (top-right of hero) */
+    .hex-badge{ position:absolute; top:8px; right:20px; width:56px; height:56px; opacity:.85; }
+    .hex-badge svg{ width:100%; height:100%; filter: drop-shadow(0 0 10px rgba(255,0,136,.15)); }
+    .hex-base{ fill: none; stroke: rgba(0,255,136,.35); stroke-width: 2; }
+    .hex-pulse-red{ stroke: rgba(255,0,136,.55); stroke-width: 2; fill:none; animation: pulse 2.8s ease-in-out infinite; }
+    .hex-pulse-cyan{ stroke: rgba(0,204,255,.6); stroke-width: 2; fill:none; animation: pulse 2.8s ease-in-out infinite; animation-delay: 1.4s; }
+    @keyframes pulse{ 0%,100%{ opacity:.25; transform: scale(1); } 50%{ opacity:.9; transform: scale(1.04); } }
+
+    /* 2) Animated scanline under logo */
+    .scanline{
+      position: relative;
+      width: 220px;
+      height: 2px;
+      margin: 14px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(0,255,136,.22), transparent);
+      overflow: hidden;
+      border-radius: 2px;
+      opacity: .85;
     }
-    .link{
-      text-decoration: none;
-      color: var(--neon-cyan);
-      font-weight: 600;
-      padding: 10px 18px;
-      border: 1px solid var(--glass-stroke);
-      background: var(--glass);
-      border-radius: var(--radius-sm);
-      transition: all 0.3s ease;
+    .scanline::after{
+      content: '';
+      position: absolute; top: -1px; left: -20%; height: 4px; width: 30%;
+      background: linear-gradient(90deg, rgba(0,204,255,.0), rgba(0,204,255,.8), rgba(0,204,255,.0));
+      filter: blur(0.5px);
+      animation: sweep 2.6s ease-in-out infinite;
     }
-    .link:hover{
-      border-color: var(--neon-cyan);
-      background: rgba(0,204,255,.1);
-      box-shadow: 0 0 12px rgba(0,204,255,.3);
+    @keyframes sweep{ 0%{ left:-30%; } 60%{ left:100%; } 100%{ left:100%; } }
+
+    /* 3) CSS-only scroll reveal for section headings */
+    section h2{ opacity: 0; transform: translateY(8px); transition: opacity .7s ease, transform .7s ease; }
+    section:has(h2):is(:not(:first-of-type)) h2{ view-timeline-name: --reveal; }
+    @supports (animation-timeline: view()) {
+      section h2{ animation: fadeUp .9s ease both; animation-timeline: view(); animation-range: entry 20% cover 20%; }
+    }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(10px);} to { opacity:1; transform: translateY(0);} }
+
+    /* Fallback: intersect via prefers-reduced-motion off (mild initial reveal) */
+    @media (prefers-reduced-motion: reduce){
+      .hex-pulse-red,.hex-pulse-cyan,.scanline::after{ animation: none; }
     }
   </style>
 </head>
 <body>
   <header class="hero">
-    <h1><span class="logo">RL_V0ID</span></h1>
+    <div class="hex-badge" aria-hidden="true">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="hex-base" points="50,3 95,26 95,74 50,97 5,74 5,26"/>
+        <polygon class="hex-pulse-red" points="50,8 90,28 90,72 50,92 10,72 10,28"/>
+        <polygon class="hex-pulse-cyan" points="50,14 84,32 84,68 50,86 16,68 16,32"/>
+      </svg>
+    </div>
+    <span class="logo">RL_V0ID</span>
+    <div class="scanline" aria-hidden="true"></div>
     <p class="quote">Exploring AI security, model evaluation, and secure prompt design. Currently building foundational knowledge.</p>
   </header>
+
   <div class="container">
     <!-- About -->
     <section>
@@ -194,6 +221,7 @@
         <p class="muted">Building skills from the ground up. Documenting every step. Something bigger is coming.</p>
       </div>
     </section>
+
     <!-- Projects -->
     <section>
       <h2>// Projects</h2>
@@ -216,49 +244,53 @@
       </div>
       <p class="muted" style="text-align:center; margin-top:24px;">More experiments coming as I learn. This is just the beginning.</p>
     </section>
+
     <!-- Skills -->
     <section>
-      <h2>// Skills & Learning</h2>
+      <h2>// Skills &amp; Learning</h2>
       <div class="card">
         <h3>Core Areas</h3>
-        <p>• Linux/Unix fundamentals & command-line proficiency<br/>
-           • Python scripting for security automation<br/>
-           • Network protocols & packet analysis basics<br/>
-           • Web application security concepts<br/>
-           • AI/ML security & adversarial testing (learning)</p>
+        <p>• Linux/Unix fundamentals &amp; command-line proficiency<br>
+           • Python scripting for security automation<br>
+           • Network protocols &amp; packet analysis basics<br>
+           • Web application security concepts<br>
+           • AI/ML security &amp; adversarial testing (learning)</p>
       </div>
       <div class="card">
         <h3>Currently Studying</h3>
-        <p>• OWASP Top 10 vulnerabilities<br/>
-           • Metasploit & exploitation frameworks<br/>
-           • Privilege escalation techniques<br/>
-           • LLM jailbreaking & prompt engineering<br/>
+        <p>• OWASP Top 10 vulnerabilities<br>
+           • Metasploit &amp; exploitation frameworks<br>
+           • Privilege escalation techniques<br>
+           • LLM jailbreaking &amp; prompt engineering<br>
            • Cryptography fundamentals</p>
         <span class="status">Always Expanding</span>
       </div>
     </section>
+
     <!-- Certifications -->
     <section>
-      <h2>// Certifications & Goals</h2>
+      <h2>// Certifications &amp; Goals</h2>
       <div class="card">
         <h3>Preparing For</h3>
         <p>Working toward foundational certifications in ethical hacking and penetration testing. Building practical experience through labs, CTFs, and personal projects.</p>
         <p class="muted">Focused on hands-on learning over credential chasing. The knowledge comes first.</p>
       </div>
     </section>
+
     <!-- Contact -->
     <section style="text-align:center;">
       <h2>// Connect</h2>
       <p class="muted">Open to learning opportunities, collaboration, and conversations with fellow security enthusiasts.</p>
       <div class="links">
-        <a class="link" href="https://github.com/rl-v0id" target="_blank" rel="noopener">GitHub</a>
+        <a class="link" href="https://github.com/rl-v0id" rel="noopener" target="_blank">GitHub</a>
         <a class="link" href="mailto:contact@rlv0id.dev">Email</a>
-        <a class="link" href="https://twitter.com/rl_v0id" target="_blank" rel="noopener">Twitter</a>
+        <a class="link" href="https://twitter.com/rl_v0id" rel="noopener" target="_blank">Twitter</a>
       </div>
     </section>
+
     <!-- Footer Note -->
     <div style="text-align:center; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,.1);">
-      <p class="muted" style="font-size:0.85rem;">This is a student's journey, not a finished product.<br/>The real work is just beginning.</p>
+      <p class="muted" style="font-size:0.85rem;">This is a student's journey, not a finished product.<br>The real work is just beginning.</p>
     </div>
   </div>
 </body>
