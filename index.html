@@ -59,19 +59,20 @@
     .badge{ border:1px solid var(--glass-stroke); border-radius:999px; padding:6px 10px; font-size:.85rem; color:var(--fg); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); }
     .block{ border-radius:var(--radius); border:1px solid var(--glass-stroke); padding:16px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); }
     /* Hero */
-    .hero{ position:relative; max-width:var(--maxw); margin:32px auto 0; padding:24px; }
+    .hero{ position:relative; max-width:var(--maxw); margin:32px auto 0; padding:24px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:50vh; }
     .logo{ font-size: clamp(2.2rem, 5vw + .5rem, 4rem); font-weight:900; letter-spacing:.15em; color: transparent;
       text-shadow: 0 0 18px rgba(0,255,136,.7), 0 0 36px rgba(0,204,255,.35), 0 0 64px rgba(255,0,136,.25);
       background: linear-gradient(90deg, var(--neon) 0%, var(--neon-cyan) 25%, var(--neon-pink) 50%, var(--neon) 75%, var(--neon-cyan) 100%);
       background-size: 200% auto;
       -webkit-background-clip:text; background-clip:text;
-      animation: shimmer 3s linear infinite; }
+      animation: shimmer 3s linear infinite;
+      margin:0; }
     @keyframes shimmer {
       0% { background-position: 0% center; }
       100% { background-position: 200% center; }
     }
     .subtitle{ color:var(--muted); margin-top:6px; }
-    .quote{ color:var(--fg); font-size:1.1rem; margin-top:16px; font-style:italic; line-height:1.5; max-width:700px; }
+    .quote{ color:var(--neon-cyan); font-size:1.05rem; margin-top:20px; line-height:1.6; max-width:600px; font-weight:500; text-align:center; }
     /* Contact */
     .contact-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
     .contact-links a{ text-decoration:none; border:1px solid var(--glass-stroke); border-radius:999px; padding:8px 12px; color:var(--fg);
@@ -99,7 +100,7 @@
   <header class="hero" id="home">
     <h1 class="logo">RL_V0ID</h1>
     <p class="subtitle">Red Team Specialist • Ethical Hacker • AI Enthusiast</p>
-    <p class="quote">"Hacking is not just about breaking systems—it's about understanding them better than anyone else."</p>
+    <p class="quote">Red teaming isn't about chaos—it's about clarity. Know the system, reveal the truth.</p>
   </header>
   <main class="wrap">
     <section id="projects">
@@ -176,8 +177,8 @@
         <p>Reach out via the links below.</p>
         <div class="contact-links">
           <a href="https://github.com/rl-v0id" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/barath-t-864b80373?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://x.com/A2Barath?t=s_7P4yIEXkeE58D0ePFerw&s=09" target="_blank" rel="noopener">Twitter/X</a>
+          <a href="https://www.linkedin.com/in/barath-t-864b80373" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://x.com/A2Barath" target="_blank" rel="noopener">Twitter/X</a>
           <a href="mailto:contact@rl-v0id.com">Email</a>
         </div>
       </div>
