@@ -11,184 +11,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#05040a;
-      --fg:#e6fff5;
-      --muted:#b0c7bf;
-      --neon:#00ff88;
-      --neon-pink:#ff0088;
-      --neon-cyan:#00ccff;
-      --glass: rgba(255,255,255,.06);
-      --glass-stroke: rgba(255,255,255,.18);
-      --radius: 16px;
-      --radius-sm: 12px;
-      --maxw: 1200px;
-    }
+    :root{--bg:#05040a;--fg:#e6fff5;--muted:#b0c7bf;--neon:#00ff88;--neon-pink:#ff0088;--neon-cyan:#00ccff;--glass: rgba(255,255,255,.06);--glass-stroke: rgba(255,255,255,.18);--radius: 16px;--radius-sm: 12px;--maxw: 1200px;}
     *{ box-sizing: border-box; }
     html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      color: var(--fg);
-      background: linear-gradient(180deg,#030208 0%,#0b0914 100%);
-      line-height:1.6;
-      overflow-x:hidden;
+    body{ margin:0; font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; color: var(--fg); background: linear-gradient(180deg,#030208 0%,#0b0914 100%); line-height:1.6; overflow-x:hidden; }
+
+    /* Enhanced shimmer + glow for logo */
+    .logo{
+      display:inline-block;
+      font-weight:700;
+      letter-spacing:.08em;
+      background: linear-gradient(90deg, var(--neon), var(--neon-cyan), var(--neon-pink), var(--neon));
+      -webkit-background-clip: text; background-clip:text; color: transparent;
+      position:relative;
+      text-shadow:
+        0 0 6px rgba(0,255,136,.85),
+        0 0 14px rgba(0,204,255,.5),
+        0 0 28px rgba(255,0,136,.35),
+        0 0 52px rgba(0,255,136,.25);
+      filter: drop-shadow(0 0 10px rgba(0,255,136,.25));
+      animation: shimmer 3.2s linear infinite, pulseGlow 2.6s ease-in-out infinite alternate;
+      background-size: 300% 100%;
     }
-    /* Nav */
-    .nav{ position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(10,10,18,.6), rgba(10,10,18,.35));
-      border-bottom:1px solid var(--glass-stroke); }
-    .nav-inner{ max-width:var(--maxw); margin:0 auto; display:flex; align-items:center; gap:16px; padding:12px 20px; }
-    .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--fg); }
-    .brand .dot{ width:10px; height:10px; border-radius:50%; box-shadow:0 0 16px var(--neon); background:var(--neon); }
-    .brand span{ font-weight:700; letter-spacing:.08em; }
-    .links{ margin-left:auto; display:flex; gap:10px; flex-wrap:wrap; }
-    .links a{ color:var(--fg); text-decoration:none; padding:8px 12px; border-radius:999px; border:1px solid var(--glass-stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); transition: all .2s ease; font-size:.95rem; }
-    .links a:focus-visible, .links a:hover{ outline:none; color:#000; background:var(--neon); border-color:transparent; box-shadow:0 0 24px rgba(0,255,136,.35); }
-    /* Headings and wrappers */
-    section{ scroll-margin-top:84px; }
-    .wrap{ max-width:var(--maxw); padding:28px 24px; margin:0 auto; }
-    .section-heading{ font-size:1.25rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin:0 0 14px; color:var(--muted); }
-    /* Cards, badges, blocks */
-    .grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
-    .card{ border-radius:var(--radius); border:1px solid var(--glass-stroke); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); padding:18px; box-shadow:0 12px 40px rgba(0,0,0,.45); }
-    .card h3{ margin:0 0 8px; font-size:1.05rem; }
-    .card p{ margin:0; color:var(--muted); }
-    .badge-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .badge{ border:1px solid var(--glass-stroke); border-radius:999px; padding:6px 10px; font-size:.85rem; color:var(--fg); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); }
-    .block{ border-radius:var(--radius); border:1px solid var(--glass-stroke); padding:16px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); }
-    /* Hero */
-    .hero{ position:relative; max-width:var(--maxw); margin:32px auto 0; padding:24px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:50vh; }
-    .logo{ font-size: clamp(2.2rem, 5vw + .5rem, 4rem); font-weight:900; letter-spacing:.15em; color: transparent;
-      text-shadow: 0 0 18px rgba(0,255,136,.7), 0 0 36px rgba(0,204,255,.35), 0 0 64px rgba(255,0,136,.25);
-      background: linear-gradient(90deg, var(--neon) 0%, var(--neon-cyan) 25%, var(--neon-pink) 50%, var(--neon) 75%, var(--neon-cyan) 100%);
-      background-size: 200% auto;
-      -webkit-background-clip:text; background-clip:text;
-      animation: shimmer 3s linear infinite;
-      margin:0; }
-    @keyframes shimmer {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
+    @keyframes shimmer{ 0%{ background-position: 0% 50%; } 100%{ background-position: 100% 50%; } }
+    @keyframes pulseGlow{
+      0%{ text-shadow: 0 0 6px rgba(0,255,136,.75), 0 0 14px rgba(0,204,255,.45), 0 0 28px rgba(255,0,136,.3), 0 0 52px rgba(0,255,136,.2); }
+      100%{ text-shadow: 0 0 10px rgba(0,255,136,1), 0 0 22px rgba(0,204,255,.65), 0 0 44px rgba(255,0,136,.5), 0 0 72px rgba(0,255,136,.35); }
     }
-    .subtitle{ color:var(--muted); margin-top:6px; }
-    .quote{ color:var(--neon-cyan); font-size:1.05rem; margin-top:20px; line-height:1.6; max-width:600px; font-weight:500; text-align:center; }
-    /* Contact */
-    .contact-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
-    .contact-links a{ text-decoration:none; border:1px solid var(--glass-stroke); border-radius:999px; padding:8px 12px; color:var(--fg);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); transition:.2s; }
-    .contact-links a:hover{ background:var(--neon); color:#000; border-color:transparent; box-shadow:0 0 24px rgba(0,255,136,.35); }
-    footer{ color:var(--muted); opacity:.85; font-size:.85rem; padding:30px 24px; border-top:1px solid var(--glass-stroke); margin-top:40px; }
+
+    /* Enhanced quote styling */
+    .quote{
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      opacity:.95;
+      position: relative;
+      text-shadow: 0 0 6px rgba(0,204,255,.25);
+      filter: drop-shadow(0 2px 12px rgba(0,204,255,.12));
+      backdrop-filter: blur(1px);
+    }
+    .quote:before{
+      content: "\201C";
+      color: var(--neon-cyan);
+      margin-right: 6px;
+      text-shadow: 0 0 10px rgba(0,204,255,.45);
+    }
+
+    /* Simple layout for hero */
+    .hero{ max-width: var(--maxw); margin: 64px auto 24px; padding: 0 20px; text-align:center; }
+    .hero h1{ font-size: 4rem; margin:0; line-height:1.1; }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#home" class="brand" aria-label="RL_V0ID Home">
-        <span class="dot" aria-hidden="true"></span>
-        RL_V0ID
-      </a>
-      <div class="links" role="navigation" aria-label="Primary">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </nav>
-  <header class="hero" id="home">
-    <h1 class="logo">RL_V0ID</h1>
-    <p class="subtitle">Red Team Specialist • Ethical Hacker • AI Enthusiast</p>
-    <p class="quote">Red teaming isn't about chaos—it's about clarity. Know the system, reveal the truth.</p>
+  <header class="hero">
+    <h1><span class="logo">RL_V0ID</span></h1>
+    <p class="quote">Exploring AI security, model evaluation, and secure prompt design. Currently building foundational knowledge.</p>
   </header>
-  <main class="wrap">
-    <section id="projects">
-      <h2 class="section-heading">Projects</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>Threat Hunter</h3>
-          <p>Beaconing, anomalies, and IOC triage automation with Python + Sigma.</p>
-          <div class="badge-row">
-            <span class="badge">Python</span>
-            <span class="badge">Sigma</span>
-            <span class="badge">ELK</span>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Red Team Toolkit</h3>
-          <p>Modular C2 helpers, OPSEC-safe payload staging, and infra scripts.</p>
-          <div class="badge-row">
-            <span class="badge">C2</span>
-            <span class="badge">OPSEC</span>
-            <span class="badge">Go</span>
-          </div>
-        </article>
-        <article class="card">
-          <h3>AI Sec Lab</h3>
-          <p>LLM jailbreak tests, prompt filters, and model risk evaluation.</p>
-          <div class="badge-row">
-            <span class="badge">LLM</span>
-            <span class="badge">Eval</span>
-            <span class="badge">Python</span>
-          </div>
-        </article>
-      </div>
-    </section>
-    <section id="skills">
-      <h2 class="section-heading">Skills</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Red Team</h3>
-          <p>Recon, initial access, privilege escalation, lateral movement, reporting.</p>
-        </div>
-        <div class="card">
-          <h3>AI/ML</h3>
-          <p>Exploring AI security, model evaluation, and secure prompt design. Currently building foundational knowledge.</p>
-        </div>
-      </div>
-    </section>
-    <section id="certifications">
-      <h2 class="section-heading">Certifications</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>eJPT/eCPPT</h3>
-          <p>Junior to professional penetration testing tracks.</p>
-        </div>
-        <div class="card">
-          <h3>Security+</h3>
-          <p>Baseline cybersecurity knowledge and practices.</p>
-        </div>
-        <div class="card">
-          <h3>Azure/AWS</h3>
-          <p>Cloud security foundations and threat modeling.</p>
-        </div>
-      </div>
-    </section>
-    <section id="about">
-      <h2 class="section-heading">About</h2>
-      <div class="block">
-        <p>Focused on red team operations and offensive security with a passion for understanding system vulnerabilities at their core. Exploring AI security and building tools that make a difference.</p>
-      </div>
-    </section>
-    <section id="contact">
-      <h2 class="section-heading">Contact</h2>
-      <div class="block">
-        <p>Reach out via the links below.</p>
-        <div class="contact-links">
-          <a href="https://github.com/rl-v0id" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/barath-t-864b80373" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://x.com/A2Barath" target="_blank" rel="noopener">Twitter/X</a>
-          <a href="mailto:contact@rl-v0id.com">Email</a>
-        </div>
-      </div>
-    </section>
-  </main>
-  <footer class="wrap">
-    <small>© <span id="year"></span> RL_V0ID. All rights reserved.</small>
-  </footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
