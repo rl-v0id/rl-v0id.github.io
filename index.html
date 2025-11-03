@@ -87,33 +87,98 @@
       background: rgba(0,255,136,0.03);
       position: relative;
       
-      /* Layered animated glow with blue + circuit green */
-      text-shadow: 
-        0 0 10px rgba(0,204,255,0.8),
-        0 0 20px rgba(0,204,255,0.6),
-        0 0 30px rgba(0,255,136,0.8),
-        0 0 40px rgba(0,255,136,0.6),
-        0 0 60px rgba(0,255,136,0.4);
+      /* Base text with enhanced shimmer gradient */
+      background: linear-gradient(
+        110deg,
+        var(--neon-cyan) 0%,
+        var(--fg) 25%,
+        var(--neon) 50%,
+        var(--fg) 75%,
+        var(--neon-cyan) 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       
-      animation: glowPulse 3s ease-in-out infinite, borderGlow 3s ease-in-out infinite;
+      /* Layered animated glow with blue + circuit green */
+      filter: drop-shadow(0 0 10px rgba(0,204,255,0.8))
+              drop-shadow(0 0 20px rgba(0,204,255,0.6))
+              drop-shadow(0 0 30px rgba(0,255,136,0.8))
+              drop-shadow(0 0 40px rgba(0,255,136,0.6))
+              drop-shadow(0 0 60px rgba(0,255,136,0.4));
+      
+      animation: shimmerMove 4s linear infinite, glowPulse 3s ease-in-out infinite, borderGlow 3s ease-in-out infinite, glitchEffect 8s infinite;
+    }
+    
+    /* Scanlines pseudo-element for CRT effect */
+    .hero h1::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      border-radius: 12px;
+      animation: scanlineScroll 10s linear infinite;
+      opacity: 0.5;
+    }
+    
+    /* Shimmer animation - moves gradient across text */
+    @keyframes shimmerMove {
+      0% {
+        background-position: 200% center;
+      }
+      100% {
+        background-position: -200% center;
+      }
+    }
+    
+    /* Scanline scrolling animation */
+    @keyframes scanlineScroll {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 0 100px;
+      }
+    }
+    
+    /* Glitch effect - subtle distortion */
+    @keyframes glitchEffect {
+      0%, 90%, 92%, 94%, 100% {
+        transform: translate(0);
+      }
+      91% {
+        transform: translate(-2px, -2px) skew(0.5deg);
+      }
+      93% {
+        transform: translate(2px, 2px) skew(-0.5deg);
+      }
     }
     
     @keyframes glowPulse {
       0%, 100% {
-        text-shadow: 
-          0 0 10px rgba(0,204,255,0.8),
-          0 0 20px rgba(0,204,255,0.6),
-          0 0 30px rgba(0,255,136,0.8),
-          0 0 40px rgba(0,255,136,0.6),
-          0 0 60px rgba(0,255,136,0.4);
+        filter: drop-shadow(0 0 10px rgba(0,204,255,0.8))
+                drop-shadow(0 0 20px rgba(0,204,255,0.6))
+                drop-shadow(0 0 30px rgba(0,255,136,0.8))
+                drop-shadow(0 0 40px rgba(0,255,136,0.6))
+                drop-shadow(0 0 60px rgba(0,255,136,0.4));
       }
       50% {
-        text-shadow: 
-          0 0 15px rgba(0,204,255,1),
-          0 0 30px rgba(0,204,255,0.8),
-          0 0 45px rgba(0,255,136,1),
-          0 0 60px rgba(0,255,136,0.8),
-          0 0 90px rgba(0,255,136,0.6);
+        filter: drop-shadow(0 0 15px rgba(0,204,255,1))
+                drop-shadow(0 0 30px rgba(0,204,255,0.8))
+                drop-shadow(0 0 45px rgba(0,255,136,1))
+                drop-shadow(0 0 60px rgba(0,255,136,0.8))
+                drop-shadow(0 0 90px rgba(0,255,136,0.6));
       }
     }
     
@@ -125,6 +190,15 @@
       50% {
         border-color: var(--neon-cyan);
         box-shadow: 0 0 20px rgba(0,204,255,0.5), inset 0 0 25px rgba(0,204,255,0.2);
+      }
+    }
+    
+    /* Fallback for browsers that don't support background-clip */
+    @supports not (-webkit-background-clip: text) {
+      .hero h1 {
+        -webkit-text-fill-color: var(--fg);
+        color: var(--fg);
+        background: rgba(0,255,136,0.03);
       }
     }
     
