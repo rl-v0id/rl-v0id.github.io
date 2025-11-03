@@ -49,89 +49,125 @@
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Fira Mono', monospace;
       font-weight: 700;
+      line-height: 1.2;
       margin: 0 0 1rem 0;
-    }
-    
-    h1 {
-      font-size: 3rem;
-      animation: neonGlow 2s ease-in-out infinite alternate;
-    }
-    
-    @keyframes neonGlow {
-      from {
-        text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon), 0 0 30px var(--neon);
-      }
-      to {
-        text-shadow: 0 0 20px var(--neon), 0 0 30px var(--neon), 0 0 40px var(--neon), 0 0 50px var(--neon);
-      }
-    }
-    
-    h2 {
-      font-size: 2rem;
-      color: var(--neon-cyan);
-    }
-    
-    h3 {
-      font-size: 1.5rem;
-      color: var(--neon-pink);
-    }
-    
-    .container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
-    
-    .hero h1 {
-      margin-bottom: 1.5rem;
-    }
-    
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--muted);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    .section {
-      background: var(--glass);
-      border: 1px solid var(--glass-stroke);
-      border-radius: var(--radius);
-      padding: 2rem;
-      margin: 2rem 0;
-      backdrop-filter: blur(10px);
-    }
-    
-    .section:hover {
-      border-color: var(--neon);
-      transition: border-color 0.3s ease;
     }
     
     a {
       color: var(--neon);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: all .25s ease;
     }
     
     a:hover {
       color: var(--neon-cyan);
+      text-shadow: 0 0 8px rgba(0,255,136,.6);
     }
     
+    /* ----- HERO ----- */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+    }
+    
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin: 0 0 1.5rem 0;
+      padding: 1.5rem 2.5rem;
+      border: 3px dotted var(--neon);
+      border-radius: 12px;
+      background: rgba(0,255,136,0.03);
+      position: relative;
+      
+      /* Layered animated glow with blue + circuit green */
+      text-shadow: 
+        0 0 10px rgba(0,204,255,0.8),
+        0 0 20px rgba(0,204,255,0.6),
+        0 0 30px rgba(0,255,136,0.8),
+        0 0 40px rgba(0,255,136,0.6),
+        0 0 60px rgba(0,255,136,0.4);
+      
+      animation: glowPulse 3s ease-in-out infinite, borderGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes glowPulse {
+      0%, 100% {
+        text-shadow: 
+          0 0 10px rgba(0,204,255,0.8),
+          0 0 20px rgba(0,204,255,0.6),
+          0 0 30px rgba(0,255,136,0.8),
+          0 0 40px rgba(0,255,136,0.6),
+          0 0 60px rgba(0,255,136,0.4);
+      }
+      50% {
+        text-shadow: 
+          0 0 15px rgba(0,204,255,1),
+          0 0 30px rgba(0,204,255,0.8),
+          0 0 45px rgba(0,255,136,1),
+          0 0 60px rgba(0,255,136,0.8),
+          0 0 90px rgba(0,255,136,0.6);
+      }
+    }
+    
+    @keyframes borderGlow {
+      0%, 100% {
+        border-color: var(--neon);
+        box-shadow: 0 0 10px rgba(0,255,136,0.3), inset 0 0 15px rgba(0,255,136,0.1);
+      }
+      50% {
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(0,204,255,0.5), inset 0 0 25px rgba(0,204,255,0.2);
+      }
+    }
+    
+    .hero .motto {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      text-shadow: 0 0 8px rgba(0,255,136,0.3);
+      letter-spacing: 0.02em;
+    }
+    
+    /* ----- CONTAINER ----- */
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    
+    .section {
+      margin-bottom: 4rem;
+    }
+    
+    .section h2 {
+      font-size: 2rem;
+      color: var(--neon);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 12px rgba(0,255,136,.4);
+    }
+    
+    .section p {
+      font-size: 1.05rem;
+      color: var(--fg);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    
+    /* ----- GRID ----- */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
     
     .card {
@@ -139,14 +175,29 @@
       border: 1px solid var(--glass-stroke);
       border-radius: var(--radius-sm);
       padding: 1.5rem;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      transition: all .3s ease;
     }
     
     .card:hover {
-      transform: translateY(-5px);
-      border-color: var(--neon-pink);
+      background: rgba(255,255,255,.1);
+      border-color: var(--neon);
+      box-shadow: 0 8px 24px rgba(0,255,136,.15);
+      transform: translateY(-4px);
     }
     
+    .card h3 {
+      font-size: 1.25rem;
+      color: var(--neon-cyan);
+      margin-bottom: 0.75rem;
+    }
+    
+    .card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0;
+    }
+    
+    /* ----- CODE ----- */
     code {
       font-family: 'Fira Mono', monospace;
       background: rgba(0,255,136,.1);
@@ -157,17 +208,16 @@
   </style>
 </head>
 <body>
+  <!-- HERO SECTION -->
   <div class="hero">
     <h1>RL_V0ID</h1>
-    <p>Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey.</p>
+    <p class="motto">"The quieter you become, the more you are able to hear."</p>
+    <p class="motto">"Information wants to be free."</p>
+    <p class="motto">"In the world of zeros and ones, I am the exception."</p>
   </div>
   
+  <!-- MAIN CONTENT -->
   <div class="container">
-    <div class="section">
-      <h2>About</h2>
-      <p>Diving into the world of cybersecurity with focus on offensive security, red team operations, and emerging AI security challenges.</p>
-    </div>
-    
     <div class="section">
       <h2>Skills & Learning</h2>
       <div class="grid">
