@@ -15,7 +15,6 @@
     *{ box-sizing: border-box; }
     html,body{ height:100%; }
     body{ margin:0; font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; color: var(--fg); background: linear-gradient(180deg,#030208 0%,#0b0914 100%); line-height:1.6; overflow-x:hidden; }
-
     /* Enhanced shimmer + glow for logo */
     .logo{
       display:inline-block;
@@ -38,25 +37,25 @@
       0%{ text-shadow: 0 0 6px rgba(0,255,136,.75), 0 0 14px rgba(0,204,255,.45), 0 0 28px rgba(255,0,136,.3), 0 0 52px rgba(0,255,136,.2); }
       100%{ text-shadow: 0 0 10px rgba(0,255,136,1), 0 0 22px rgba(0,204,255,.65), 0 0 44px rgba(255,0,136,.5), 0 0 72px rgba(0,255,136,.35); }
     }
-
     /* Enhanced quote styling */
     .quote{
-      margin: 12px 0 0;
-      color: var(--muted);
+      margin: 12px auto 0;
+      color: var(--neon-cyan);
       font-size: 1.05rem;
+      font-weight: 700;
+      text-align: center;
       opacity:.95;
       position: relative;
-      text-shadow: 0 0 6px rgba(0,204,255,.25);
-      filter: drop-shadow(0 2px 12px rgba(0,204,255,.12));
+      text-shadow: 0 0 12px rgba(0,204,255,.75), 0 0 24px rgba(0,204,255,.5), 0 0 36px rgba(0,204,255,.35);
+      filter: drop-shadow(0 4px 16px rgba(0,204,255,.3));
       backdrop-filter: blur(1px);
     }
     .quote:before{
       content: "\201C";
       color: var(--neon-cyan);
       margin-right: 6px;
-      text-shadow: 0 0 10px rgba(0,204,255,.45);
+      text-shadow: 0 0 15px rgba(0,204,255,.75);
     }
-
     /* Simple layout for hero */
     .hero{ max-width: var(--maxw); margin: 64px auto 24px; padding: 0 20px; text-align:center; }
     .hero h1{ font-size: 4rem; margin:0; line-height:1.1; }
