@@ -1,82 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RL_V0ID • Red Team Journey</title>
-    <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey." />
-    <meta name="theme-color" content="#000000" />
-
-    <!-- Google Fonts: Replace Orbitron/JetBrains with Fira Mono (headings) and Manrope (body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-      :root {
-        --bg: #05040a;
-        --fg: #e6fff5;
-        --muted: #b0c7bf;
-        --neon: #00ff88;
-        --neon-pink: #ff0088;
-        --neon-cyan: #00ccff;
-        --glass: rgba(255,255,255,.06);
-        --glass-stroke: rgba(255,255,255,.18);
-        --radius: 16px;
-        --radius-sm: 12px;
-        --maxw: 1200px;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RL_V0ID • Red Team Journey</title>
+  <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey.">
+  <meta name="theme-color" content="#000000">
+  
+  <!-- Google Fonts - Fira Mono for headings, Manrope for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #05040a;
+      --fg: #e6fff5;
+      --muted: #b0c7bf;
+      --neon: #00ff88;
+      --neon-pink: #ff0088;
+      --neon-cyan: #00ccff;
+      --glass: rgba(255,255,255,.06);
+      --glass-stroke: rgba(255,255,255,.18);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --maxw: 1200px;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Fira Mono', monospace;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      animation: neonGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes neonGlow {
+      from {
+        text-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon), 0 0 30px var(--neon);
       }
-
-      * { box-sizing: border-box; }
-      html, body { height: 100%; }
-
-      body {
-        margin: 0;
-        font-family: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
-        color: var(--fg);
-        background: linear-gradient(180deg, #030208 0%, #0b0914 100%);
-        line-height: 1.65;
-        overflow-x: hidden;
-        font-weight: 400;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+      to {
+        text-shadow: 0 0 20px var(--neon), 0 0 30px var(--neon), 0 0 40px var(--neon), 0 0 50px var(--neon);
       }
-
-      /* Headings use Fira Mono for a technical feel */
-      h1, h2, h3, h4, h5, h6, .hero-title, .section-title {
-        font-family: "Fira Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        letter-spacing: 0.5px;
-      }
-
-      /* Keep the glowing effect on the main heading, tuned for the new fonts */
-      .hero-title, h1.hero-title, h1 {
-        color: var(--fg);
-        text-shadow:
-          0 0 6px rgba(0,255,136,0.5),
-          0 0 14px rgba(0,255,136,0.35),
-          0 0 26px rgba(0,204,255,0.25);
-      }
-
-      /* Optional: emphasize secondary headings with cyan glow */
-      h2, .section-title {
-        text-shadow: 0 0 6px rgba(0,204,255,0.25);
-      }
-
-      /* Ensure code/mono blocks remain mono; inherits fine alongside headings */
-      code, pre, kbd, samp { font-family: "Fira Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-
-      /* Keep existing layout/util styles below this line if present in the original file */
-    </style>
-  </head>
-  <body>
-    <!-- Existing HTML content below remains unchanged; only fonts/CSS were updated -->
-    <canvas id="bg-canvas" aria-hidden="true"></canvas>
-
-    <!-- Page content goes here. If the original file had sections, keep them as is. -->
-
-    <script>
-      // If there was an existing background/particles script, keep it as-is.
-      // This placeholder is to avoid removing prior JS accidentally.
-    </script>
-  </body>
+    }
+    
+    h2 {
+      font-size: 2rem;
+      color: var(--neon-cyan);
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      color: var(--neon-pink);
+    }
+    
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .hero h1 {
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .section {
+      background: var(--glass);
+      border: 1px solid var(--glass-stroke);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 2rem 0;
+      backdrop-filter: blur(10px);
+    }
+    
+    .section:hover {
+      border-color: var(--neon);
+      transition: border-color 0.3s ease;
+    }
+    
+    a {
+      color: var(--neon);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    a:hover {
+      color: var(--neon-cyan);
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-stroke);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--neon-pink);
+    }
+    
+    code {
+      font-family: 'Fira Mono', monospace;
+      background: rgba(0,255,136,.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: var(--neon);
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>RL_V0ID</h1>
+    <p>Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey.</p>
+  </div>
+  
+  <div class="container">
+    <div class="section">
+      <h2>About</h2>
+      <p>Diving into the world of cybersecurity with focus on offensive security, red team operations, and emerging AI security challenges.</p>
+    </div>
+    
+    <div class="section">
+      <h2>Skills & Learning</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Red Team</h3>
+          <p>Penetration testing, vulnerability assessment, exploit development</p>
+        </div>
+        <div class="card">
+          <h3>AI Security</h3>
+          <p>Adversarial ML, prompt injection, model security</p>
+        </div>
+        <div class="card">
+          <h3>Tools</h3>
+          <p>Python, Bash, Metasploit, Burp Suite, Wireshark</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Projects</h2>
+      <p>Coming soon... Building and documenting projects as I learn.</p>
+    </div>
+    
+    <div class="section">
+      <h2>Connect</h2>
+      <p>Follow the journey: <code>github.com/rl-v0id</code></p>
+    </div>
+  </div>
+</body>
 </html>
