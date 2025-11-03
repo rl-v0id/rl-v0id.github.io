@@ -6,12 +6,12 @@
   <title>RL_V0ID • Red Team Journey</title>
   <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey.">
   <meta name="theme-color" content="#000000">
-  
+
   <!-- Google Fonts - Fira Mono for headings, Manrope for body -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
     :root {
       --bg: #05040a;
@@ -26,17 +26,11 @@
       --radius-sm: 12px;
       --maxw: 1200px;
     }
-    
-    * {
-      box-sizing: border-box;
-    }
-    
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; margin: 0; padding: 0; }
+
     body {
       background: var(--bg);
       color: var(--fg);
@@ -45,25 +39,17 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-    
+
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Fira Mono', monospace;
       font-weight: 700;
       line-height: 1.2;
       margin: 0 0 1rem 0;
     }
-    
-    a {
-      color: var(--neon);
-      text-decoration: none;
-      transition: all .25s ease;
-    }
-    
-    a:hover {
-      color: var(--neon-cyan);
-      text-shadow: 0 0 8px rgba(0,255,136,.6);
-    }
-    
+
+    a { color: var(--neon); text-decoration: none; transition: all .25s ease; }
+    a:hover { color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0,255,136,.6); }
+
     /* ----- HERO ----- */
     .hero {
       min-height: 70vh;
@@ -75,18 +61,17 @@
       padding: 4rem 2rem;
       position: relative;
     }
-    
+
     .hero h1 {
       font-size: 4rem;
       font-weight: 700;
       letter-spacing: 0.05em;
       margin: 0 0 1.5rem 0;
       padding: 1.5rem 2.5rem;
-      border: 3px dotted var(--neon);
       border-radius: 12px;
       background: rgba(0,255,136,0.03);
       position: relative;
-      
+
       /* Base text with enhanced shimmer gradient */
       background: linear-gradient(
         110deg,
@@ -100,25 +85,44 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      
+
       /* Layered animated glow with blue + circuit green */
       filter: drop-shadow(0 0 10px rgba(0,204,255,0.8))
               drop-shadow(0 0 20px rgba(0,204,255,0.6))
               drop-shadow(0 0 30px rgba(0,255,136,0.8))
               drop-shadow(0 0 40px rgba(0,255,136,0.6))
               drop-shadow(0 0 60px rgba(0,255,136,0.4));
-      
-      animation: shimmerMove 4s linear infinite, glowPulse 3s ease-in-out infinite, borderGlow 3s ease-in-out infinite, glitchEffect 8s infinite;
+
+      /* Modern glowing frame via box-shadow pulses (replaces dotted border) */
+      box-shadow:
+        0 0 0 4px rgba(0,255,136,0), /* invisible base to reserve space */
+        0 0 24px rgba(0,255,136,0.25),
+        0 0 48px rgba(0,204,255,0.2),
+        inset 0 0 24px rgba(0,255,136,0.12);
+      animation: shimmerMove 4s linear infinite, glowPulse 3s ease-in-out infinite, borderGlow 3s ease-in-out infinite, glitchEffect 8s infinite, framePulse 3.2s ease-in-out infinite;
     }
-    
+
+    /* Optional subtle animated gradient halo around the heading */
+    .hero h1::before {
+      content: '';
+      position: absolute;
+      inset: -18px -24px; /* extend beyond the h1 padding */
+      border-radius: 18px;
+      background:
+        radial-gradient(60% 60% at 50% 50%, rgba(0,255,136,0.18), rgba(0,255,136,0) 70%),
+        radial-gradient(50% 50% at 30% 40%, rgba(0,204,255,0.15), rgba(0,204,255,0) 70%);
+      filter: blur(14px);
+      opacity: .7;
+      z-index: -1;
+      pointer-events: none;
+      animation: haloPulse 5s ease-in-out infinite;
+    }
+
     /* Scanlines pseudo-element for CRT effect */
     .hero h1::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       background: repeating-linear-gradient(
         0deg,
         rgba(0, 0, 0, 0.15) 0px,
@@ -131,40 +135,20 @@
       animation: scanlineScroll 10s linear infinite;
       opacity: 0.5;
     }
-    
+
     /* Shimmer animation - moves gradient across text */
-    @keyframes shimmerMove {
-      0% {
-        background-position: 200% center;
-      }
-      100% {
-        background-position: -200% center;
-      }
-    }
-    
+    @keyframes shimmerMove { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
+
     /* Scanline scrolling animation */
-    @keyframes scanlineScroll {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 0 100px;
-      }
-    }
-    
+    @keyframes scanlineScroll { 0% { background-position: 0 0; } 100% { background-position: 0 100px; } }
+
     /* Glitch effect - subtle distortion */
     @keyframes glitchEffect {
-      0%, 90%, 92%, 94%, 100% {
-        transform: translate(0);
-      }
-      91% {
-        transform: translate(-2px, -2px) skew(0.5deg);
-      }
-      93% {
-        transform: translate(2px, 2px) skew(-0.5deg);
-      }
+      0%, 90%, 92%, 94%, 100% { transform: translate(0); }
+      91% { transform: translate(-2px, -2px) skew(0.5deg); }
+      93% { transform: translate(2px, 2px) skew(-0.5deg); }
     }
-    
+
     @keyframes glowPulse {
       0%, 100% {
         filter: drop-shadow(0 0 10px rgba(0,204,255,0.8))
@@ -181,18 +165,24 @@
                 drop-shadow(0 0 90px rgba(0,255,136,0.6));
       }
     }
-    
+
     @keyframes borderGlow {
-      0%, 100% {
-        border-color: var(--neon);
-        box-shadow: 0 0 10px rgba(0,255,136,0.3), inset 0 0 15px rgba(0,255,136,0.1);
-      }
-      50% {
-        border-color: var(--neon-cyan);
-        box-shadow: 0 0 20px rgba(0,204,255,0.5), inset 0 0 25px rgba(0,204,255,0.2);
-      }
+      0%, 100% { box-shadow: 0 0 0 4px rgba(0,255,136,0), 0 0 24px rgba(0,255,136,0.25), 0 0 48px rgba(0,204,255,0.2), inset 0 0 24px rgba(0,255,136,0.12); }
+      50% { box-shadow: 0 0 0 4px rgba(0,204,255,0), 0 0 36px rgba(0,204,255,0.4), 0 0 72px rgba(0,255,136,0.35), inset 0 0 36px rgba(0,204,255,0.2); }
     }
-    
+
+    /* Additional subtle frame pulse to modernize the glow */
+    @keyframes framePulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(0,255,136,0), 0 0 22px rgba(0,255,136,0.22), 0 0 46px rgba(0,204,255,0.18), inset 0 0 20px rgba(0,255,136,0.1); }
+      50% { box-shadow: 0 0 0 4px rgba(0,204,255,0), 0 0 38px rgba(0,204,255,0.45), 0 0 84px rgba(0,255,136,0.4), inset 0 0 34px rgba(0,204,255,0.22); }
+    }
+
+    /* Optional halo pulse animation */
+    @keyframes haloPulse {
+      0%, 100% { opacity: .55; filter: blur(14px); }
+      50% { opacity: .85; filter: blur(18px); }
+    }
+
     /* Fallback for browsers that don't support background-clip */
     @supports not (-webkit-background-clip: text) {
       .hero h1 {
@@ -201,7 +191,7 @@
         background: rgba(0,255,136,0.03);
       }
     }
-    
+
     .hero .motto {
       font-size: 1.1rem;
       font-style: italic;
@@ -211,74 +201,22 @@
       text-shadow: 0 0 8px rgba(0,255,136,0.3);
       letter-spacing: 0.02em;
     }
-    
+
     /* ----- CONTAINER ----- */
-    .container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-    
-    .section {
-      margin-bottom: 4rem;
-    }
-    
-    .section h2 {
-      font-size: 2rem;
-      color: var(--neon);
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 12px rgba(0,255,136,.4);
-    }
-    
-    .section p {
-      font-size: 1.05rem;
-      color: var(--fg);
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-    
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 3rem 2rem; }
+    .section { margin-bottom: 4rem; }
+    .section h2 { font-size: 2rem; color: var(--neon); margin-bottom: 1.5rem; text-shadow: 0 0 12px rgba(0,255,136,.4); }
+    .section p { font-size: 1.05rem; color: var(--fg); line-height: 1.7; margin-bottom: 1rem; }
+
     /* ----- GRID ----- */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .card {
-      background: var(--glass);
-      border: 1px solid var(--glass-stroke);
-      border-radius: var(--radius-sm);
-      padding: 1.5rem;
-      transition: all .3s ease;
-    }
-    
-    .card:hover {
-      background: rgba(255,255,255,.1);
-      border-color: var(--neon);
-      box-shadow: 0 8px 24px rgba(0,255,136,.15);
-      transform: translateY(-4px);
-    }
-    
-    .card h3 {
-      font-size: 1.25rem;
-      color: var(--neon-cyan);
-      margin-bottom: 0.75rem;
-    }
-    
-    .card p {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin: 0;
-    }
-    
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--glass); border: 1px solid var(--glass-stroke); border-radius: var(--radius-sm); padding: 1.5rem; transition: all .3s ease; }
+    .card:hover { background: rgba(255,255,255,.1); border-color: var(--neon); box-shadow: 0 8px 24px rgba(0,255,136,.15); transform: translateY(-4px); }
+    .card h3 { font-size: 1.25rem; color: var(--neon-cyan); margin-bottom: 0.75rem; }
+    .card p { font-size: 0.95rem; color: var(--muted); margin: 0; }
+
     /* ----- CODE ----- */
-    code {
-      font-family: 'Fira Mono', monospace;
-      background: rgba(0,255,136,.1);
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-      color: var(--neon);
-    }
+    code { font-family: 'Fira Mono', monospace; background: rgba(0,255,136,.1); padding: 0.2rem 0.4rem; border-radius: 4px; color: var(--neon); }
   </style>
 </head>
 <body>
@@ -289,11 +227,11 @@
     <p class="motto">"Information wants to be free."</p>
     <p class="motto">"In the world of zeros and ones, I am the exception."</p>
   </div>
-  
+
   <!-- MAIN CONTENT -->
   <div class="container">
     <div class="section">
-      <h2>Skills & Learning</h2>
+      <h2>Skills &amp; Learning</h2>
       <div class="grid">
         <div class="card">
           <h3>Red Team</h3>
@@ -309,12 +247,12 @@
         </div>
       </div>
     </div>
-    
+
     <div class="section">
       <h2>Projects</h2>
       <p>Coming soon... Building and documenting projects as I learn.</p>
     </div>
-    
+
     <div class="section">
       <h2>Connect</h2>
       <p>Follow the journey: <code>github.com/rl-v0id</code></p>
