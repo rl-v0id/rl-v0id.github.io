@@ -93,6 +93,71 @@
       text-align: center;
       padding: 2rem;
     }
+    
+    /* Premium Hero Reveal Animation */
+    @keyframes hero-slide-reveal {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .hero-headline,
+    .hero-subline,
+    .hero-quote {
+      opacity: 0;
+      animation: hero-slide-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    /* Headline appears first */
+    .hero-headline {
+      font-size: 4.5rem;
+      font-weight: 700;
+      margin: 0 0 1rem;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation-delay: 0s;
+    }
+    
+    /* Subline appears 0.2s after headline */
+    .hero-subline {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin: 0 0 2rem;
+      animation-delay: 0.2s;
+    }
+    
+    /* Quote appears 0.4s after headline */
+    .hero-quote {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--fg);
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      animation-delay: 0.4s;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-headline {
+        font-size: 2.5rem;
+      }
+      .hero-subline {
+        font-size: 1.25rem;
+      }
+      .hero-quote {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -100,8 +165,9 @@
     <canvas id="constellation-bg"></canvas>
     <div class="aurora-overlay"></div>
     <div class="hero-content">
-      <h1>RL_V0ID</h1>
-      <p>Red Team Journey</p>
+      <h1 class="hero-headline">RL_V0ID</h1>
+      <h2 class="hero-subline">Red Team Journey</h2>
+      <p class="hero-quote">"Security is not a product, but a process of continuous learning."</p>
     </div>
   </section>
   
