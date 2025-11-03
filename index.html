@@ -3,15 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RL_V0ID • Cybersecurity &amp; AI Portfolio</title>
+  <title>RL_V0ID • Cybersecurity & AI Portfolio</title>
   <meta name="description" content="RL_V0ID — Cybersecurity Specialist, Ethical Hacker, and AI Enthusiast. Projects, skills, certifications, and contact." />
   <meta name="theme-color" content="#000000" />
-
   <!-- JetBrains Mono font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --bg:#05040a;
@@ -36,7 +34,6 @@
       line-height:1.6;
       overflow-x:hidden;
     }
-
     /* Nav */
     .nav{ position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
       background: linear-gradient(180deg, rgba(10,10,18,.6), rgba(10,10,18,.35));
@@ -49,43 +46,36 @@
     .links a{ color:var(--fg); text-decoration:none; padding:8px 12px; border-radius:999px; border:1px solid var(--glass-stroke);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); transition: all .2s ease; font-size:.95rem; }
     .links a:focus-visible, .links a:hover{ outline:none; color:#000; background:var(--neon); border-color:transparent; box-shadow:0 0 24px rgba(0,255,136,.35); }
-
     /* Headings and wrappers */
     section{ scroll-margin-top:84px; }
     .wrap{ max-width:var(--maxw); padding:28px 24px; margin:0 auto; }
     .section-heading{ font-size:1.25rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin:0 0 14px; color:var(--muted); }
-
     /* Cards, badges, blocks */
     .grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
     .card{ border-radius:var(--radius); border:1px solid var(--glass-stroke); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); padding:18px; box-shadow:0 12px 40px rgba(0,0,0,.45); }
     .card h3{ margin:0 0 8px; font-size:1.05rem; }
     .card p{ margin:0; color:var(--muted); }
-
     .badge-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
     .badge{ border:1px solid var(--glass-stroke); border-radius:999px; padding:6px 10px; font-size:.85rem; color:var(--fg); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); }
-
     .block{ border-radius:var(--radius); border:1px solid var(--glass-stroke); padding:16px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); }
-
     /* Hero */
     .hero{ position:relative; max-width:var(--maxw); margin:32px auto 0; padding:24px; }
     .logo{ font-size: clamp(2.2rem, 5vw + .5rem, 4rem); font-weight:900; letter-spacing:.15em; color: transparent;
       text-shadow: 0 0 18px rgba(0,255,136,.7), 0 0 36px rgba(0,204,255,.35), 0 0 64px rgba(255,0,136,.25);
       background: linear-gradient(90deg, var(--neon), var(--neon-cyan), var(--neon-pink)); -webkit-background-clip:text; background-clip:text; }
     .subtitle{ color:var(--muted); margin-top:6px; }
-
     /* Contact */
     .contact-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
     .contact-links a{ text-decoration:none; border:1px solid var(--glass-stroke); border-radius:999px; padding:8px 12px; color:var(--fg);
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); transition:.2s; }
     .contact-links a:hover{ background:var(--neon); color:#000; border-color:transparent; box-shadow:0 0 24px rgba(0,255,136,.35); }
-
     footer{ color:var(--muted); opacity:.85; font-size:.85rem; padding:30px 24px; border-top:1px solid var(--glass-stroke); margin-top:40px; }
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="#home" aria-label="RL_V0ID Home">
+      <a href="#home" class="brand" aria-label="RL_V0ID Home">
         <span class="dot" aria-hidden="true"></span>
         <span>RL_V0ID</span>
       </a>
@@ -98,12 +88,10 @@
       </div>
     </div>
   </nav>
-
-  <header id="home" class="hero">
-    <h1 class="logo">CYBERSECURITY • AI • RL_V0ID</h1>
-    <p class="subtitle">Cybersecurity Specialist, Ethical Hacker, and AI Enthusiast</p>
+  <header class="hero" id="home">
+    <h1 class="logo">RL_V0ID</h1>
+    <p class="subtitle">Cybersecurity Specialist • Ethical Hacker • AI Enthusiast</p>
   </header>
-
   <main class="wrap">
     <section id="projects">
       <h2 class="section-heading">Projects</h2>
@@ -137,7 +125,6 @@
         </article>
       </div>
     </section>
-
     <section id="skills">
       <h2 class="section-heading">Skills</h2>
       <div class="grid">
@@ -155,23 +142,29 @@
         </div>
       </div>
     </section>
-
     <section id="certifications">
       <h2 class="section-heading">Certifications</h2>
       <div class="grid">
-        <div class="card"><h3>eJPT/eCPPT</h3><p>Junior to professional penetration testing tracks.</p></div>
-        <div class="card"><h3>Security+</h3><p>Baseline cybersecurity knowledge and practices.</p></div>
-        <div class="card"><h3>Azure/AWS</h3><p>Cloud security foundations and threat modeling.</p></div>
+        <div class="card">
+          <h3>eJPT/eCPPT</h3>
+          <p>Junior to professional penetration testing tracks.</p>
+        </div>
+        <div class="card">
+          <h3>Security+</h3>
+          <p>Baseline cybersecurity knowledge and practices.</p>
+        </div>
+        <div class="card">
+          <h3>Azure/AWS</h3>
+          <p>Cloud security foundations and threat modeling.</p>
+        </div>
       </div>
     </section>
-
     <section id="about">
       <h2 class="section-heading">About</h2>
       <div class="block">
         <p>Focused on practical security outcomes: measurable risk reduction and resilient systems. Passion for building helpful tools and sharing clear write-ups.</p>
       </div>
     </section>
-
     <section id="contact">
       <h2 class="section-heading">Contact</h2>
       <div class="block">
@@ -185,11 +178,9 @@
       </div>
     </section>
   </main>
-
   <footer class="wrap">
     <small>© <span id="year"></span> RL_V0ID. All rights reserved.</small>
   </footer>
-
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
