@@ -1,265 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>RL_V0ID - Cybersecurity & AI Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 100%);
-            color: #00ff88;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        h1 {
-            font-size: 3.5em;
-            color: #00ff88;
-            text-shadow: 0 0 20px #00ff88;
-            margin-bottom: 20px;
-            animation: glow 2s ease-in-out infinite;
-        }
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
-            50% { text-shadow: 0 0 30px #00ff88, 0 0 40px #00ff88, 0 0 50px #00ff88; }
-        }
-        .tagline {
-            font-size: 1.5em;
-            color: #ff0088;
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            color: #00ccff;
-            font-size: 1.2em;
-        }
-        .terminal {
-            background: #0d0d0d;
-            border: 2px solid #00ff88;
-            border-radius: 10px;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-        }
-        .terminal h2 {
-            color: #ff0088;
-            margin-bottom: 20px;
-            font-size: 2em;
-            text-shadow: 0 0 10px #ff0088;
-        }
-        .skill-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        .skill-card {
-            background: linear-gradient(135deg, #1a0033 0%, #0d0d0d 100%);
-            border: 1px solid #00ff88;
-            padding: 20px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5);
-            border-color: #ff0088;
-        }
-        .skill-card h3 {
-            color: #00ccff;
-            margin-bottom: 10px;
-        }
-        .skill-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .skill-list li {
-            padding: 5px 0;
-            color: #00ff88;
-        }
-        .skill-list li:before {
-            content: "▸ ";
-            color: #ff0088;
-            font-weight: bold;
-        }
-        .project {
-            background: #0d0d0d;
-            border-left: 4px solid #00ff88;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        .project h3 {
-            color: #00ccff;
-            margin-bottom: 10px;
-        }
-        .project p {
-            color: #aaa;
-            margin-bottom: 10px;
-        }
-        .cert-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff0088 0%, #00ff88 100%);
-            color: #000;
-            padding: 10px 20px;
-            margin: 10px 10px 10px 0;
-            border-radius: 20px;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 0, 136, 0.5);
-        }
-        .contact {
-            text-align: center;
-            margin-top: 60px;
-        }
-        .contact a {
-            color: #00ccff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2em;
-            transition: all 0.3s;
-        }
-        .contact a:hover {
-            color: #ff0088;
-            text-shadow: 0 0 10px #ff0088;
-        }
-        .ascii-art {
-            color: #00ff88;
-            font-size: 0.8em;
-            line-height: 1.2;
-            margin: 20px 0;
-            text-align: center;
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5em; }
-            .tagline { font-size: 1.2em; }
-            .skill-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RL_V0ID • Cybersecurity & AI Portfolio</title>
+  <meta name="description" content="RL_V0ID — Cybersecurity Specialist, Ethical Hacker, and AI Enthusiast. Projects, skills, certifications, and contact." />
+  <meta name="theme-color" content="#000000" />
+  <style>
+    :root{--bg:#05040a;--fg:#e6fff5;--muted:#b0c7bf;--neon:#00ff88;--neon-pink:#ff0088;--neon-cyan:#00ccff;--glass:rgba(255,255,255,.06);--glass-stroke:rgba(255,255,255,.18);--radius:16px;--radius-sm:12px;--maxw:1200px}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;color:var(--fg);background:linear-gradient(180deg,#030208 0%,#0b0914 100%);line-height:1.6;overflow-x:hidden}
+    #space{position:fixed;inset:0;z-index:-2;background:transparent}
+    .parallax{position:fixed;inset:0;pointer-events:none;z-index:-1}
+    .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:linear-gradient(180deg, rgba(10,10,18,.6), rgba(10,10,18,.35));border-bottom:1px solid var(--glass-stroke)}
+    .nav-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg)}
+    .brand .dot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 16px var(--neon);background:var(--neon)}
+    .brand span{font-weight:700;letter-spacing:.08em}
+    .links{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+    .links a{color:var(--fg);text-decoration:none;padding:8px 12px;border-radius:999px;border:1px solid var(--glass-stroke);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));transition:all .2s ease;font-size:.95rem}
+    .links a:focus-visible,.links a:hover{outline:none;color:#000;background:var(--neon);border-color:transparent;box-shadow:0 0 24px rgba(0,255,136,.35)}
+    .hero{position:relative;max-width:var(--maxw);margin:32px auto 0;padding:24px}
+    .terminal{border-radius:var(--radius);border:1px solid var(--glass-stroke);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));box-shadow:0 12px 40px rgba(0,0,0,.45)}
+    .term-top{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--glass-stroke);background:rgba(0,0,0,.25);border-top-left-radius:var(--radius);border-top-right-radius:var(--radius)}
+    .btn{width:10px;height:10px;border-radius:50%}
+    .btn.red{background:#ff5f56}.btn.yellow{background:#ffbd2e}.btn.green{background:#27c93f}
+    .term-body{padding:22px 18px 26px;font-size:1rem}
+    .prompt{color:var(--neon)}
+    .cursor{display:inline-block;width:10px;height:1.2em;vertical-align:bottom;background:var(--neon);box-shadow:0 0 10px var(--neon);animation:blink 1.1s step-end infinite}
+    @keyframes blink{50%{opacity:0}}
+    .logo{font-size:clamp(2.2rem,5vw + .5rem,4rem);font-weight:900;letter-spacing:.15em;color:transparent;text-shadow:0 0 18px rgba(0,255,136,.7),0 0 36px rgba(0,204,255,.35),0 0 64px rgba(255,0,136,.25);background:linear-gradient(90deg, var(--neon), var(--neon-cyan), var(--neon-pink));-webkit-background-clip:text;background-clip:text;animation:glowShift 6s ease-in-out infinite}
+    @keyframes glowShift{0%{filter:drop-shadow(0 0 12px rgba(0,255,136,.6))}50%{filter:drop-shadow(0 0 22px rgba(0,204,255,.6))}100%{filter:drop-shadow(0 0 12px rgba(255,0,136,.55))}}
+    section{scroll-margin-top:84px}
+    .wrap{max-width:var(--maxw);padding:28px 24px;margin:0 auto}
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(12,1fr)}
+    .card{grid-column:span 12;border-radius:var(--radius-sm);border:1px solid var(--glass-stroke);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));box-shadow:0 8px 28px rgba(0,0,0,.45);padding:18px 18px 16px;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+    .card:hover{transform:translateY(-3px);border-color:rgba(0,255,136,.55);box-shadow:0 0 24px rgba(0,255,136,.35),0 0 24px rgba(0,204,255,.18)}
+    .card h3{margin:6px 0 8px;font-size:1.2rem;color:var(--neon-cyan)}
+    .card p{margin:0;color:var(--muted)}
+    .icon{font-size:1.4rem;margin-right:.35rem}
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid rgba(0,255,136,.35);background:linear-gradient(180deg, rgba(0,255,136,.18), rgba(0,255,136,.08));color:#001b12;font-weight:700;box-shadow:0 0 14px rgba(0,255,136,.2) inset, 0 0 24px rgba(0,255,136,.18)}
+    .chip .dot{width:8px;height:8px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon)}
+    .contact{text-align:center;border-top:1px solid var(--glass-stroke);padding:36px 24px 60px;background:radial-gradient(600px 300px at 50% -10%, rgba(255,0,136,.12), transparent)}
+    .cta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    .cta a{display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 16px;border-radius:999px;border:1px solid var(--glass-stroke);background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));color:var(--fg);transition:all .2s ease}
+    .cta a:hover,.cta a:focus-visible{outline:none;color:#000;background:var(--neon-pink);border-color:transparent;box-shadow:0 0 22px rgba(255,0,136,.6)}
+    footer{color:#8aa;text-align:center;padding:20px}
+    @media (min-width:640px){.card{grid-column:span 6}}
+    @media (min-width:980px){.card{grid-column:span 4}}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--neon-cyan);outline-offset:2px;border-radius:8px}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="ascii-art">
-                <pre>
-    ██████╗ ██╗         ██╗   ██╗ ██████╗ ██╗██████╗ 
-    ██╔══██╗██║         ██║   ██║██╔═████╗██║██╔══██╗
-    ██████╔╝██║         ██║   ██║██║██╔██║██║██║  ██║
-    ██╔══██╗██║         ╚██╗ ██╔╝████╔╝██║██║██║  ██║
-    ██║  ██║███████╗     ╚████╔╝ ╚██████╔╝██║██████╔╝
-    ╚═╝  ╚═╝╚══════╝      ╚═══╝   ╚═════╝ ╚═╝╚═════╝ 
-                </pre>
-            </div>
-            <h1>RL_V0ID</h1>
-            <p class="tagline">🔐 Cybersecurity Specialist | 🤖 AI Enthusiast | 💻 Ethical Hacker</p>
-            <p class="subtitle">Penetration Testing • Network Security • AI/ML Integration</p>
-        </header>
-        <div class="terminal">
-            <h2>$ whoami</h2>
-            <p>A passionate cybersecurity professional specializing in penetration testing, network security, and AI-driven threat detection. Currently pursuing advanced certifications while working on cutting-edge security projects.</p>
-        </div>
-        <div class="terminal">
-            <h2>$ cat skills.txt</h2>
-            <div class="skill-grid">
-                <div class="skill-card">
-                    <h3>🔒 Cybersecurity</h3>
-                    <ul class="skill-list">
-                        <li>Penetration Testing (VAPT)</li>
-                        <li>Network Security Analysis</li>
-                        <li>Vulnerability Assessment</li>
-                        <li>Security Auditing</li>
-                        <li>Incident Response</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h3>🤖 AI & Machine Learning</h3>
-                    <ul class="skill-list">
-                        <li>Deep Learning (PyTorch/TensorFlow)</li>
-                        <li>Natural Language Processing</li>
-                        <li>Computer Vision</li>
-                        <li>AI Security Research</li>
-                        <li>Model Optimization</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h3>💻 Programming</h3>
-                    <ul class="skill-list">
-                        <li>Python (Advanced)</li>
-                        <li>JavaScript/Node.js</li>
-                        <li>Bash Scripting</li>
-                        <li>C/C++</li>
-                        <li>SQL & NoSQL</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h3>🛠️ Tools & Platforms</h3>
-                    <ul class="skill-list">
-                        <li>Kali Linux, ParrotOS</li>
-                        <li>Metasploit, Burp Suite</li>
-                        <li>Wireshark, Nmap</li>
-                        <li>Docker, Kubernetes</li>
-                        <li>AWS, Azure Security</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="terminal">
-            <h2>$ ls projects/</h2>
-            
-            <div class="project">
-                <h3>🔐 AI-Powered Intrusion Detection System</h3>
-                <p>Developed a machine learning-based IDS using deep neural networks to detect and classify network anomalies with 95% accuracy. Implemented real-time threat analysis and automated response mechanisms.</p>
-                <p><strong>Tech Stack:</strong> Python, TensorFlow, Scapy, Flask</p>
-            </div>
-            <div class="project">
-                <h3>🕵️ Automated Vulnerability Scanner</h3>
-                <p>Created a custom vulnerability assessment tool that automates port scanning, service enumeration, and exploit suggestion. Integrated with CVE database for up-to-date threat intelligence.</p>
-                <p><strong>Tech Stack:</strong> Python, Nmap API, SQLite</p>
-            </div>
-            <div class="project">
-                <h3>🛡️ Secure Chat Application</h3>
-                <p>Built an end-to-end encrypted messaging platform with zero-knowledge architecture. Features include perfect forward secrecy, self-destructing messages, and decentralized authentication.</p>
-                <p><strong>Tech Stack:</strong> Node.js, WebRTC, Signal Protocol</p>
-            </div>
-        </div>
-        <div class="terminal">
-            <h2>$ cat certifications.txt</h2>
-            <div style="margin: 20px 0;">
-                <span class="cert-badge">🎖️ CEH (In Progress)</span>
-                <span class="cert-badge">🎖️ CompTIA Security+</span>
-                <span class="cert-badge">🎖️ OSCP (Preparing)</span>
-                <span class="cert-badge">🎖️ AWS Security Specialty</span>
-            </div>
-        </div>
-        <div class="terminal">
-            <h2>$ echo $INTERESTS</h2>
-            <p>🔬 Reverse Engineering • 🎮 CTF Competitions • 📡 IoT Security • 🌐 Web3 Security • 🧠 AI Ethics & Safety</p>
-        </div>
-        <div class="contact">
-            <h2 style="color: #ff0088; text-shadow: 0 0 10px #ff0088;">$ connect --with RL_V0ID</h2>
-            <p style="margin: 20px 0;">
-                <a href="https://github.com/rl-v0id" target="_blank">🐙 GitHub</a>
-                <a href="https://linkedin.com/in/rl-v0id" target="_blank">💼 LinkedIn</a>
-                <a href="https://twitter.com/rl_v0id" target="_blank">🐦 Twitter</a>
-                <a href="mailto:contact@rlv0id.dev">📧 Email</a>
-            </p>
-        </div>
-        <footer style="text-align: center; margin-top: 60px; color: #555; border-top: 1px solid #333; padding-top: 20px;">
-            <p>© 2024 RL_V0ID | "Breaking systems to build them stronger" | 🔒 Security first, always.</p>
-        </footer>
+  <canvas id="space" aria-hidden="true"></canvas>
+  <div class="parallax" aria-hidden="true" id="parallax"></div>
+
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="RL_V0ID Home"><span class="dot" aria-hidden="true"></span><span>RL_V0ID</span></a>
+      <div class="links" role="list">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#certs">Certifications</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
-</body>
-</html>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="terminal" role="region" aria-label="Hacker terminal intro">
+      <div class="term-top" aria-hidden="true"><span class="btn red"></span><span class="btn yellow"></span><span class="btn green"></span></div>
+      <div class="term-body" aria-live="polite">
+        <div aria-hidden="true" class="logo">RL_V0ID</div>
+        <pre aria-label="intro" style="white-space:pre-wrap;margin:10px 0">
+<span class="prompt">$</span> whoami
+A passionate cybersecurity professional specializing in penetration testing, network security, and AI-driven threat detection.
+Currently pursuing advanced certifications while working on cutting-edge security projects.
+
+<span class="prompt">$</span> echo "Cybersecurity Specialist | AI Enthusiast | Ethical Hacker" <span class="cursor" aria-hidden="true"></span>
+        </pre>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="projects" class="wrap" aria-labelledby="h-projects">
+      <h2 id="h-projects" class="sr-only">Projects</h2>
+      <div class="grid">
+        <article class="card" aria-label="AI-Powered Intrusion Detection System">
+          <h3><span class="icon">🔐</span>AI-Powered Intrusion Detection System</h3>
+          <p>Developed a machine learning-based IDS using deep neural networks to detect and classify network anomalies with ~95% accuracy. Real-time threat analysis and automated responses.</p>
+          <p><strong>Tech Stack:</strong> Python, TensorFlow, Scapy, Flask</p>
+        </article>
+        <article class="card" aria-label="Automated Vulnerability Scanner">
+          <h3><span class="icon">🕵️</span>Automated Vulnerability Scanner</h3>
+          <p>Custom VAPT tool that automates port scanning, service enumeration, and exploit suggestion. Integrates CVE database for current intel.</p>
+          <p><strong>Tech Stack:</strong> Python, Nmap API, SQLite</p>
+        </article>
+        <article class="card" aria-label="Secure Chat Application">
+          <h3><span class="icon">🛡️</span>Secure Chat Application</h3>
+          <p>End-to-end encrypted messaging with perfect forward secrecy, self-destructing messages, and decentralized authentication.</p>
+          <p><strong>Tech Stack:</strong> Node.js, WebRTC, Signal Protocol</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="wrap" aria-labelledby="h-skills">
+      <h2 id="h-skills" class="sr-only">Skills</h2>
+      <div class="grid">
+        <article class="card">
+          <h3><span class="icon">🔒</span>Cybersecurity</h3>
+          <div class="chips" role="list">
+            <span class="chip" role="listitem"><span class="dot"></span>Penetration Testing (VAPT)</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Network Security Analysis</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Vulnerability Assessment</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Security Auditing</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Incident Response</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3><span class="icon">🤖</span>AI & Machine Learning</h3>
+          <div class="chips" role="list">
+            <span class="chip" role="listitem"><span class="dot"></span>Deep Learning (PyTorch/TensorFlow)</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Natural Language Processing</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Computer Vision</span>
+            <span class="chip" role="listitem"><span class="dot"></span>AI Security Research</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Model Optimization</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3><span class="icon">💻</span>Programming</h3>
+          <div class="chips" role="list">
+            <span class="chip" role="listitem"><span class="dot"></span>Python (Advanced)</span>
+            <span class="chip" role="listitem"><span class="dot"></span>JavaScript / Node.js</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Bash Scripting</span>
+            <span class="chip" role="listitem"><span class="dot"></span>C / C++</span>
+            <span class="chip" role="listitem"><span class="dot"></span>SQL & NoSQL</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3><span class="icon">🛠️</span>Tools & Platforms</h3>
+          <div class="chips" role="list">
+            <span class="chip" role="listitem"><span class="dot"></span>Kali Linux</span>
+            <span class="chip" role="listitem"><span class="dot"></span>ParrotOS</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Metasploit</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Burp Suite</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Wireshark</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Nmap</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Docker</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Kubernetes</span>
+            <span class="chip" role="listitem"><span class="dot"></span>AWS</span>
+            <span class="chip" role="listitem"><span class="dot"></span>Azure Security</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="certs" class="wrap" aria-labelledby="h-certs">
+      <h2 id="
