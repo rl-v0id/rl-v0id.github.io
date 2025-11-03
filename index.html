@@ -3,18 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RL_V0ID • Cybersecurity & AI Portfolio</title>
-  <meta name="description" content="RL_V0ID — Red Team Specialist, Ethical Hacker, and AI Enthusiast. Projects, skills, certifications, and contact." />
+  <title>RL_V0ID • Red Team Journey</title>
+  <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey." />
   <meta name="theme-color" content="#000000" />
   <!-- JetBrains Mono font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#05040a;--fg:#e6fff5;--muted:#b0c7bf;--neon:#00ff88;--neon-pink:#ff0088;--neon-cyan:#00ccff;--glass: rgba(255,255,255,.06);--glass-stroke: rgba(255,255,255,.18);--radius: 16px;--radius-sm: 12px;--maxw: 1200px;}
+    :root{
+      --bg:#05040a;
+      --fg:#e6fff5;
+      --muted:#b0c7bf;
+      --neon:#00ff88;
+      --neon-pink:#ff0088;
+      --neon-cyan:#00ccff;
+      --glass: rgba(255,255,255,.06);
+      --glass-stroke: rgba(255,255,255,.18);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --maxw: 1200px;
+    }
     *{ box-sizing: border-box; }
     html,body{ height:100%; }
-    body{ margin:0; font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; color: var(--fg); background: linear-gradient(180deg,#030208 0%,#0b0914 100%); line-height:1.6; overflow-x:hidden; }
+    body{
+      margin:0;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: var(--fg);
+      background: linear-gradient(180deg,#030208 0%,#0b0914 100%);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
     /* Enhanced shimmer + glow for logo */
     .logo{
       display:inline-block;
@@ -56,9 +75,87 @@
       margin-right: 6px;
       text-shadow: 0 0 15px rgba(0,204,255,.75);
     }
-    /* Simple layout for hero */
+    /* Layout */
     .hero{ max-width: var(--maxw); margin: 64px auto 24px; padding: 0 20px; text-align:center; }
     .hero h1{ font-size: 4rem; margin:0; line-height:1.1; }
+    .container{ max-width: var(--maxw); margin: 0 auto; padding: 0 20px 80px; }
+    section{ margin: 60px 0; }
+    h2{
+      font-size: 1.6rem;
+      margin: 0 0 24px;
+      color: var(--neon);
+      font-weight: 600;
+      letter-spacing: .03em;
+    }
+    /* Glass cards */
+    .card{
+      background: var(--glass);
+      border: 1px solid var(--glass-stroke);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+    .card:hover{
+      background: rgba(255,255,255,.08);
+      border-color: rgba(0,255,136,.3);
+      transform: translateY(-2px);
+    }
+    .card h3{
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+    .card p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .status{
+      display: inline-block;
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(0,204,255,.15);
+      color: var(--neon-cyan);
+      border: 1px solid rgba(0,204,255,.3);
+      margin-top: 8px;
+      font-weight: 600;
+    }
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    /* Accent text */
+    .muted{ color: var(--muted); font-size: 0.95rem; margin: 8px 0 0; }
+    .highlight{ color: var(--neon-pink); font-weight: 600; }
+    /* Contact links */
+    .links{
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .link{
+      text-decoration: none;
+      color: var(--neon-cyan);
+      font-weight: 600;
+      padding: 10px 18px;
+      border: 1px solid var(--glass-stroke);
+      background: var(--glass);
+      border-radius: var(--radius-sm);
+      transition: all 0.3s ease;
+    }
+    .link:hover{
+      border-color: var(--neon-cyan);
+      background: rgba(0,204,255,.1);
+      box-shadow: 0 0 12px rgba(0,204,255,.3);
+    }
   </style>
 </head>
 <body>
@@ -66,5 +163,87 @@
     <h1><span class="logo">RL_V0ID</span></h1>
     <p class="quote">Exploring AI security, model evaluation, and secure prompt design. Currently building foundational knowledge.</p>
   </header>
+
+  <div class="container">
+    <!-- About -->
+    <section>
+      <h2>// About</h2>
+      <div class="card">
+        <p>I'm a <span class="highlight">student</span> passionate about cybersecurity and red team operations. This space isn't just a portfolio—it's a living document of my learning journey into offensive security, AI vulnerabilities, and ethical hacking.</p>
+        <p class="muted">Building skills from the ground up. Documenting every step. Something bigger is coming.</p>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h2>// Projects</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>AI Red Team Toolkit</h3>
+          <p>Exploring prompt injection techniques and LLM security boundaries. Early research phase.</p>
+          <span class="status">In Progress</span>
+        </div>
+        <div class="card">
+          <h3>Network Recon Scripts</h3>
+          <p>Collection of Python scripts for network discovery and vulnerability scanning practice.</p>
+          <span class="status">Building</span>
+        </div>
+        <div class="card">
+          <h3>CTF Write-ups</h3>
+          <p>Documenting my approach to Capture The Flag challenges and security puzzles.</p>
+          <span class="status">Updating Soon</span>
+        </div>
+      </div>
+      <p class="muted" style="text-align:center; margin-top:24px;">More experiments coming as I learn. This is just the beginning.</p>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2>// Skills & Learning</h2>
+      <div class="card">
+        <h3>Core Areas</h3>
+        <p>• Linux/Unix fundamentals & command-line proficiency<br>
+           • Python scripting for security automation<br>
+           • Network protocols & packet analysis basics<br>
+           • Web application security concepts<br>
+           • AI/ML security & adversarial testing (learning)</p>
+      </div>
+      <div class="card">
+        <h3>Currently Studying</h3>
+        <p>• OWASP Top 10 vulnerabilities<br>
+           • Metasploit & exploitation frameworks<br>
+           • Privilege escalation techniques<br>
+           • LLM jailbreaking & prompt engineering<br>
+           • Cryptography fundamentals</p>
+        <span class="status">Always Expanding</span>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section>
+      <h2>// Certifications & Goals</h2>
+      <div class="card">
+        <h3>Preparing For</h3>
+        <p>Working toward foundational certifications in ethical hacking and penetration testing. Building practical experience through labs, CTFs, and personal projects.</p>
+        <p class="muted">Focused on hands-on learning over credential chasing. The knowledge comes first.</p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section style="text-align:center;">
+      <h2>// Connect</h2>
+      <p class="muted">Open to learning opportunities, collaboration, and conversations with fellow security enthusiasts.</p>
+      <div class="links">
+        <a href="https://github.com/rl-v0id" class="link" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:contact@rlv0id.dev" class="link">Email</a>
+        <a href="https://twitter.com/rl_v0id" class="link" target="_blank" rel="noopener">Twitter</a>
+      </div>
+    </section>
+
+    <!-- Footer Note -->
+    <div style="text-align:center; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,.1);">
+      <p class="muted" style="font-size:0.85rem;">This is a student's journey, not a finished product.<br>The real work is just beginning.</p>
+    </div>
+  </div>
 </body>
 </html>
