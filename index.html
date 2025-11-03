@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RL_V0ID • Cybersecurity & AI Portfolio</title>
-  <meta name="description" content="RL_V0ID — Cybersecurity Specialist, Ethical Hacker, and AI Enthusiast. Projects, skills, certifications, and contact." />
+  <meta name="description" content="RL_V0ID — Red Team Specialist, Ethical Hacker, and AI Enthusiast. Projects, skills, certifications, and contact." />
   <meta name="theme-color" content="#000000" />
   <!-- JetBrains Mono font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,8 +62,16 @@
     .hero{ position:relative; max-width:var(--maxw); margin:32px auto 0; padding:24px; }
     .logo{ font-size: clamp(2.2rem, 5vw + .5rem, 4rem); font-weight:900; letter-spacing:.15em; color: transparent;
       text-shadow: 0 0 18px rgba(0,255,136,.7), 0 0 36px rgba(0,204,255,.35), 0 0 64px rgba(255,0,136,.25);
-      background: linear-gradient(90deg, var(--neon), var(--neon-cyan), var(--neon-pink)); -webkit-background-clip:text; background-clip:text; }
+      background: linear-gradient(90deg, var(--neon) 0%, var(--neon-cyan) 25%, var(--neon-pink) 50%, var(--neon) 75%, var(--neon-cyan) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip:text; background-clip:text;
+      animation: shimmer 3s linear infinite; }
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
     .subtitle{ color:var(--muted); margin-top:6px; }
+    .quote{ color:var(--fg); font-size:1.1rem; margin-top:16px; font-style:italic; line-height:1.5; max-width:700px; }
     /* Contact */
     .contact-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
     .contact-links a{ text-decoration:none; border:1px solid var(--glass-stroke); border-radius:999px; padding:8px 12px; color:var(--fg);
@@ -77,7 +85,7 @@
     <div class="nav-inner">
       <a href="#home" class="brand" aria-label="RL_V0ID Home">
         <span class="dot" aria-hidden="true"></span>
-        <span>RL_V0ID</span>
+        RL_V0ID
       </a>
       <div class="links" role="navigation" aria-label="Primary">
         <a href="#projects">Projects</a>
@@ -90,7 +98,8 @@
   </nav>
   <header class="hero" id="home">
     <h1 class="logo">RL_V0ID</h1>
-    <p class="subtitle">Cybersecurity Specialist • Ethical Hacker • AI Enthusiast</p>
+    <p class="subtitle">Red Team Specialist • Ethical Hacker • AI Enthusiast</p>
+    <p class="quote">"Hacking is not just about breaking systems—it's about understanding them better than anyone else."</p>
   </header>
   <main class="wrap">
     <section id="projects">
@@ -129,16 +138,12 @@
       <h2 class="section-heading">Skills</h2>
       <div class="grid">
         <div class="card">
-          <h3>Blue Team</h3>
-          <p>Detection engineering, log analytics, incident response, threat intel.</p>
-        </div>
-        <div class="card">
           <h3>Red Team</h3>
           <p>Recon, initial access, privilege escalation, lateral movement, reporting.</p>
         </div>
         <div class="card">
           <h3>AI/ML</h3>
-          <p>Model evaluation, secure prompt design, automation, data pipelines.</p>
+          <p>Exploring AI security, model evaluation, and secure prompt design. Currently building foundational knowledge.</p>
         </div>
       </div>
     </section>
@@ -162,18 +167,18 @@
     <section id="about">
       <h2 class="section-heading">About</h2>
       <div class="block">
-        <p>Focused on practical security outcomes: measurable risk reduction and resilient systems. Passion for building helpful tools and sharing clear write-ups.</p>
+        <p>Focused on red team operations and offensive security with a passion for understanding system vulnerabilities at their core. Exploring AI security and building tools that make a difference.</p>
       </div>
     </section>
     <section id="contact">
       <h2 class="section-heading">Contact</h2>
       <div class="block">
-        <p>Reach out via the links below. Profiles are placeholders—update as needed.</p>
+        <p>Reach out via the links below.</p>
         <div class="contact-links">
-          <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a>
-          <a href="mailto:you@example.com">Email</a>
+          <a href="https://github.com/rl-v0id" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/barath-t-864b80373?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://x.com/A2Barath?t=s_7P4yIEXkeE58D0ePFerw&s=09" target="_blank" rel="noopener">Twitter/X</a>
+          <a href="mailto:contact@rl-v0id.com">Email</a>
         </div>
       </div>
     </section>
