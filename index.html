@@ -34,75 +34,49 @@
       line-height:1.6;
       overflow-x:hidden;
     }
-    /* Ultra-modern shimmer + premium glow for logo */
+    /* Refined logo shimmer: crisp, clean, professional */
     .logo{
       display:inline-block;
       font-weight:700;
       letter-spacing:.08em;
       background: linear-gradient(
-        90deg,
-        #0d47a1,
-        #00ccff,
-        #00ff88,
-        #ff00ff,
-        #c722ff,
-        #00ccff,
-        #0d47a1
+        110deg,
+        #4a90e2,
+        #50c9e8,
+        #7dd3c0,
+        #c084fc,
+        #4a90e2
       );
-      -webkit-background-clip: text; background-clip:text; color: transparent;
+      -webkit-background-clip: text;
+      background-clip:text;
+      color: transparent;
       position:relative;
-      text-shadow:
-        0 0 8px rgba(0,255,136,.95),
-        0 0 18px rgba(0,204,255,.65),
-        0 0 32px rgba(255,0,255,.55),
-        0 0 56px rgba(199,34,255,.4),
-        0 2px 4px rgba(0,0,0,.6);
-      box-shadow:
-        0 0 20px rgba(0,204,255,.35),
-        0 0 40px rgba(255,0,255,.25),
-        0 4px 16px rgba(0,0,0,.5);
-      filter: drop-shadow(0 0 14px rgba(0,255,136,.4)) drop-shadow(0 0 28px rgba(0,204,255,.3));
-      animation: shimmer 6s linear infinite, pulseGlow 3s ease-in-out infinite alternate;
-      background-size: 400% 100%;
-      border-radius: 4px;
-      padding: 2px 0;
+      text-shadow: 0 0 24px rgba(74,144,226,.3);
+      animation: smoothShimmer 8s ease-in-out infinite;
+      background-size: 200% 100%;
     }
     .logo::before{
       content: '';
       position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
       background: linear-gradient(
-        135deg,
-        rgba(0,204,255,.15),
-        transparent 40%,
-        transparent 60%,
-        rgba(255,0,255,.15)
+        110deg,
+        transparent 30%,
+        rgba(80,201,232,.12) 50%,
+        transparent 70%
       );
-      border-radius: 6px;
+      border-radius: 8px;
       z-index: -1;
-      filter: blur(8px);
+      filter: blur(12px);
+      animation: smoothShimmer 8s ease-in-out infinite;
+      background-size: 200% 100%;
     }
-    @keyframes shimmer{ 0%{ background-position: 0% 50%; } 100%{ background-position: 100% 50%; } }
-    @keyframes pulseGlow{
-      0%{ 
-        text-shadow: 
-          0 0 8px rgba(0,255,136,.9), 
-          0 0 18px rgba(0,204,255,.6), 
-          0 0 32px rgba(255,0,255,.5), 
-          0 0 56px rgba(199,34,255,.35),
-          0 2px 4px rgba(0,0,0,.6); 
-      }
-      100%{ 
-        text-shadow: 
-          0 0 12px rgba(0,255,136,1), 
-          0 0 26px rgba(0,204,255,.8), 
-          0 0 48px rgba(255,0,255,.7), 
-          0 0 76px rgba(199,34,255,.5),
-          0 2px 6px rgba(0,0,0,.7); 
-      }
+    @keyframes smoothShimmer{
+      0%, 100%{ background-position: 0% 50%; }
+      50%{ background-position: 100% 50%; }
     }
     /* Enhanced quote styling */
     .quote{
@@ -209,7 +183,7 @@
 <body>
   <header class="hero">
     <h1><span class="logo">RL_V0ID</span></h1>
-    <p class="quote">Break the limits you inherit, not the systems you find.</p>
+    <p class="quote">Exploring AI security, model evaluation, and secure prompt design. Currently building foundational knowledge.</p>
   </header>
   <div class="container">
     <!-- About -->
@@ -244,28 +218,28 @@
     </section>
     <!-- Skills -->
     <section>
-      <h2>// Skills &amp; Learning</h2>
+      <h2>// Skills & Learning</h2>
       <div class="card">
         <h3>Core Areas</h3>
-        <p>• Linux/Unix fundamentals &amp; command-line proficiency<br/>
+        <p>• Linux/Unix fundamentals & command-line proficiency<br/>
            • Python scripting for security automation<br/>
-           • Network protocols &amp; packet analysis basics<br/>
+           • Network protocols & packet analysis basics<br/>
            • Web application security concepts<br/>
-           • AI/ML security &amp; adversarial testing (learning)</p>
+           • AI/ML security & adversarial testing (learning)</p>
       </div>
       <div class="card">
         <h3>Currently Studying</h3>
         <p>• OWASP Top 10 vulnerabilities<br/>
-           • Metasploit &amp; exploitation frameworks<br/>
+           • Metasploit & exploitation frameworks<br/>
            • Privilege escalation techniques<br/>
-           • LLM jailbreaking &amp; prompt engineering<br/>
+           • LLM jailbreaking & prompt engineering<br/>
            • Cryptography fundamentals</p>
         <span class="status">Always Expanding</span>
       </div>
     </section>
     <!-- Certifications -->
     <section>
-      <h2>// Certifications &amp; Goals</h2>
+      <h2>// Certifications & Goals</h2>
       <div class="card">
         <h3>Preparing For</h3>
         <p>Working toward foundational certifications in ethical hacking and penetration testing. Building practical experience through labs, CTFs, and personal projects.</p>
