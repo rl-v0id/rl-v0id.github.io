@@ -6,11 +6,6 @@
   <title>RL_V0ID • Red Team Journey</title>
   <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey." />
   <meta name="theme-color" content="#000000" />
-  <!-- Google Fonts - Fira Mono for headings, Manrope for body -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --bg: #05040a;
@@ -19,251 +14,215 @@
       --neon: #00ff88;
       --neon-pink: #ff0088;
       --neon-cyan: #00ccff;
-      --glass: rgba(255, 255, 255, 0.06);
-      --glass-stroke: rgba(255, 255, 255, 0.18);
-      --radius: 16px;
-      --radius-sm: 12px;
-      --maxw: 1200px;
+      --glass: rgba(255,255,255,0.06);
+      --glass-stroke: rgba(255,255,255,0.18);
     }
-
     * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; padding: 0; }
+    html, body { height: 100%; margin: 0; }
     body {
       background: var(--bg);
       color: var(--fg);
-      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, system-ui, Segoe UI, Roboto, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Manrope", Arial, sans-serif;
       overflow-x: hidden;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
+    h1 { font-weight: 800; letter-spacing: 0.06em; margin: 0; }
+    a { color: var(--neon); text-decoration: none; }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Fira Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-weight: 700;
-      line-height: 1.2;
-      margin: 0 0 1rem 0;
-    }
-
-    a { color: var(--neon); text-decoration: none; transition: color .25s ease, text-shadow .25s ease; }
-    a:hover { color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0,255,136,.6); }
-
-    /* ----- HERO (Updated) ----- */
+    /* Hero layout */
     .hero {
-      min-height: 70vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: clamp(2rem, 4vw, 4rem) clamp(1rem, 3vw, 2rem);
       position: relative;
+      min-height: 86vh;
+      display: grid;
+      place-items: center;
       isolation: isolate;
+      padding: 8vh 5vw 6vh;
     }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin: 0 0 1.25rem 0;
-      padding: 1rem 1.5rem;
-      border-radius: 12px;
-      background: linear-gradient(
-        110deg,
-        var(--neon-cyan) 0%,
-        var(--fg) 25%,
-        var(--neon) 50%,
-        var(--fg) 75%,
-        var(--neon-cyan) 100%
-      );
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter:
-        drop-shadow(0 0 10px rgba(0,204,255,0.7))
-        drop-shadow(0 0 22px rgba(0,204,255,0.5))
-        drop-shadow(0 0 32px rgba(0,255,136,0.7))
-        drop-shadow(0 0 44px rgba(0,255,136,0.5))
-        drop-shadow(0 0 60px rgba(0,255,136,0.35));
-      animation: shimmerMove 4s linear infinite, glowPulse 3s ease-in-out infinite, glitchEffect 8s infinite;
+    .hero-inner {
       position: relative;
+      width: min(1100px, 92vw);
+      z-index: 3;
+      display: grid;
+      gap: 1.2rem;
+      text-align: center;
     }
 
-    /* Gradient halo + scanlines overlay for CRT vibe */
-    .hero h1::before {
-      content: '';
-      position: absolute;
-      inset: -16px -20px;
-      border-radius: 18px;
-      background:
-        radial-gradient(60% 60% at 50% 50%, rgba(0,255,136,0.18), rgba(0,255,136,0) 70%),
-        radial-gradient(50% 50% at 30% 40%, rgba(0,204,255,0.15), rgba(0,204,255,0) 70%);
-      filter: blur(14px);
-      opacity: .7;
-      z-index: -1;
-      pointer-events: none;
-      animation: haloPulse 5s ease-in-out infinite;
+    /* RGB split glitch title */
+    .title-wrap { position: relative; display: inline-block; margin-inline: auto; }
+    .glitch {
+      position: relative;
+      font-size: clamp(2.6rem, 9vw, 7rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      filter: drop-shadow(0 0 6px rgba(0,255,136,.2));
     }
-
-    .hero h1::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.15) 0px,
-        rgba(0, 0, 0, 0.15) 1px,
-        transparent 1px,
-        transparent 3px
-      );
-      border-radius: 12px;
-      pointer-events: none;
-      opacity: 0.5;
-      mix-blend-mode: multiply;
-      animation: scanlineScroll 10s linear infinite;
+    .glitch .layer {
+      position: absolute; inset: 0; mix-blend-mode: screen; pointer-events: none;
     }
-
-    .hero .sr-only {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0, 0, 0, 0);
-      white-space: nowrap; border: 0;
+    .glitch .base { position: relative; color: var(--fg); text-shadow: 0 0 20px rgba(0,255,136,.35); }
+    .glitch .r { color: #f00; transform: translateX(0); animation: rShift 2.4s infinite steps(2, end); opacity: .45; }
+    .glitch .g { color: #0f0; transform: translateX(0); animation: gShift 2.1s infinite steps(2, end); opacity: .45; }
+    .glitch .b { color: #0bf; transform: translateX(0); animation: bShift 2.7s infinite steps(2, end); opacity: .45; }
+    @keyframes rShift { 0%,100%{transform:translate(0,0)} 20%{transform:translate(2px,-1px)} 50%{transform:translate(-3px,1px)} 75%{transform:translate(1px,0)} }
+    @keyframes gShift { 0%,100%{transform:translate(0,0)} 15%{transform:translate(-2px,1px)} 45%{transform:translate(2px,0)} 80%{transform:translate(-1px,-1px)} }
+    @keyframes bShift { 0%,100%{transform:translate(0,0)} 10%{transform:translate(1px,1px)} 40%{transform:translate(-2px,0)} 70%{transform:translate(1px,-2px)} }
+    .glimmer {
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.05) 45%, rgba(255,255,255,.18) 50%, rgba(255,255,255,.05) 55%, transparent 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: shimmer 3.2s linear infinite;
     }
+    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
 
-    .motto { font-size: clamp(1rem, 2.2vw, 1.15rem); color: var(--muted); max-width: 760px; margin: 0 auto; text-shadow: 0 0 8px rgba(0,255,136,0.3); letter-spacing: 0.02em; min-height: 1.6em; }
+    /* Animated quote ticker (typewriter replaced by cycle) */
+    .sub {
+      font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-top: .25rem;
+      min-height: 1.6em;
+    }
+    .sub .cursor { opacity: .75; }
 
-    /* ----- KEYFRAMES ----- */
-    @keyframes shimmerMove { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
-    @keyframes scanlineScroll { 0% { background-position: 0 0; } 100% { background-position: 0 100px; } }
-    @keyframes glitchEffect { 0%, 90%, 92%, 94%, 100% { transform: translate(0); } 91% { transform: translate(-2px, -2px) skew(0.5deg); } 93% { transform: translate(2px, 2px) skew(-0.5deg); } }
-    @keyframes glowPulse { 0%, 100% { filter: drop-shadow(0 0 10px rgba(0,204,255,0.8)) drop-shadow(0 0 20px rgba(0,204,255,0.6)) drop-shadow(0 0 30px rgba(0,255,136,0.8)) drop-shadow(0 0 40px rgba(0,255,136,0.6)) drop-shadow(0 0 60px rgba(0,255,136,0.4)); } 50% { filter: drop-shadow(0 0 15px rgba(0,204,255,1)) drop-shadow(0 0 30px rgba(0,204,255,0.85)) drop-shadow(0 0 45px rgba(0,255,136,1)) drop-shadow(0 0 60px rgba(0,255,136,0.85)) drop-shadow(0 0 90px rgba(0,255,136,0.6)); } }
-    @keyframes haloPulse { 0%, 100% { opacity: .55; filter: blur(14px); } 50% { opacity: .85; filter: blur(18px); } }
+    /* Glass card (if original layout had intro) – preserved space without altering others */
+    .intro { margin-top: 1.2rem; backdrop-filter: blur(6px); background: var(--glass); border: 1px solid var(--glass-stroke); border-radius: 14px; padding: 1rem 1.1rem; }
 
-    /* ----- LAYOUT (unchanged sections below rely on these) ----- */
-    .container { max-width: var(--maxw); margin: 0 auto; padding: 3rem 2rem; }
-    .section { margin-bottom: 4rem; }
-    .section h2 { font-size: 2rem; color: var(--neon); margin-bottom: 1.5rem; text-shadow: 0 0 12px rgba(0,255,136,.4); }
-    .section p { font-size: 1.05rem; color: var(--fg); line-height: 1.7; margin-bottom: 1rem; }
+    /* Background layers */
+    /* Matrix rain (faint) */
+    .matrix-layer, .circuit-layer { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+    .matrix-layer { opacity: .14; }
+    .matrix-col { position: absolute; top: -120vh; width: 1.2ch; color: #00ff88; text-shadow: 0 0 7px rgba(0,255,136,.55); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: clamp(10px, 2.2vw, 14px); white-space: pre; opacity: .65; }
+    @keyframes fall { to { transform: translateY(220vh); } }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .card { background: var(--glass); border: 1px solid var(--glass-stroke); border-radius: var(--radius-sm); padding: 1.5rem; transition: all .3s ease; }
-    .card:hover { background: rgba(255,255,255,.1); border-color: var(--neon); box-shadow: 0 8px 24px rgba(0,255,136,.15); transform: translateY(-4px); }
-    .card h3 { font-size: 1.25rem; color: var(--neon-cyan); margin-bottom: 0.75rem; }
-    .card p { font-size: 0.95rem; color: var(--muted); margin: 0; }
+    /* Circuit SVG glow */
+    .circuit-layer svg { width: 100%; height: 100%; display: block; }
+    .trace { fill: none; stroke: rgba(0, 204, 255, .18); stroke-width: 1; }
+    .trace.light { stroke: rgba(0,255,136,.5); filter: drop-shadow(0 0 6px rgba(0,255,136,.7)); }
+    .dash { stroke-dasharray: 140 420; stroke-dashoffset: 560; animation: dash 6s ease-in-out infinite; }
+    .pulse { animation: pulse 3.5s ease-in-out infinite; }
+    @keyframes dash { 0% { stroke-dashoffset: 560; } 50% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -560; } }
+    @keyframes pulse { 0%,100%{opacity:.15} 40%{opacity:.55} }
 
-    code { font-family: 'Fira Mono', monospace; background: rgba(0,255,136,.1); padding: 0.2rem 0.4rem; border-radius: 4px; color: var(--neon); }
-
-    /* Reduced-motion respects user preference */
+    /* Responsive tweaks */
+    @media (max-width: 640px) {
+      .hero { padding-top: 12vh; }
+      .glitch { font-size: clamp(2.2rem, 11vw, 3.2rem); }
+    }
     @media (prefers-reduced-motion: reduce) {
-      .hero h1, .hero h1::after { animation: none; }
+      .glitch .r,.glitch .g,.glitch .b, .dash, .pulse, .matrix-col { animation: none !important; }
+      .matrix-layer { display: none; }
     }
   </style>
 </head>
 <body>
-  <!-- HERO SECTION (replaced) -->
-  <header class="hero" role="banner" aria-labelledby="site-title">
-    <h1 id="site-title" aria-live="polite">RL_V0ID</h1>
-    <p class="sr-only" id="quotes-label">Hacker quotes rotating with typewriter effect</p>
-    <p class="motto" aria-describedby="quotes-label"><span id="quote"></span><span id="cursor" aria-hidden="true">▌</span></p>
-  </header>
+  <section class="hero" aria-label="RL_V0ID">
+    <!-- Faint matrix rain background -->
+    <div class="matrix-layer" aria-hidden="true" id="matrix"></div>
 
-  <!-- MAIN CONTENT (structure unchanged) -->
-  <div class="container">
-    <div class="section">
-      <h2>Skills &amp; Learning</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Red Team</h3>
-          <p>Penetration testing, vulnerability assessment, exploit development</p>
-        </div>
-        <div class="card">
-          <h3>AI Security</h3>
-          <p>Adversarial ML, prompt injection, model security</p>
-        </div>
-        <div class="card">
-          <h3>Tools</h3>
-          <p>Python, Bash, Metasploit, Burp Suite, Wireshark</p>
-        </div>
+    <!-- SVG circuit traces around title -->
+    <div class="circuit-layer" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <filter id="softGlow">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <!-- grid-like lattice -->
+        <g opacity="0.22">
+          <path class="trace" d="M0 120 H1200 M0 260 H1200 M0 400 H1200 M0 540 H1200 M0 680 H1200"/>
+          <path class="trace" d="M160 0 V800 M320 0 V800 M480 0 V800 M640 0 V800 M800 0 V800 M960 0 V800"/>
+        </g>
+        <!-- animated traces framing center -->
+        <path class="trace dash" d="M220 300 H980 V500 H220 Z"/>
+        <path class="trace light pulse" d="M220 300 L320 260 L880 260 L980 300" filter="url(#softGlow)"/>
+        <path class="trace light pulse" d="M220 500 L320 540 L880 540 L980 500" filter="url(#softGlow)"/>
+        <!-- side branches -->
+        <path class="trace dash" d="M160 360 H220 M160 440 H220 M980 360 H1040 M980 440 H1040"/>
+        <circle cx="160" cy="360" r="2.4" fill="rgba(0,255,136,.65)"/>
+        <circle cx="1040" cy="440" r="2.4" fill="rgba(0,255,136,.65)"/>
+      </svg>
+    </div>
+
+    <div class="hero-inner">
+      <div class="title-wrap">
+        <h1 class="glitch" aria-label="RL_V0ID">
+          <span class="layer r">RL_V0ID</span>
+          <span class="layer g">RL_V0ID</span>
+          <span class="layer b">RL_V0ID</span>
+          <span class="base glimmer">RL_V0ID</span>
+        </h1>
       </div>
+      <p class="sub" id="subline"><span id="q"></span><span class="cursor">▋</span></p>
+      <!-- Keep space for existing layout below -->
+      <div class="intro" id="intro-anchor" hidden></div>
     </div>
-
-    <div class="section">
-      <h2>Projects</h2>
-      <p>Coming soon... Building and documenting projects as I learn.</p>
-    </div>
-
-    <div class="section">
-      <h2>Connect</h2>
-      <p>Follow the journey: github.com/rl-v0id</p>
-    </div>
-  </div>
+  </section>
 
   <script>
-    // Accessible typewriter that respects reduced motion
-    (function() {
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const el = document.getElementById('quote');
-      const cursor = document.getElementById('cursor');
-      const quotes = [
-        '"The quieter you become, the more you are able to hear."',
-        '"Information wants to be free."',
-        '"In the world of zeros and ones, I am the exception."',
-        '"Amateurs hack systems, professionals hack people."',
-        '"The only secure system is one that is powered off."'
+    // Matrix rain generator (lightweight)
+    (function(){
+      const holder = document.getElementById('matrix');
+      const cols = Math.min(18, Math.ceil(window.innerWidth / 90));
+      const charset = '01▮░▒▓/\\|<>[]{}$@#';
+      const durationBase = 9; // seconds
+      function spawnCol(i){
+        const el = document.createElement('div');
+        el.className = 'matrix-col';
+        el.style.left = (i*(100/cols)) + 'vw';
+        const len = 14 + Math.floor(Math.random()*18);
+        let s = '';
+        for(let k=0;k<len;k++){ s += charset[Math.floor(Math.random()*charset.length)] + '\n'; }
+        el.textContent = s;
+        const d = (durationBase + Math.random()*6).toFixed(2);
+        el.style.animation = `fall ${d}s linear infinite`;
+        el.style.opacity = (0.28 + Math.random()*0.3).toFixed(2);
+        holder.appendChild(el);
+      }
+      for(let i=0;i<cols;i++) spawnCol(i);
+      addEventListener('resize', ()=>{
+        holder.innerHTML='';
+        const n = Math.min(18, Math.ceil(window.innerWidth / 90));
+        for(let i=0;i<n;i++) spawnCol(i);
+      });
+    })();
+
+    // Quote cycler (no terminal prompts)
+    (function(){
+      const words = [
+        'reverse shell',
+        'AI injection',
+        'Exploit //',
+        'recon',
+        'exploit.CVE-2025-1337',
+        'phishing',
+        'bypass',
+        'threat emulation'
       ];
-
-      let qi = 0; // quote index
-      let ti = 0; // typed char index
-      let deleting = false;
-
-      function setText(t) { el.textContent = t; }
-
-      function tick() {
-        const q = quotes[qi];
-        const speed = prefersReduced ? 0 : (deleting ? 30 : 50);
-
-        if (prefersReduced) {
-          // Instantly swap quote every 4s for reduced motion users
-          setText(q);
-          qi = (qi + 1) % quotes.length;
-          setTimeout(tick, 4000);
-          return;
-        }
-
-        if (!deleting) {
-          setText(q.slice(0, ti + 1));
-          ti++;
-          if (ti === q.length) {
-            // pause at end, then start deleting
-            setTimeout(() => { deleting = true; tick(); }, 1400);
-            return;
-          }
+      const el = document.getElementById('q');
+      const cursor = document.querySelector('.cursor');
+      let i = 0, ti = 0, del = false;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function set(t){ el.textContent = t; }
+      function loop(){
+        const w = words[i];
+        if (reduce){ set(w); i = (i+1)%words.length; return setTimeout(loop, 1800); }
+        if (!del){
+          set(w.slice(0, ++ti));
+          if (ti === w.length){ del = true; return setTimeout(loop, 900); }
         } else {
-          setText(q.slice(0, ti - 1));
-          ti--;
-          if (ti === 0) {
-            deleting = false;
-            qi = (qi + 1) % quotes.length;
-          }
+          set(w.slice(0, --ti));
+          if (ti === 0){ del = false; i = (i+1)%words.length; }
         }
-        setTimeout(tick, speed + Math.floor(Math.random() * 60));
+        setTimeout(loop, 40 + Math.floor(Math.random()*50));
       }
-
-      // Cursor blink
-      function blink() {
-        if (prefersReduced) { cursor.style.opacity = '1'; return; }
-        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-        setTimeout(blink, 500);
-      }
-
-      // Initialize
-      setText('');
-      tick();
-      blink();
+      function blink(){ if(reduce){cursor.style.opacity='1';return;} cursor.style.opacity = cursor.style.opacity==='0'?'1':'0'; setTimeout(blink, 450); }
+      set(''); loop(); blink();
     })();
   </script>
 </body>
