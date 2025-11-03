@@ -6,287 +6,203 @@
   <title>RL_V0ID • Red Team Journey</title>
   <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey." />
   <meta name="theme-color" content="#000000" />
+  
+  <!-- Google Fonts - Orbitron for cyber/tech effect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  
   <!-- JetBrains Mono font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg:#05040a;
-      --fg:#e6fff5;
-      --muted:#b0c7bf;
-      --neon:#00ff88;
-      --neon-pink:#ff0088;
-      --neon-cyan:#00ccff;
+      --bg: #05040a;
+      --fg: #e6fff5;
+      --muted: #b0c7bf;
+      --neon: #00ff88;
+      --neon-pink: #ff0088;
+      --neon-cyan: #00ccff;
       --glass: rgba(255,255,255,.06);
       --glass-stroke: rgba(255,255,255,.18);
       --radius: 16px;
       --radius-sm: 12px;
       --maxw: 1200px;
     }
+    
     * { box-sizing: border-box; }
-    html,body { height:100%; }
+    html, body { height: 100%; }
+    
     body {
-      margin:0;
+      margin: 0;
       font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       color: var(--fg);
-      background: linear-gradient(180deg,#030208 0%,#0b0914 100%);
-      line-height:1.6;
-      overflow-x:hidden;
+      background: linear-gradient(180deg, #030208 0%, #0b0914 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-
+    
+    /* Apply Orbitron font to all headings and titles */
+    h1, h2, h3, h4, h5, h6, .hero-title, .section-title {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 700;
+    }
+    
     /* === HERO === */
     .hero {
-      position:relative;
-      min-height:100vh;
-      display:flex; align-items:center; justify-content:center;
-      text-align:center;
-      overflow:hidden;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
     }
-
+    
     /* Constellation + aurora background */
     #constellation-bg {
-      position:absolute; top:0; left:0;
-      width:100%; height:100%;
-      z-index:1;
-    }
-    .aurora-overlay {
-      position:absolute; top:0; left:0;
-      width:100%; height:100%;
-      background:
-        radial-gradient(ellipse 60% 40% at 30% 20%, rgba(0,255,136,.12), transparent 50%),
-        radial-gradient(ellipse 50% 50% at 70% 70%, rgba(0,204,255,.08), transparent 50%);
-      pointer-events:none;
-      animation: aurora-shift 10s infinite alternate ease-in-out;
-      z-index:2;
-    }
-    @keyframes aurora-shift {
-      to { filter: hue-rotate(20deg); }
-    }
-
-    /* Grid overlay for hacker aesthetic */
-    .hero::before {
-      content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-image:
-        linear-gradient(rgba(0,255,136,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,136,.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      z-index: 3;
-      pointer-events: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
-
+    
     .hero-content {
-      position:relative; z-index:10;
-      max-width:900px; padding:2rem;
+      position: relative;
+      z-index: 1;
+      padding: 2rem;
     }
-    .hero h1 {
-      font-size:clamp(2.5rem,8vw,5rem);
-      font-weight:700;
-      margin:0 0 1rem;
-      color:var(--neon);
-      text-shadow:
-        0 0 20px rgba(0,255,136,.6),
-        0 0 40px rgba(0,255,136,.3);
-    }
-    .hero p {
-      font-size:clamp(1rem,2.5vw,1.5rem);
-      color:var(--muted);
-      margin:0;
-    }
-
-    /* Access granted line */
-    .access-line {
-      margin-top: 2rem;
-      font-size: 1rem;
+    
+    .hero-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      font-weight: 900;
+      margin: 0 0 1rem;
+      letter-spacing: 0.05em;
+      /* Glowing neon effect */
       color: var(--neon);
-      font-family: "JetBrains Mono", monospace;
-      opacity: 0.9;
-      text-shadow: 0 0 10px rgba(0,255,136,.4);
+      text-shadow: 
+        0 0 10px rgba(0, 255, 136, 0.8),
+        0 0 20px rgba(0, 255, 136, 0.6),
+        0 0 30px rgba(0, 255, 136, 0.4),
+        0 0 40px rgba(0, 255, 136, 0.3),
+        0 0 60px rgba(0, 255, 136, 0.2);
+      animation: glow-pulse 2s ease-in-out infinite alternate;
     }
-    .access-line::before {
-      content: '[+] ';
+    
+    @keyframes glow-pulse {
+      from {
+        text-shadow: 
+          0 0 10px rgba(0, 255, 136, 0.8),
+          0 0 20px rgba(0, 255, 136, 0.6),
+          0 0 30px rgba(0, 255, 136, 0.4),
+          0 0 40px rgba(0, 255, 136, 0.3),
+          0 0 60px rgba(0, 255, 136, 0.2);
+      }
+      to {
+        text-shadow: 
+          0 0 15px rgba(0, 255, 136, 1),
+          0 0 30px rgba(0, 255, 136, 0.8),
+          0 0 45px rgba(0, 255, 136, 0.6),
+          0 0 60px rgba(0, 255, 136, 0.4),
+          0 0 80px rgba(0, 255, 136, 0.3);
+      }
+    }
+    
+    .hero-subtitle {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 400;
       color: var(--neon-cyan);
+      margin: 0 0 2rem;
+      letter-spacing: 0.1em;
+      text-shadow: 
+        0 0 5px rgba(0, 204, 255, 0.6),
+        0 0 10px rgba(0, 204, 255, 0.4);
     }
-
-    /* Terminal glyph in corner */
-    .terminal-glyph {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(0,0,0,.7);
-      border: 1px solid rgba(0,255,136,.3);
-      border-radius: 4px;
-      padding: 8px 12px;
+    
+    .tagline {
       font-family: "JetBrains Mono", monospace;
-      font-size: 0.85rem;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    
+    /* Section titles with glow effect */
+    .section-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
       color: var(--neon);
-      z-index: 1000;
-      box-shadow: 0 0 20px rgba(0,255,136,.2);
+      margin: 3rem 0 1.5rem;
+      text-shadow: 
+        0 0 8px rgba(0, 255, 136, 0.7),
+        0 0 15px rgba(0, 255, 136, 0.5),
+        0 0 25px rgba(0, 255, 136, 0.3);
     }
-    .terminal-cursor {
-      display: inline-block;
-      width: 8px;
-      height: 14px;
-      background: var(--neon);
-      margin-left: 2px;
-      animation: blink 1s step-end infinite;
+    
+    /* Card titles */
+    .card-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--fg);
+      text-shadow: 
+        0 0 5px rgba(230, 255, 245, 0.5),
+        0 0 10px rgba(230, 255, 245, 0.3);
     }
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      50.01%, 100% { opacity: 0; }
-    }
-
-    /* === CARDS SECTION === */
-    .section {
-      position:relative; z-index:5;
-      max-width:var(--maxw); margin:0 auto;
-      padding:4rem 2rem;
-    }
-    .cards {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap:2rem;
-    }
-    .card {
+    
+    .glass-card {
       background: var(--glass);
-      border:1px solid var(--glass-stroke);
-      border-radius:var(--radius);
-      padding:2rem;
-      backdrop-filter:blur(10px);
-      transition: transform 0.2s, border-color 0.2s;
+      border: 1px solid var(--glass-stroke);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      margin: 1rem 0;
     }
-    .card:hover {
-      transform:translateY(-4px);
-      border-color: var(--neon);
-    }
-    .card-icon {
-      font-size:2.5rem; margin-bottom:1rem;
-    }
-    .card h3 {
-      font-size:1.5rem; margin:0 0 0.5rem;
-      color:var(--neon);
-    }
-    .card p {
-      color:var(--muted); margin:0 0 1rem;
-      line-height:1.6;
-    }
-    .card ul {
-      list-style:none; padding:0; margin:0;
-      color:var(--fg);
-      font-size:0.95rem;
-    }
-    .card ul li {
-      padding:0.3rem 0;
-    }
-    .card ul li::before {
-      content:'▸ '; color:var(--neon);
-    }
-
-    /* === FOOTER === */
-    footer {
-      position:relative; z-index:5;
-      text-align:center;
-      padding:3rem 2rem;
-      color:var(--muted);
-      font-size:0.9rem;
-    }
-    footer a {
-      color:var(--neon); text-decoration:none;
-      transition: color 0.2s;
-    }
-    footer a:hover { color:var(--neon-cyan); }
   </style>
 </head>
 <body>
-  <!-- Hero section -->
-  <section class="hero">
+  <div class="hero">
     <canvas id="constellation-bg"></canvas>
-    <div class="aurora-overlay"></div>
     <div class="hero-content">
-      <h1>RL_V0ID</h1>
-      <p>Red Team Journey</p>
-      <div class="access-line">Access Granted — Welcome, RL_V0ID</div>
+      <h1 class="hero-title">RL_V0ID</h1>
+      <p class="hero-subtitle">RED TEAM JOURNEY</p>
+      <p class="tagline">Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey.</p>
     </div>
-  </section>
-
-  <!-- Terminal glyph with blinking cursor -->
-  <div class="terminal-glyph">
-    <span>root@v0id:~#</span><span class="terminal-cursor"></span>
   </div>
-
-  <!-- Cards section -->
-  <section class="section">
-    <div class="cards">
-      <div class="card">
-        <div class="card-icon">🔴</div>
-        <h3>Red Teaming</h3>
-        <p>Exploring offensive security techniques, penetration testing methodologies, and threat emulation frameworks.</p>
-        <ul>
-          <li>Network exploitation</li>
-          <li>Web application testing</li>
-          <li>Social engineering</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-icon">🤖</div>
-        <h3>AI Security</h3>
-        <p>Researching adversarial ML, prompt injection, model extraction, and AI system vulnerabilities.</p>
-        <ul>
-          <li>Adversarial attacks</li>
-          <li>LLM security</li>
-          <li>Model robustness</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-icon">📚</div>
-        <h3>Learning Path</h3>
-        <p>Documenting my journey from beginner to practitioner in cybersecurity and ethical hacking.</p>
-        <ul>
-          <li>HTB & CTF writeups</li>
-          <li>Tool development</li>
-          <li>Security research</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>RL_V0ID &copy; 2025 | Building in public, learning constantly.</p>
-    <p>
-      <a href="https://github.com/rl-v0id" target="_blank">GitHub</a> •
-      <a href="https://twitter.com/rl_v0id" target="_blank">Twitter</a> •
-      <a href="mailto:contact@rl-v0id.dev">Contact</a>
-    </p>
-  </footer>
-
-  <!-- Constellation background script -->
+  
   <script>
     const canvas = document.getElementById('constellation-bg');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
-    const particles = [];
-    const particleCount = 80;
+    
+    const particleCount = 100;
     const maxDist = 150;
-
+    const particles = [];
+    
     class Particle {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
-        this.radius = Math.random() * 1.5 + 0.5;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
       }
+      
       update() {
         this.x += this.vx;
         this.y += this.vy;
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
       }
+      
       draw() {
         ctx.fillStyle = 'rgba(230,255,245,0.7)';
         ctx.beginPath();
@@ -294,11 +210,11 @@
         ctx.fill();
       }
     }
-
+    
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
-
+    
     function drawLines() {
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -317,7 +233,7 @@
         }
       }
     }
-
+    
     function animate() {
       ctx.clearRect(0, 0, width, height);
       particles.forEach(p => {
@@ -327,12 +243,12 @@
       drawLines();
       requestAnimationFrame(animate);
     }
-
+    
     window.addEventListener('resize', () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     });
-
+    
     animate();
   </script>
 </body>
