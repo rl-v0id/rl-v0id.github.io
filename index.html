@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RL_V0ID • Red Team Journey</title>
-  <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey." />
-  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey.">
+  <meta name="theme-color" content="#000000">
   <style>
     :root {
       --bg: #05040a;
@@ -30,7 +30,6 @@
     }
     h1 { font-weight: 800; letter-spacing: 0.06em; margin: 0; }
     a { color: var(--neon); text-decoration: none; }
-
     /* Hero layout */
     .hero {
       position: relative;
@@ -48,181 +47,153 @@
       gap: 1.2rem;
       text-align: center;
     }
-
     /* RGB split glitch title */
-    .title-wrap { position: relative; display: inline-block; margin-inline: auto; }
-    .glitch {
+    .glitch-title {
+      font-size: clamp(2.8rem, 9vw, 5.5rem);
+      line-height: 1.1;
       position: relative;
-      font-size: clamp(2.6rem, 9vw, 7rem);
-      line-height: 0.95;
+      display: inline-block;
       text-transform: uppercase;
-      filter: drop-shadow(0 0 6px rgba(0,255,136,.2));
     }
-    .glitch .layer {
-      position: absolute; inset: 0; mix-blend-mode: screen; pointer-events: none;
+    .glitch-title::before,
+    .glitch-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      overflow: hidden;
+      clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
     }
-    .glitch .base { position: relative; color: var(--fg); text-shadow: 0 0 20px rgba(0,255,136,.35); }
-    .glitch .r { color: #f00; transform: translateX(0); animation: rShift 2.4s infinite steps(2, end); opacity: .45; }
-    .glitch .g { color: #0f0; transform: translateX(0); animation: gShift 2.1s infinite steps(2, end); opacity: .45; }
-    .glitch .b { color: #0bf; transform: translateX(0); animation: bShift 2.7s infinite steps(2, end); opacity: .45; }
-    @keyframes rShift { 0%,100%{transform:translate(0,0)} 20%{transform:translate(2px,-1px)} 50%{transform:translate(-3px,1px)} 75%{transform:translate(1px,0)} }
-    @keyframes gShift { 0%,100%{transform:translate(0,0)} 15%{transform:translate(-2px,1px)} 45%{transform:translate(2px,0)} 80%{transform:translate(-1px,-1px)} }
-    @keyframes bShift { 0%,100%{transform:translate(0,0)} 10%{transform:translate(1px,1px)} 40%{transform:translate(-2px,0)} 70%{transform:translate(1px,-2px)} }
-    .glimmer {
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.05) 45%, rgba(255,255,255,.18) 50%, rgba(255,255,255,.05) 55%, transparent 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: shimmer 3.2s linear infinite;
+    .glitch-title::before {
+      animation: glitch-1 2.5s infinite;
+      color: var(--neon-cyan);
+      z-index: -1;
     }
-    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
-
-    /* Animated quote ticker (typewriter replaced by cycle) */
-    .sub {
-      font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    .glitch-title::after {
+      animation: glitch-2 3s infinite;
+      color: var(--neon-pink);
+      z-index: -2;
+    }
+    @keyframes glitch-1 {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-3px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(3px, 1px); }
+      80% { transform: translate(2px, -1px); }
+    }
+    @keyframes glitch-2 {
+      0%, 100% { transform: translate(0); }
+      25% { transform: translate(3px, -2px); }
+      50% { transform: translate(-2px, 2px); }
+      75% { transform: translate(2px, -1px); }
+    }
+    /* Subtitle */
+    .subtitle {
+      font-size: clamp(1rem, 2.8vw, 1.4rem);
       color: var(--muted);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-top: .25rem;
-      min-height: 1.6em;
+      margin-top: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
     }
-    .sub .cursor { opacity: .75; }
-
-    /* Glass card (if original layout had intro) – preserved space without altering others */
-    .intro { margin-top: 1.2rem; backdrop-filter: blur(6px); background: var(--glass); border: 1px solid var(--glass-stroke); border-radius: 14px; padding: 1rem 1.1rem; }
-
-    /* Background layers */
-    /* Matrix rain (faint) */
-    .matrix-layer, .circuit-layer { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-    .matrix-layer { opacity: .14; }
-    .matrix-col { position: absolute; top: -120vh; width: 1.2ch; color: #00ff88; text-shadow: 0 0 7px rgba(0,255,136,.55); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: clamp(10px, 2.2vw, 14px); white-space: pre; opacity: .65; }
-    @keyframes fall { to { transform: translateY(220vh); } }
-
-    /* Circuit SVG glow */
-    .circuit-layer svg { width: 100%; height: 100%; display: block; }
-    .trace { fill: none; stroke: rgba(0, 204, 255, .18); stroke-width: 1; }
-    .trace.light { stroke: rgba(0,255,136,.5); filter: drop-shadow(0 0 6px rgba(0,255,136,.7)); }
-    .dash { stroke-dasharray: 140 420; stroke-dashoffset: 560; animation: dash 6s ease-in-out infinite; }
-    .pulse { animation: pulse 3.5s ease-in-out infinite; }
-    @keyframes dash { 0% { stroke-dashoffset: 560; } 50% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -560; } }
-    @keyframes pulse { 0%,100%{opacity:.15} 40%{opacity:.55} }
-
-    /* Responsive tweaks */
-    @media (max-width: 640px) {
-      .hero { padding-top: 12vh; }
-      .glitch { font-size: clamp(2.2rem, 11vw, 3.2rem); }
+    /* CTA buttons */
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .glitch .r,.glitch .g,.glitch .b, .dash, .pulse, .matrix-col { animation: none !important; }
-      .matrix-layer { display: none; }
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .btn-primary {
+      background: var(--neon);
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: transparent;
+      border-color: var(--neon);
+      color: var(--neon);
+      box-shadow: 0 0 20px rgba(0,255,136,0.4);
+    }
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--glass-stroke);
+      color: var(--fg);
+    }
+    .btn-secondary:hover {
+      background: var(--glass);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0,204,255,0.3);
+    }
+    /* Background matrix rain effect */
+    .matrix-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .matrix-column {
+      position: absolute;
+      top: -100%;
+      font-family: monospace;
+      font-size: 1.2rem;
+      color: var(--neon);
+      white-space: pre;
+      line-height: 1.4;
+      animation: matrix-fall linear infinite;
+    }
+    @keyframes matrix-fall {
+      to { transform: translateY(100vh); }
     }
   </style>
 </head>
 <body>
-  <section class="hero" aria-label="RL_V0ID">
-    <!-- Faint matrix rain background -->
-    <div class="matrix-layer" aria-hidden="true" id="matrix"></div>
-
-    <!-- SVG circuit traces around title -->
-    <div class="circuit-layer" aria-hidden="true">
-      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <filter id="softGlow">
-            <feGaussianBlur stdDeviation="2" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-        <!-- grid-like lattice -->
-        <g opacity="0.22">
-          <path class="trace" d="M0 120 H1200 M0 260 H1200 M0 400 H1200 M0 540 H1200 M0 680 H1200"/>
-          <path class="trace" d="M160 0 V800 M320 0 V800 M480 0 V800 M640 0 V800 M800 0 V800 M960 0 V800"/>
-        </g>
-        <!-- animated traces framing center -->
-        <path class="trace dash" d="M220 300 H980 V500 H220 Z"/>
-        <path class="trace light pulse" d="M220 300 L320 260 L880 260 L980 300" filter="url(#softGlow)"/>
-        <path class="trace light pulse" d="M220 500 L320 540 L880 540 L980 500" filter="url(#softGlow)"/>
-        <!-- side branches -->
-        <path class="trace dash" d="M160 360 H220 M160 440 H220 M980 360 H1040 M980 440 H1040"/>
-        <circle cx="160" cy="360" r="2.4" fill="rgba(0,255,136,.65)"/>
-        <circle cx="1040" cy="440" r="2.4" fill="rgba(0,255,136,.65)"/>
-      </svg>
-    </div>
-
+  <section class="hero">
+    <div class="matrix-bg" id="matrix"></div>
     <div class="hero-inner">
-      <div class="title-wrap">
-        <h1 class="glitch" aria-label="RL_V0ID">
-          <span class="layer r">RL_V0ID</span>
-          <span class="layer g">RL_V0ID</span>
-          <span class="layer b">RL_V0ID</span>
-          <span class="base glimmer">RL_V0ID</span>
-        </h1>
+      <h1 class="glitch-title" data-text="RL_V0ID">RL_V0ID</h1>
+      <p class="subtitle">Student | Red Team Explorer | AI Security Enthusiast</p>
+      <div class="cta-group">
+        <a href="#writeups" class="btn btn-primary">View Writeups</a>
+        <a href="#about" class="btn btn-secondary">Learn More</a>
       </div>
-      <p class="sub" id="subline"><span id="q"></span><span class="cursor">▋</span></p>
-      <!-- Keep space for existing layout below -->
-      <div class="intro" id="intro-anchor" hidden></div>
     </div>
   </section>
-
   <script>
-    // Matrix rain generator (lightweight)
+    // Matrix rain effect
     (function(){
-      const holder = document.getElementById('matrix');
-      const cols = Math.min(18, Math.ceil(window.innerWidth / 90));
-      const charset = '01▮░▒▓/\\|<>[]{}$@#';
-      const durationBase = 9; // seconds
-      function spawnCol(i){
-        const el = document.createElement('div');
-        el.className = 'matrix-col';
-        el.style.left = (i*(100/cols)) + 'vw';
-        const len = 14 + Math.floor(Math.random()*18);
-        let s = '';
-        for(let k=0;k<len;k++){ s += charset[Math.floor(Math.random()*charset.length)] + '\n'; }
-        el.textContent = s;
-        const d = (durationBase + Math.random()*6).toFixed(2);
-        el.style.animation = `fall ${d}s linear infinite`;
-        el.style.opacity = (0.28 + Math.random()*0.3).toFixed(2);
-        holder.appendChild(el);
-      }
-      for(let i=0;i<cols;i++) spawnCol(i);
-      addEventListener('resize', ()=>{
-        holder.innerHTML='';
-        const n = Math.min(18, Math.ceil(window.innerWidth / 90));
-        for(let i=0;i<n;i++) spawnCol(i);
-      });
-    })();
-
-    // Quote cycler (no terminal prompts)
-    (function(){
-      const words = [
-        'reverse shell',
-        'AI injection',
-        'Exploit //',
-        'recon',
-        'exploit.CVE-2025-1337',
-        'phishing',
-        'bypass',
-        'threat emulation'
-      ];
-      const el = document.getElementById('q');
-      const cursor = document.querySelector('.cursor');
-      let i = 0, ti = 0, del = false;
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function set(t){ el.textContent = t; }
-      function loop(){
-        const w = words[i];
-        if (reduce){ set(w); i = (i+1)%words.length; return setTimeout(loop, 1800); }
-        if (!del){
-          set(w.slice(0, ++ti));
-          if (ti === w.length){ del = true; return setTimeout(loop, 900); }
-        } else {
-          set(w.slice(0, --ti));
-          if (ti === 0){ del = false; i = (i+1)%words.length; }
+      const matrix = document.getElementById('matrix');
+      const cols = Math.min(12, Math.ceil(window.innerWidth / 100));
+      const charset = '01アイウエオカキクケコサシスセソタチツテト';
+      function createColumn(index) {
+        const col = document.createElement('div');
+        col.className = 'matrix-column';
+        col.style.left = (index * (100 / cols)) + '%';
+        let text = '';
+        const lines = 15;
+        for(let i=0; i<lines; i++){
+          text += charset[Math.floor(Math.random()*charset.length)] + '\n';
         }
-        setTimeout(loop, 40 + Math.floor(Math.random()*50));
+        col.textContent = text;
+        const duration = (8 + Math.random() * 6).toFixed(2);
+        col.style.animationDuration = duration + 's';
+        col.style.animationDelay = (Math.random() * 3) + 's';
+        matrix.appendChild(col);
       }
-      function blink(){ if(reduce){cursor.style.opacity='1';return;} cursor.style.opacity = cursor.style.opacity==='0'?'1':'0'; setTimeout(blink, 450); }
-      set(''); loop(); blink();
+      for(let i=0; i<cols; i++) createColumn(i);
+      addEventListener('resize', () => {
+        matrix.innerHTML = '';
+        const n = Math.min(12, Math.ceil(window.innerWidth / 100));
+        for(let i=0; i<n; i++) createColumn(i);
+      });
     })();
   </script>
 </body>
