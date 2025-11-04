@@ -29,6 +29,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
     h1 { font-weight: 800; letter-spacing: 0.06em; margin: 0; }
+    h2 { font-weight: 700; letter-spacing: 0.04em; margin: 0; }
     a { color: var(--neon); text-decoration: none; }
     /* Hero layout */
     .hero {
@@ -153,6 +154,67 @@
     @keyframes matrix-fall {
       to { transform: translateY(100vh); }
     }
+    /* Writeups section */
+    .writeups-section {
+      padding: 4rem 5vw;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: var(--neon);
+    }
+    .section-subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+    .writeups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .writeup-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-stroke);
+      border-radius: 12px;
+      padding: 1.8rem;
+      transition: all 0.3s ease;
+    }
+    .writeup-card:hover {
+      border-color: var(--neon);
+      box-shadow: 0 0 25px rgba(0,255,136,0.2);
+      transform: translateY(-4px);
+    }
+    .writeup-tag {
+      display: inline-block;
+      background: rgba(0,255,136,0.15);
+      color: var(--neon);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .writeup-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      color: var(--fg);
+    }
+    .writeup-desc {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .writeup-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
@@ -167,6 +229,46 @@
       </div>
     </div>
   </section>
+
+  <section class="writeups-section" id="writeups">
+    <h2 class="section-title">Writeups & Research</h2>
+    <p class="section-subtitle">Documenting my journey through cybersecurity challenges and research</p>
+    <div class="writeups-grid">
+      <div class="writeup-card">
+        <span class="writeup-tag">Web Exploitation</span>
+        <h3 class="writeup-title">SQL Injection in Login Forms</h3>
+        <p class="writeup-desc">Deep dive into exploiting vulnerable authentication systems using SQL injection techniques. Covers basic and advanced payloads, WAF bypasses, and proper remediation.</p>
+        <div class="writeup-meta">
+          <span>Difficulty: Medium</span>
+          <span>•</span>
+          <span>Nov 2025</span>
+        </div>
+      </div>
+
+      <div class="writeup-card">
+        <span class="writeup-tag">Cryptography</span>
+        <h3 class="writeup-title">Breaking Weak RSA Implementation</h3>
+        <p class="writeup-desc">Analysis of a CTF challenge involving factorization attacks on RSA with small primes. Demonstrates the importance of proper key generation and parameter selection.</p>
+        <div class="writeup-meta">
+          <span>Difficulty: Hard</span>
+          <span>•</span>
+          <span>Oct 2025</span>
+        </div>
+      </div>
+
+      <div class="writeup-card">
+        <span class="writeup-tag">Binary Exploitation</span>
+        <h3 class="writeup-title">Buffer Overflow to Shell Access</h3>
+        <p class="writeup-desc">Step-by-step walkthrough of exploiting a stack-based buffer overflow vulnerability to gain remote code execution. Includes payload crafting and ASLR bypass techniques.</p>
+        <div class="writeup-meta">
+          <span>Difficulty: Hard</span>
+          <span>•</span>
+          <span>Sep 2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <script>
     // Matrix rain effect
     (function(){
