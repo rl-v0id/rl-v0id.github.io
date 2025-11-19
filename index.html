@@ -1,302 +1,1043 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RL_V0ID • Red Team Journey</title>
-  <meta name="description" content="RL_V0ID — Student exploring cybersecurity, red team ops, and AI security. Building foundational knowledge, documenting the journey.">
-  <meta name="theme-color" content="#000000">
-  <style>
-    :root {
-      --bg: #05040a;
-      --fg: #e6fff5;
-      --muted: #b0c7bf;
-      --neon: #00ff88;
-      --neon-pink: #ff0088;
-      --neon-cyan: #00ccff;
-      --glass: rgba(255,255,255,0.06);
-      --glass-stroke: rgba(255,255,255,0.18);
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Manrope", Arial, sans-serif;
-      overflow-x: hidden;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    h1 { font-weight: 800; letter-spacing: 0.06em; margin: 0; }
-    h2 { font-weight: 700; letter-spacing: 0.04em; margin: 0; }
-    a { color: var(--neon); text-decoration: none; }
-    /* Hero layout */
-    .hero {
-      position: relative;
-      min-height: 86vh;
-      display: grid;
-      place-items: center;
-      isolation: isolate;
-      padding: 8vh 5vw 6vh;
-    }
-    .hero-inner {
-      position: relative;
-      width: min(1100px, 92vw);
-      z-index: 3;
-      display: grid;
-      gap: 1.2rem;
-      text-align: center;
-    }
-    /* RGB split glitch title */
-    .glitch-title {
-      font-size: clamp(2.8rem, 9vw, 5.5rem);
-      line-height: 1.1;
-      position: relative;
-      display: inline-block;
-      text-transform: uppercase;
-    }
-    .glitch-title::before,
-    .glitch-title::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      overflow: hidden;
-      clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
-    }
-    .glitch-title::before {
-      animation: glitch-1 2.5s infinite;
-      color: var(--neon-cyan);
-      z-index: -1;
-    }
-    .glitch-title::after {
-      animation: glitch-2 3s infinite;
-      color: var(--neon-pink);
-      z-index: -2;
-    }
-    @keyframes glitch-1 {
-      0%, 100% { transform: translate(0); }
-      20% { transform: translate(-3px, 2px); }
-      40% { transform: translate(-2px, -2px); }
-      60% { transform: translate(3px, 1px); }
-      80% { transform: translate(2px, -1px); }
-    }
-    @keyframes glitch-2 {
-      0%, 100% { transform: translate(0); }
-      25% { transform: translate(3px, -2px); }
-      50% { transform: translate(-2px, 2px); }
-      75% { transform: translate(2px, -1px); }
-    }
-    /* Subtitle */
-    .subtitle {
-      font-size: clamp(1rem, 2.8vw, 1.4rem);
-      color: var(--muted);
-      margin-top: 0.5rem;
-      font-weight: 300;
-      letter-spacing: 0.03em;
-    }
-    /* CTA buttons */
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-    }
-    .btn {
-      padding: 0.9rem 2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-    .btn-primary {
-      background: var(--neon);
-      color: #000;
-    }
-    .btn-primary:hover {
-      background: transparent;
-      border-color: var(--neon);
-      color: var(--neon);
-      box-shadow: 0 0 20px rgba(0,255,136,0.4);
-    }
-    .btn-secondary {
-      background: transparent;
-      border-color: var(--glass-stroke);
-      color: var(--fg);
-    }
-    .btn-secondary:hover {
-      background: var(--glass);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 20px rgba(0,204,255,0.3);
-    }
-    /* Background matrix rain effect */
-    .matrix-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      overflow: hidden;
-      opacity: 0.15;
-      pointer-events: none;
-    }
-    .matrix-column {
-      position: absolute;
-      top: -100%;
-      font-family: monospace;
-      font-size: 1.2rem;
-      color: var(--neon);
-      white-space: pre;
-      line-height: 1.4;
-      animation: matrix-fall linear infinite;
-    }
-    @keyframes matrix-fall {
-      to { transform: translateY(100vh); }
-    }
-    /* Writeups section */
-    .writeups-section {
-      padding: 4rem 5vw;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-title {
-      font-size: clamp(2rem, 5vw, 3rem);
-      text-align: center;
-      margin-bottom: 0.5rem;
-      color: var(--neon);
-    }
-    .section-subtitle {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 3rem;
-      font-size: 1.1rem;
-    }
-    .writeups-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-    .writeup-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-stroke);
-      border-radius: 12px;
-      padding: 1.8rem;
-      transition: all 0.3s ease;
-    }
-    .writeup-card:hover {
-      border-color: var(--neon);
-      box-shadow: 0 0 25px rgba(0,255,136,0.2);
-      transform: translateY(-4px);
-    }
-    .writeup-tag {
-      display: inline-block;
-      background: rgba(0,255,136,0.15);
-      color: var(--neon);
-      padding: 0.3rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-    .writeup-title {
-      font-size: 1.4rem;
-      margin-bottom: 0.8rem;
-      color: var(--fg);
-    }
-    .writeup-desc {
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    .writeup-meta {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-  </style>
-</head>
-<body>
-  <section class="hero">
-    <div class="matrix-bg" id="matrix"></div>
-    <div class="hero-inner">
-      <h1 class="glitch-title" data-text="RL_V0ID">RL_V0ID</h1>
-      <p class="subtitle">Student | Red Team Explorer | AI Security Enthusiast</p>
-      <div class="cta-group">
-        <a href="#writeups" class="btn btn-primary">View Writeups</a>
-        <a href="#about" class="btn btn-secondary">Learn More</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="writeups-section" id="writeups">
-    <h2 class="section-title">Writeups & Research</h2>
-    <p class="section-subtitle">Documenting my journey through cybersecurity challenges and research</p>
-    <div class="writeups-grid">
-      <div class="writeup-card">
-        <span class="writeup-tag">Web Exploitation</span>
-        <h3 class="writeup-title">SQL Injection in Login Forms</h3>
-        <p class="writeup-desc">Deep dive into exploiting vulnerable authentication systems using SQL injection techniques. Covers basic and advanced payloads, WAF bypasses, and proper remediation.</p>
-        <div class="writeup-meta">
-          <span>Difficulty: Medium</span>
-          <span>•</span>
-          <span>Nov 2025</span>
-        </div>
-      </div>
-
-      <div class="writeup-card">
-        <span class="writeup-tag">Cryptography</span>
-        <h3 class="writeup-title">Breaking Weak RSA Implementation</h3>
-        <p class="writeup-desc">Analysis of a CTF challenge involving factorization attacks on RSA with small primes. Demonstrates the importance of proper key generation and parameter selection.</p>
-        <div class="writeup-meta">
-          <span>Difficulty: Hard</span>
-          <span>•</span>
-          <span>Oct 2025</span>
-        </div>
-      </div>
-
-      <div class="writeup-card">
-        <span class="writeup-tag">Binary Exploitation</span>
-        <h3 class="writeup-title">Buffer Overflow to Shell Access</h3>
-        <p class="writeup-desc">Step-by-step walkthrough of exploiting a stack-based buffer overflow vulnerability to gain remote code execution. Includes payload crafting and ASLR bypass techniques.</p>
-        <div class="writeup-meta">
-          <span>Difficulty: Hard</span>
-          <span>•</span>
-          <span>Sep 2025</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    // Matrix rain effect
-    (function(){
-      const matrix = document.getElementById('matrix');
-      const cols = Math.min(12, Math.ceil(window.innerWidth / 100));
-      const charset = '01アイウエオカキクケコサシスセソタチツテト';
-      function createColumn(index) {
-        const col = document.createElement('div');
-        col.className = 'matrix-column';
-        col.style.left = (index * (100 / cols)) + '%';
-        let text = '';
-        const lines = 15;
-        for(let i=0; i<lines; i++){
-          text += charset[Math.floor(Math.random()*charset.length)] + '\n';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RL_V0ID | Cybersecurity Student Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f3ff;
+            --primary-dim: rgba(0, 243, 255, 0.1);
+            --secondary: #7000ff;
+            --accent: #ffffff;
+            --bg-dark: #030305;
+            --bg-card: rgba(20, 20, 25, 0.6);
+            --text-main: #e0e0e0;
+            --text-muted: #9ca3af;
+            --font-heading: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --gradient-main: linear-gradient(135deg, var(--primary), var(--secondary));
         }
-        col.textContent = text;
-        const duration = (8 + Math.random() * 6).toFixed(2);
-        col.style.animationDuration = duration + 's';
-        col.style.animationDelay = (Math.random() * 3) + 's';
-        matrix.appendChild(col);
-      }
-      for(let i=0; i<cols; i++) createColumn(i);
-      addEventListener('resize', () => {
-        matrix.innerHTML = '';
-        const n = Math.min(12, Math.ceil(window.innerWidth / 100));
-        for(let i=0; i<n; i++) createColumn(i);
-      });
-    })();
-  </script>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-heading);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-dim);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Background Effects */
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+        }
+
+        .orb-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(30px, 50px);
+            }
+        }
+
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.07;
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 15px 30px;
+            z-index: 100;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .shimmer-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            
+            /* Enhanced Shimmer Gradient */
+            background: linear-gradient(to right, 
+                #4a4a4a 0%, 
+                #00f3ff 40%, 
+                #ffffff 50%, 
+                #00f3ff 60%, 
+                #4a4a4a 100%);
+            
+            background-size: 200% auto;
+            
+            color: #000; /* Fallback */
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .typing-container {
+            font-family: var(--font-mono);
+            color: var(--primary);
+            font-size: 1.1rem;
+            height: 30px;
+            margin-bottom: 40px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn-outline:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Sections */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* About Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .terminal-window {
+            background: #0f0f12;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            font-family: var(--font-mono);
+        }
+
+        .terminal-bar {
+            background: #1a1a1e;
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .red {
+            background: #ff5f56;
+        }
+
+        .yellow {
+            background: #ffbd2e;
+        }
+
+        .green {
+            background: #27c93f;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            color: #a9b1d6;
+            font-size: 0.9rem;
+        }
+
+        .cmd {
+            color: var(--primary);
+        }
+
+        .path {
+            color: var(--secondary);
+        }
+
+        .output {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Cards */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            background: rgba(20, 20, 25, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0, 243, 255, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card p {
+            margin-top: auto;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: rgba(0, 243, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: var(--font-heading);
+            transition: border-color 0.3s;
+        }
+
+        .contact-wrapper {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: var(--font-heading);
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-input {
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-main);
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        .hamburger.toggle span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.toggle span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.toggle span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .shimmer-title {
+                font-size: 3rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .container {
+                padding: 60px 20px;
+            }
+
+            .hamburger {
+                display: block;
+                z-index: 101;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 100%;
+                background: rgba(3, 3, 5, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease-in-out;
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+                margin: 20px 0;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-main);
+            z-index: 10000;
+            box-shadow: 0 0 10px var(--primary);
+            transition: width 0.1s;
+        }
+
+        /* Scanline */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0),
+                    rgba(255, 255, 255, 0) 50%,
+                    rgba(0, 0, 0, 0.2) 50%,
+                    rgba(0, 0, 0, 0.2));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.3;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+    <!-- Scanline Effect -->
+    <div class="scanline"></div>
+    
+    <div class="bg-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    <canvas id="matrix-bg"></canvas>
+
+    <nav class="navbar">
+        <div class="nav-logo">&lt;RL_V0ID /&gt;</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Start</a>
+            <a href="#about">About</a>
+            <a href="#learning">Learning Path</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Connect</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 class="shimmer-title">RL_V0ID</h1>
+        <p class="subtitle">Aspiring Cybersecurity Analyst</p>
+        <div class="typing-container" id="typing-text"></div>
+        <div class="btn-group">
+            <a href="#projects" class="btn btn-primary">View My Progress</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <div class="about-grid reveal">
+            <div class="about-text">
+                <div class="section-header">
+                    <h2 class="section-title">About Me</h2>
+                    <p class="section-desc">My journey into the world of bits and bytes.</p>
+                </div>
+                <p>Hi there! I'm a <span class="highlight">Cybersecurity Student</span> passionate about understanding
+                    how systems work—and how to break them to make them safer.</p>
+                <p>I'm currently building my foundation in <span class="highlight">Networking</span>, <span
+                        class="highlight">Linux Administration</span>, and <span class="highlight">Offensive
+                        Security</span>. I spend my free time solving complex challenges on TryHackMe and HackTheBox to sharpen my skills.</p>
+                <p>My goal is to evolve into a <span class="highlight">Principal Security Engineer</span> or <span class="highlight">Security Architect</span>. I aim to design and secure enterprise-level infrastructures through continuous learning and hands-on practice.</p>
+            </div>
+            <div class="terminal-window">
+                <div class="terminal-bar">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-body">
+                    <div>
+                        <span class="path">student@kali:~$</span> <span class="cmd">whoami</span>
+                    </div>
+                    <span class="output">cyber_student</span>
+
+                    <div>
+                        <span class="path">student@kali:~$</span> <span class="cmd">cat current_focus.txt</span>
+                    </div>
+                    <span class="output">
+                        - Cloud Security Posture (CSPM)<br>
+                        - Python for Security Automation<br>
+                        - Kernel Level Hardening<br>
+                        - TryHackMe/HTB Focus: Advanced Lateral Movement
+                    </span>
+
+                    <div>
+                        <span class="path">student@kali:~$</span> <span class="cmd">./status.sh</span>
+                    </div>
+                    <span class="output" style="color: #27c93f">Running... [Learning Mode: ON]</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="learning" class="container">
+        <div class="section-header">
+            <h2 class="section-title">My Learning Path</h2>
+            <p class="section-desc">The skills I'm actively developing and practicing.</p>
+        </div>
+        <div class="grid-3">
+            <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Networking</h3>
+                <p>Understanding TCP/IP, OSI Model, Subnetting, and analyzing traffic with Wireshark.</p>
+                <div class="tags">
+                    <span class="tag">Wireshark</span>
+                    <span class="tag">Cisco Packet Tracer</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fab fa-linux"></i></div>
+                <h3>Linux & SysAdmin</h3>
+                <p>Command line proficiency, permissions, bash scripting, and system hardening.</p>
+                <div class="tags">
+                    <span class="tag">Kali</span>
+                    <span class="tag">Ubuntu</span>
+                    <span class="tag">Bash</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fab fa-python"></i></div>
+                <h3>Python Scripting</h3>
+                <p>Writing basic tools for automation, port scanning, and data parsing.</p>
+                <div class="tags">
+                    <span class="tag">Automation</span>
+                    <span class="tag">Requests</span>
+                    <span class="tag">Socket</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-user-secret"></i></div>
+                <h3>Ethical Hacking</h3>
+                <p>Learning the methodology: Reconnaissance, Scanning, Exploitation, and Reporting.</p>
+                <div class="tags">
+                    <span class="tag">Nmap</span>
+                    <span class="tag">Burp Suite</span>
+                    <span class="tag">Metasploit</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-globe"></i></div>
+                <h3>Web Security</h3>
+                <p>Studying OWASP Top 10 vulnerabilities like SQLi, XSS, and IDOR.</p>
+                <div class="tags">
+                    <span class="tag">OWASP</span>
+                    <span class="tag">HTML/JS</span>
+                    <span class="tag">DVWA</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Blue Teaming</h3>
+                <p>Basics of log analysis, SIEM concepts, and defensive strategies.</p>
+                <div class="tags">
+                    <span class="tag">Splunk</span>
+                    <span class="tag">Snort</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <div class="section-header">
+            <h2 class="section-title">Projects & Labs</h2>
+            <p class="section-desc">Hands-on work to apply what I'm learning.</p>
+        </div>
+        <div class="grid-3">
+            
+            <div class="card reveal">
+                <h3><i class="fas fa-microchip text-primary"></i> CyberSentinel Pro</h3>
+                <p>A robust, interactive security suite featuring a modular CLI menu. Capabilities include Network & Web Reconnaissance, Password & Crypto Analysis, Wireless Audits, Full Security Audits, Threat Intelligence, and Compliance Checks.</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Interactive Mode</span>
+                    <span class="tag">Full Audit</span>
+                </div>
+            </div>
+            
+            <div class="card reveal">
+                <h3><i class="fas fa-lock text-primary"></i> Local Password Strength Checker</h3>
+                <p>A real-time, local Streamlit application providing immediate visual feedback and actionable entropy suggestions for users creating more secure passwords offline.</p>
+                <div class="tags">
+                    <span class="tag">Streamlit</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Cryptography</span>
+                </div>
+            </div>
+            
+            <div class="card reveal">
+                <h3><i class="fas fa-flag text-primary"></i> CTF Writeups</h3>
+                <p>Detailed walkthroughs of machines I've solved on TryHackMe and HackTheBox. Documenting my thought
+                    process.</p>
+                <div class="tags">
+                    <span class="tag">Documentation</span>
+                    <span class="tag">Learning</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <h3><i class="fas fa-laptop-code text-primary"></i> Python Port Scanner</h3>
+                <p>A simple multi-threaded port scanner built from scratch to understand socket programming.</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Networking</span>
+                </div>
+            </div>
+            <div class="card reveal">
+                <h3><i class="fas fa-server text-primary"></i> Home Lab Setup</h3>
+                <p>Configured a virtualized environment with Kali Linux, Metasploitable, and Windows Active Directory.
+                </p>
+                <div class="tags">
+                    <span class="tag">VirtualBox</span>
+                    <span class="tag">AD</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="section-header">
+            <h2 class="section-title">Connect With Me</h2>
+            <p class="section-desc">Have a question or want to work together? Send a transmission.</p>
+        </div>
+        <div class="contact-wrapper reveal">
+            <form class="contact-form" id="contactForm">
+                <input type="text" id="nameInput" class="form-input" placeholder="Codename / Name" required>
+                <input type="email" id="emailInput" class="form-input" placeholder="Secure Frequency / Email" required>
+                <textarea id="messageInput" class="form-input" rows="5" placeholder="Encrypted Message..." required></textarea>
+                <button type="submit" class="btn btn-primary">Send Transmission</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 RL_V0ID. Securing the future, one byte at a time.</p>
+    </footer>
+
+    <script>
+        // Contact Form Logic
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('nameInput').value;
+            const email = document.getElementById('emailInput').value;
+            const message = document.getElementById('messageInput').value;
+            
+            const subject = `Transmission from ${name}`;
+            const body = `Sender: ${name} (${email})\n\nMessage:\n${message}`;
+            
+            // !!! IMPORTANT: REPLACE THIS PLACEHOLDER EMAIL WITH YOUR ACTUAL CONTACT ADDRESS !!!
+            const recipientEmail = 'rl.void.contact@example.com';
+            
+            window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+
+        // Matrix Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+
+        const chars = '01';
+        const fontSize = 14;
+        const columns = width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(3, 3, 5, 0.05)';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.fillStyle = '#00f3ff';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > height && Math.random() > 0.975)
+                    drops[i] = 0;
+                drops[i]++;
+            }
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+
+        // Typing Effect
+        const textElement = document.getElementById('typing-text');
+        const texts = ['Student @ Cybersecurity', 'Learning Python', 'CTF Player', 'Linux Enthusiast'];
+        let count = 0;
+        let index = 0;
+        let currentText = '';
+        let letter = '';
+
+        (function type() {
+            if (count === texts.length) {
+                count = 0;
+            }
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+
+            textElement.textContent = letter + '|';
+
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 2000);
+            } else {
+                setTimeout(type, 100);
+            }
+        }());
+
+        // Mobile Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+        });
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('toggle');
+            });
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3D Tilt Effect for Cards
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg rotation
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            const progressBar = document.querySelector('.scroll-progress');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+        });
+
+        // Active Nav Link Highlighting
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // Dynamic Title
+        const originalTitle = document.title;
+        window.addEventListener('blur', () => {
+            document.title = 'Signal Lost...';
+        });
+        window.addEventListener('focus', () => {
+            document.title = originalTitle;
+        });
+    </script>
 </body>
+
 </html>
