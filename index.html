@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RL_V0ID | Cybersecurity Student Journey</title>
+    <title>RL_V0ID | Web Penetration Tester & Bug Bounty Hunter</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -17,7 +17,7 @@
             --primary-dim: rgba(0, 243, 255, 0.1);
             --secondary: #7000ff;
             --accent: #ffffff;
-            --bg-dark: #030305;
+            --bg-dark: #050507;
             --bg-card: rgba(20, 20, 25, 0.6);
             --text-main: #e0e0e0;
             --text-muted: #9ca3af;
@@ -33,6 +33,7 @@
             scroll-behavior: smooth;
         }
 
+        /* --- CUSTOM SCOPE CURSOR --- */
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
@@ -40,6 +41,15 @@
             min-height: 100vh;
             overflow-x: hidden;
             line-height: 1.6;
+            position: relative;
+            
+            /* Default Scope Cursor (Cyan) */
+            cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='16' cy='16' r='10' stroke='%2300f3ff' stroke-width='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='10' stroke='%2300f3ff' stroke-width='2'/%3E%3Cline x1='16' y1='22' x2='16' y2='30' stroke='%2300f3ff' stroke-width='2'/%3E%3Cline x1='2' y1='16' x2='10' y2='16' stroke='%2300f3ff' stroke-width='2'/%3E%3Cline x1='22' y1='16' x2='30' y2='16' stroke='%2300f3ff' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2300f3ff'/%3E%3C/svg%3E") 16 16, crosshair;
+        }
+
+        /* Hover State: Locked On Scope (Red) */
+        a, button, .card, .nav-logo {
+            cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='16' cy='16' r='12' stroke='%23ff003c' stroke-width='2'/%3E%3Cline x1='16' y1='0' x2='16' y2='8' stroke='%23ff003c' stroke-width='2'/%3E%3Cline x1='16' y1='24' x2='16' y2='32' stroke='%23ff003c' stroke-width='2'/%3E%3Cline x1='0' y1='16' x2='8' y2='16' stroke='%23ff003c' stroke-width='2'/%3E%3Cline x1='24' y1='16' x2='32' y2='16' stroke='%23ff003c' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23ff003c'/%3E%3C/svg%3E") 16 16, pointer;
         }
 
         /* Scroll Reveal */
@@ -79,17 +89,32 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             pointer-events: none;
             overflow: hidden;
         }
 
+        /* Gloss Overlay for Background */
+        .gloss-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
+            box-shadow: inset 0 0 150px rgba(0,0,0,0.9); /* Vignette Effect */
+            pointer-events: none;
+        }
+
+
+
         .glow-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 10s infinite ease-in-out;
+            filter: blur(100px);
+            opacity: 0.2;
+            animation: float 15s infinite ease-in-out;
         }
 
         .orb-1 {
@@ -110,15 +135,8 @@
         }
 
         @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            50% {
-                transform: translate(30px, 50px);
-            }
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 50px); }
         }
 
         #matrix-bg {
@@ -128,9 +146,289 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.07;
-            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+            opacity: 0.4; /* Lower opacity for the grid so content is readable */
+        }
+
+        /* --- HACKER LOADING SCREEN --- */
+        .hacker-loader {
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+        }
+
+        .loader-terminal {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(10, 10, 15, 0.95);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3),
+                        inset 0 0 20px rgba(0, 243, 255, 0.05);
+        }
+
+        .loader-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .loader-title {
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .loader-title::before {
+            content: '◉';
+            color: #00ff00;
+            animation: blink 1s infinite;
+        }
+
+        .loader-status {
+            font-size: 0.85rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .loader-content {
+            height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .loader-line {
+            font-size: 0.9rem;
+            color: #00ff00;
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: fadeInLine 0.3s forwards;
+        }
+
+        .loader-line.error {
+            color: #ff003c;
+        }
+
+        .loader-line.warning {
+            color: #ffaa00;
+        }
+
+        .loader-line.info {
+            color: var(--primary);
+        }
+
+        .loader-line span {
+            color: #888;
+            margin-right: 10px;
+        }
+
+        .loader-progress {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 243, 255, 0.3);
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 243, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #00ff00);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @keyframes fadeInLine {
+            to { opacity: 1; }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .hacker-loader.fade-out {
+            animation: loaderFadeOut 0.8s forwards;
+        }
+
+        @keyframes loaderFadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 243, 255, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(112, 0, 255, 0.5);
+        }
+
+        .back-to-top i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* Stats Counter Section */
+        .stats-section {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.05), rgba(112, 0, 255, 0.05));
+            padding: 80px 20px;
+            margin: 60px 0;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            font-family: var(--font-mono);
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+
+        /* Skills Grid Section */
+        .skills-section {
+            padding: 80px 20px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 25px 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .skill-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .skill-level {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Navbar */
@@ -191,35 +489,98 @@
             position: relative;
         }
 
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            box-shadow: 0 10px 40px -10px rgba(0, 243, 255, 0.15);
+        }
+
+        /* Metallic Chrome Title */
         .shimmer-title {
             font-size: 4.5rem;
-            font-weight: 700;
+            font-weight: 900;
             line-height: 1.1;
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
-            
-            /* Enhanced Shimmer Gradient */
-            background: linear-gradient(to right, 
-                #4a4a4a 0%, 
-                #00f3ff 40%, 
-                #ffffff 50%, 
-                #00f3ff 60%, 
-                #4a4a4a 100%);
-            
-            background-size: 200% auto;
-            
-            color: #000; /* Fallback */
-            background-clip: text;
+            letter-spacing: 0.15em;
+            font-family: var(--font-heading);
+            background: linear-gradient(
+                135deg,
+                #667eea 0%,
+                #00f3ff 20%,
+                #ffffff 40%,
+                #00f3ff 60%,
+                #667eea 80%,
+                #00f3ff 100%
+            );
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
-            animation: shimmer 3s linear infinite;
+            background-clip: text;
+            animation: chromeShine 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.5));
         }
 
-        @keyframes shimmer {
-            to {
-                background-position: 200% center;
+        .shimmer-title::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                #667eea 0%,
+                #00f3ff 20%,
+                #ffffff 40%,
+                #00f3ff 60%,
+                #667eea 80%,
+                #00f3ff 100%
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(8px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: chromeShine 4s ease-in-out infinite;
+        }
+
+        .shimmer-title::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 243, 255, 0.3), transparent 70%);
+            background-size: 200% 200%;
+            z-index: -2;
+            animation: shimmerSweep 3s linear infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes chromeShine {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes shimmerSweep {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
             }
         }
 
@@ -236,6 +597,23 @@
             font-size: 1.1rem;
             height: 30px;
             margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typing-container::after {
+            content: '█';
+            animation: cursorBlink 1s step-end infinite;
+            color: var(--primary);
+            margin-left: 8px;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .btn-group {
@@ -253,7 +631,6 @@
             overflow: hidden;
             z-index: 1;
             border: none;
-            cursor: pointer;
         }
 
         .btn-primary {
@@ -305,12 +682,19 @@
 
         /* About Grid */
         .about-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
             align-items: center;
         }
 
+        .about-text {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
         .about-text p {
             margin-bottom: 20px;
             font-size: 1.1rem;
@@ -322,6 +706,7 @@
             font-weight: 500;
         }
 
+        /* Terminal Window */
         .terminal-window {
             background: #0f0f12;
             border-radius: 12px;
@@ -329,14 +714,49 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             font-family: var(--font-mono);
+            width: 100%;
+            max-width: 800px;
+            position: relative; /* For watermark */
+            height: 400px; /* Fixed height for interactivity */
+            display: flex;
+            flex-direction: column;
         }
 
         .terminal-bar {
             background: #1a1a1e;
             padding: 10px 15px;
             display: flex;
+            align-items: center; /* Align items vertically */
+            justify-content: space-between; /* SEPARATE ICON FROM CONTROLS */
             gap: 8px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            flex-shrink: 0;
+        }
+
+        .terminal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .terminal-header-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* KALI LOGO ICON IN HEADER */
+        .kali-icon-header {
+            width: 20px;
+            height: 20px;
+            opacity: 1;
+        }
+        
+        .terminal-title {
+            color: #a0a0a0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .dot {
@@ -345,39 +765,71 @@
             border-radius: 50%;
         }
 
-        .red {
-            background: #ff5f56;
-        }
-
-        .yellow {
-            background: #ffbd2e;
-        }
-
-        .green {
-            background: #27c93f;
-        }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
 
         .terminal-body {
             padding: 20px;
             color: #a9b1d6;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .terminal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
         }
 
-        .cmd {
-            color: var(--primary);
+        /* KALI WATERMARK */
+        .terminal-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%; 
+            height: auto;
+            opacity: 0.15; /* Increased visibility */
+            z-index: 1;
+            pointer-events: none;
         }
 
-        .path {
-            color: var(--secondary);
-        }
+        .cmd { color: var(--primary); }
+        .path { color: var(--secondary); }
 
         .output {
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             display: block;
+            line-height: 1.5;
+        }
+        
+        .input-line {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        #term-input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            flex-grow: 1;
+            outline: none;
+            margin-left: 10px;
         }
 
-        /* Cards */
+        /* Glossy Cards */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -387,10 +839,12 @@
         .card {
             display: flex;
             flex-direction: column;
-            background: rgba(20, 20, 25, 0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 16px;
             padding: 30px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -405,6 +859,7 @@
             transform: translateY(-5px);
             border-color: rgba(0, 243, 255, 0.3);
             box-shadow: 0 10px 40px -10px rgba(0, 243, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .card h3 {
@@ -440,9 +895,7 @@
             margin-top: 15px;
         }
 
-        .text-primary {
-            color: var(--primary) !important;
-        }
+        .text-primary { color: var(--primary) !important; }
 
         .card-icon {
             font-size: 2rem;
@@ -535,6 +988,11 @@
         @media (max-width: 768px) {
             .shimmer-title {
                 font-size: 3rem;
+                letter-spacing: 0.15em;
+            }
+
+            .shimmer-title::after {
+                display: none;
             }
 
             .about-grid {
@@ -553,6 +1011,30 @@
             .hamburger {
                 display: block;
                 z-index: 101;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 15px;
+            }
+
+            .skill-card {
+                padding: 20px 10px;
+            }
+
+            .skill-icon {
+                font-size: 2rem;
             }
 
             .nav-links {
@@ -634,9 +1116,33 @@
 <body>
     <!-- Scroll Progress -->
     <div class="scroll-progress"></div>
+    <!-- Hacker Loading Screen -->
+    <div class="hacker-loader" id="hackerLoader">
+        <div class="loader-terminal">
+            <div class="loader-header">
+                <div class="loader-title">
+                    <span>root@RL_V0ID:~#</span>
+                </div>
+                <div class="loader-status" id="loaderStatus">INITIALIZING</div>
+            </div>
+            <div class="loader-content" id="loaderContent"></div>
+            <div class="loader-progress">
+                <div class="progress-text">
+                    <span id="progressLabel">Loading system...</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scanline Effect -->
     <div class="scanline"></div>
-    
+    <!-- Gloss Overlay -->
+    <div class="gloss-overlay"></div>
+
     <div class="bg-effects">
         <div class="glow-orb orb-1"></div>
         <div class="glow-orb orb-2"></div>
@@ -660,8 +1166,8 @@
     </nav>
 
     <section id="home" class="hero">
-        <h1 class="shimmer-title">RL_V0ID</h1>
-        <p class="subtitle">Aspiring Cybersecurity Analyst</p>
+        <h1 class="shimmer-title" data-text="RL_V0ID">RL_V0ID</h1>
+        <p class="subtitle">Web Penetration Tester & Bug Bounty Hunter</p>
         <div class="typing-container" id="typing-text"></div>
         <div class="btn-group">
             <a href="#projects" class="btn btn-primary">View My Progress</a>
@@ -676,43 +1182,72 @@
                     <h2 class="section-title">About Me</h2>
                     <p class="section-desc">My journey into the world of bits and bytes.</p>
                 </div>
-                <p>Hi there! I'm a <span class="highlight">Cybersecurity Student</span> passionate about understanding
-                    how systems work—and how to break them to make them safer.</p>
-                <p>I'm currently building my foundation in <span class="highlight">Networking</span>, <span
-                        class="highlight">Linux Administration</span>, and <span class="highlight">Offensive
-                        Security</span>. I spend my free time solving complex challenges on TryHackMe and HackTheBox to sharpen my skills.</p>
-                <p>My goal is to evolve into a <span class="highlight">Principal Security Engineer</span> or <span class="highlight">Security Architect</span>. I aim to design and secure enterprise-level infrastructures through continuous learning and hands-on practice.</p>
+                <p>I am a Cybersecurity Student laser-focused on <span class="highlight">Offensive Security</span>, specifically <span class="highlight">Web Application Penetration Testing</span> and <span class="highlight">Bug Bounty Hunting</span>. I'm passionate about breaking modern web technologies to make them safer.</p>
+                <p>My goal is to become a top-tier <span class="highlight">Bug Bounty Hunter</span> and <span class="highlight">Red Teamer</span>. I thrive on the thrill of the hunt, chaining vulnerabilities to demonstrate critical impact.</p>
+                <p>I spend my free time analyzing web assets, automating my reconnaissance workflow with Python/Bash, and hunting for critical vulnerabilities like <span class="highlight">IDOR</span>, <span class="highlight">SQL Injection</span>, and <span class="highlight">RCE</span> on platforms like HackerOne and Bugcrowd.</p>
             </div>
-            <div class="terminal-window">
+            
+            <!-- Interactive Terminal -->
+            <div class="terminal-window" id="interactive-terminal">
                 <div class="terminal-bar">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
+                    <div class="terminal-header-left">
+                        <!-- KALI DRAGON LOGO -->
+                        <svg class="kali-icon-header" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.2,3.4c1.5-1.1,3.5-1.3,5.1-0.6c0.4,0.2,0.8,0.4,1.2,0.7c2.3,1.7,2.9,4.8,1.3,7.2c-0.2,0.3-0.5,0.6-0.7,0.9c0.5,0.5,1.1,1.1,1.7,1.5c0.5-0.4,1-0.8,1.5-1.2c0.9-0.7,1.8-1.3,2.9-1.8c0.9-0.4,1.9-0.7,2.9-0.7c0.9,0,1.8,0.2,2.6,0.6c0.7,0.3,1.4,0.7,1.9,1.3c0.7,0.7,1.1,1.6,1.2,2.6c0.1,1-0.2,2-0.8,2.8c-0.9,1.3-2.4,2-4,2.1c-0.9,0-1.8-0.2-2.6-0.5c-1.1-0.5-2-1.3-2.8-2.2c-0.1-0.1-0.1-0.2-0.2-0.4c-0.2-0.3-0.4-0.5-0.7-0.8c-0.8-0.7-1.6-1.4-2.5-2c-0.1-0.1-0.2-0.1-0.4-0.2c-0.4,0.7-1,1.2-1.7,1.5c-0.7,0.3-1.5,0.3-2.2,0.1c-0.4-0.1-0.7-0.3-1-0.6c-0.3-0.3-0.5-0.6-0.6-0.9c-0.2-0.5-0.2-1.1,0-1.6c0.2-0.4,0.5-0.8,0.9-1c0.6-0.4,1.4-0.4,2-0.1c0.3,0.2,0.6,0.5,0.7,0.8c0.3,0.7,0.2,1.5-0.3,2.1c-0.2,0.2-0.4,0.4-0.7,0.5c0.3,0.4,0.6,0.7,1,0.9c0.8,0.5,1.8,0.8,2.7,0.8c0.8,0,1.6-0.2,2.3-0.6c0.7-0.4,1.3-1,1.7-1.7c0.4-0.6,0.5-1.4,0.4-2.1c-0.1-0.5-0.4-0.9-0.7-1.3c-0.4-0.4-0.9-0.7-1.4-0.9c-0.5-0.2-1.1-0.3-1.6-0.3c-0.5,0-1,0.1-1.5,0.3c-0.5,0.2-0.9,0.5-1.3,0.9c-0.4,0.4-0.7,0.8-1,1.3c-0.3,0.5-0.6,1-0.8,1.6c-0.3,0.6-0.6,1.2-1,1.7c-0.4,0.5-0.9,0.9-1.4,1.2c-0.8,0.5-1.8,0.6-2.7,0.4c-0.6-0.1-1.2-0.4-1.7-0.9c-0.5-0.4-0.9-1-1.1-1.6c-0.1-0.4-0.2-0.9-0.2-1.3c0-0.5,0.1-0.9,0.2-1.4c0.3-0.8,0.8-1.5,1.4-2.1c1-0.9,2.3-1.3,3.6-1.1c0.9,0.1,1.8,0.5,2.5,1c0.7,0.5,1.2,1.2,1.6,2c0.1,0.3,0.2,0.6,0.3,0.9c-0.2-0.3-0.4-0.5-0.6-0.8c-0.4-0.5-0.8-0.9-1.4-1.2c-0.5-0.3-1.1-0.5-1.7-0.5c-0.6,0-1.1,0.2-1.6,0.5c-0.4,0.3-0.7,0.7-1,1.2c-0.2,0.4-0.3,0.9-0.3,1.4c0,0.4,0.1,0.8,0.3,1.2c0.2,0.3,0.5,0.6,0.9,0.8c0.5,0.2,1,0.3,1.6,0.2c0.5-0.1,1-0.3,1.4-0.6c0.4-0.3,0.8-0.7,1.1-1.1c0.3-0.4,0.6-0.9,0.8-1.3c0.2-0.5,0.5-0.9,0.8-1.3c0.6-0.8,1.4-1.4,2.3-1.8c0.7-0.3,1.5-0.4,2.3-0.3c0.9,0.1,1.8,0.5,2.5,1.1c0.6,0.6,1,1.3,1.2,2.1c0.1,0.5,0.1,1.1-0.1,1.6c-0.1,0.3-0.3,0.6-0.6,0.8c-0.3,0.2-0.6,0.4-1,0.4c-0.3,0.1-0.7,0-1-0.1c-0.3-0.1-0.5-0.3-0.7-0.6c-0.2-0.2-0.3-0.5-0.3-0.8c0-0.2,0.1-0.5,0.2-0.7c0.1-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.4-0.1,0.6-0.1c0.2,0,0.4,0.1,0.5,0.2c0.2,0.1,0.3,0.3,0.3,0.5c0.1,0.2,0.1,0.5,0,0.7c-0.1,0.2-0.2,0.3-0.4,0.4c-0.2,0.1-0.4,0.1-0.6,0.1c-0.3,0-0.6-0.2-0.7-0.5c-0.1-0.2-0.1-0.5,0-0.7c0.1-0.2,0.3-0.3,0.5-0.4c0.2-0.1,0.4-0.1,0.7-0.1c0.4,0.1,0.7,0.3,0.9,0.6c0.2,0.3,0.2,0.7,0.1,1.1c-0.1,0.3-0.3,0.5-0.6,0.7c-0.3,0.2-0.6,0.2-0.9,0.2c-0.5-0.1-0.9-0.3-1.2-0.7c-0.3-0.3-0.4-0.7-0.5-1.1c-0.1-0.6,0.1-1.2,0.4-1.7c0.4-0.5,0.9-0.9,1.5-1.1c0.7-0.3,1.5-0.3,2.2-0.1c0.6,0.2,1.1,0.6,1.5,1.1c0.3,0.4,0.5,1,0.5,1.5c0,0.4-0.1,0.9-0.3,1.3c-0.2,0.4-0.5,0.7-0.9,1c-0.5,0.3-1,0.5-1.6,0.5c-0.5,0-1-0.1-1.4-0.4c-0.4-0.2-0.7-0.6-0.9-1c-0.1-0.3-0.2-0.6-0.2-1c0-0.3,0.1-0.6,0.2-0.9c0.1-0.2,0.3-0.4,0.5-0.5c0.2-0.1,0.4-0.2,0.6-0.2c0.3,0,0.5,0.1,0.7,0.3c0.2,0.1,0.3,0.4,0.3,0.6c0,0.2-0.1,0.5-0.2,0.7c-0.1,0.2-0.3,0.3-0.6,0.3c-0.2,0-0.4-0.1-0.6-0.2c-0.1-0.1-0.2-0.3-0.2-0.5c0-0.2,0.1-0.3,0.2-0.5c0.1-0.1,0.3-0.2,0.5-0.2c0.1,0,0.2,0,0.3,0.1c0.1,0.1,0.1,0.2,0.1,0.3c0,0.1-0.1,0.2-0.2,0.2c-0.1,0.1-0.2,0.1-0.3,0.1c-0.1,0-0.2-0.1-0.3-0.2c-0.1-0.1-0.1-0.2-0.1-0.4c0-0.1,0.1-0.2,0.2-0.2c0.1-0.1,0.2-0.1,0.3-0.1c0.2,0,0.3,0.1,0.4,0.2c0.1,0.1,0.1,0.3,0.1,0.5c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.5,0.1c-0.2,0-0.3-0.1-0.4-0.3c-0.1-0.1-0.1-0.3-0.1-0.5c0-0.2,0.1-0.4,0.3-0.5c0.2-0.1,0.4-0.2,0.6-0.1c0.3,0,0.5,0.2,0.7,0.4c0.2,0.2,0.2,0.5,0.2,0.8c-0.1,0.3-0.2,0.5-0.5,0.7c-0.2,0.2-0.5,0.2-0.8,0.2c-0.3,0-0.6-0.2-0.8-0.4c-0.2-0.3-0.3-0.6-0.3-0.9c0-0.4,0.1-0.8,0.4-1.1c0.3-0.3,0.6-0.5,1-0.6c0.4-0.1,0.8-0.1,1.2,0.1c0.4,0.2,0.7,0.5,0.9,0.8c0.2,0.3,0.3,0.7,0.3,1.1c0,0.4-0.1,0.8-0.3,1.1c-0.2,0.3-0.5,0.6-0.9,0.7c-0.4,0.2-0.8,0.2-1.2,0.1c-0.4-0.1-0.7-0.4-0.9-0.7c-0.2-0.3-0.3-0.7-0.3-1.1c0-0.3,0.1-0.6,0.3-0.9c0.2-0.2,0.5-0.4,0.8-0.5c0.3-0.1,0.6-0.1,0.9,0c0.3,0.1,0.5,0.3,0.7,0.6c0.2,0.3,0.2,0.6,0.2,0.9c0,0.3-0.1,0.6-0.3,0.8c-0.2,0.2-0.5,0.4-0.8,0.4c-0.3,0.1-0.6,0-0.8-0.1c-0.3-0.2-0.5-0.4-0.6-0.7c-0.1-0.2-0.1-0.5,0-0.8c0.1-0.2,0.2-0.4,0.5-0.5c0.2-0.1,0.5-0.1,0.7,0c0.2,0.1,0.4,0.2,0.5,0.4c0.1,0.2,0.1,0.5,0.1,0.7c0,0.2-0.1,0.4-0.3,0.6c-0.1,0.1-0.3,0.2-0.5,0.2c-0.2,0-0.4-0.1-0.6-0.2c-0.1-0.1-0.2-0.3-0.2-0.5c0-0.2,0.1-0.4,0.2-0.5c0.1-0.1,0.3-0.2,0.5-0.2c0.2,0,0.3,0.1,0.4,0.2c0.1,0.1,0.2,0.3,0.2,0.5c0,0.1-0.1,0.3-0.2,0.4c-0.1,0.1-0.2,0.1-0.4,0.1c-0.1,0-0.2-0.1-0.3-0.2c-0.1-0.1-0.1-0.2-0.1-0.3c0-0.1,0-0.2,0.1-0.3c0.1-0.1,0.2-0.1,0.3-0.1c0.1,0,0.2,0.1,0.3,0.1c0.1,0.1,0.1,0.2,0.1,0.3c0,0.1,0,0.2-0.1,0.2c-0.1,0.1-0.1,0.1-0.2,0.1c-0.1,0-0.2,0-0.3-0.1c-0.1-0.1-0.1-0.2-0.1-0.3c0-0.1,0.1-0.2,0.2-0.2c0.1-0.1,0.2-0.1,0.3-0.1c0.1,0,0.2,0.1,0.2,0.2c0,0.1,0,0.2-0.1,0.3c-0.1,0.1-0.1,0.1-0.2,0.1c-0.1,0-0.2,0-0.2-0.1C5.3,3.6,5.2,3.5,5.2,3.4z" fill="#00f3ff"/>
+                        </svg>
+                        <span class="terminal-title">root@kali:~</span>
+                    </div>
+                    
+                    <div class="terminal-header-right">
+                        <div class="dot green"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot red"></div>
+                    </div>
                 </div>
-                <div class="terminal-body">
-                    <div>
-                        <span class="path">student@kali:~$</span> <span class="cmd">whoami</span>
+                <!-- KALI DRAGON WATERMARK -->
+                <svg class="terminal-watermark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.2,3.4c1.5-1.1,3.5-1.3,5.1-0.6c0.4,0.2,0.8,0.4,1.2,0.7c2.3,1.7,2.9,4.8,1.3,7.2c-0.2,0.3-0.5,0.6-0.7,0.9c0.5,0.5,1.1,1.1,1.7,1.5c0.5-0.4,1-0.8,1.5-1.2c0.9-0.7,1.8-1.3,2.9-1.8c0.9-0.4,1.9-0.7,2.9-0.7c0.9,0,1.8,0.2,2.6,0.6c0.7,0.3,1.4,0.7,1.9,1.3c0.7,0.7,1.1,1.6,1.2,2.6c0.1,1-0.2,2-0.8,2.8c-0.9,1.3-2.4,2-4,2.1c-0.9,0-1.8-0.2-2.6-0.5c-1.1-0.5-2-1.3-2.8-2.2c-0.1-0.1-0.1-0.2-0.2-0.4c-0.2-0.3-0.4-0.5-0.7-0.8c-0.8-0.7-1.6-1.4-2.5-2c-0.1-0.1-0.2-0.1-0.4-0.2c-0.4,0.7-1,1.2-1.7,1.5c-0.7,0.3-1.5,0.3-2.2,0.1c-0.4-0.1-0.7-0.3-1-0.6c-0.3-0.3-0.5-0.6-0.6-0.9c-0.2-0.5-0.2-1.1,0-1.6c0.2-0.4,0.5-0.8,0.9-1c0.6-0.4,1.4-0.4,2-0.1c0.3,0.2,0.6,0.5,0.7,0.8c0.3,0.7,0.2,1.5-0.3,2.1c-0.2,0.2-0.4,0.4-0.7,0.5c0.3,0.4,0.6,0.7,1,0.9c0.8,0.5,1.8,0.8,2.7,0.8c0.8,0,1.6-0.2,2.3-0.6c0.7-0.4,1.3-1,1.7-1.7c0.4-0.6,0.5-1.4,0.4-2.1c-0.1-0.5-0.4-0.9-0.7-1.3c-0.4-0.4-0.9-0.7-1.4-0.9c-0.5-0.2-1.1-0.3-1.6-0.3c-0.5,0-1,0.1-1.5,0.3c-0.5,0.2-0.9,0.5-1.3,0.9c-0.4,0.4-0.7,0.8-1,1.3c-0.3,0.5-0.6,1-0.8,1.6c-0.3,0.6-0.6,1.2-1,1.7c-0.4,0.5-0.9,0.9-1.4,1.2c-0.8,0.5-1.8,0.6-2.7,0.4c-0.6-0.1-1.2-0.4-1.7-0.9c-0.5-0.4-0.9-1-1.1-1.6c-0.1-0.4-0.2-0.9-0.2-1.3c0-0.5,0.1-0.9,0.2-1.4c0.3-0.8,0.8-1.5,1.4-2.1c1-0.9,2.3-1.3,3.6-1.1c0.9,0.1,1.8,0.5,2.5,1c0.7,0.5,1.2,1.2,1.6,2c0.1,0.3,0.2,0.6,0.3,0.9c-0.2-0.3-0.4-0.5-0.6-0.8c-0.4-0.5-0.8-0.9-1.4-1.2c-0.5-0.3-1.1-0.5-1.7-0.5c-0.6,0-1.1,0.2-1.6,0.5c-0.4,0.3-0.7,0.7-1,1.2c-0.2,0.4-0.3,0.9-0.3,1.4c0,0.4,0.1,0.8,0.3,1.2c0.2,0.3,0.5,0.6,0.9,0.8c0.5,0.2,1,0.3,1.6,0.2c0.5-0.1,1-0.3,1.4-0.6c0.4-0.3,0.8-0.7,1.1-1.1c0.3-0.4,0.6-0.9,0.8-1.3c0.2-0.5,0.5-0.9,0.8-1.3c0.6-0.8,1.4-1.4,2.3-1.8c0.7-0.3,1.5-0.4,2.3-0.3c0.9,0.1,1.8,0.5,2.5,1.1c0.6,0.6,1,1.3,1.2,2.1c0.1,0.5,0.1,1.1-0.1,1.6c-0.1,0.3-0.3,0.6-0.6,0.8c-0.3,0.2-0.6,0.4-1,0.4c-0.3,0.1-0.7,0-1-0.1c-0.3-0.1-0.5-0.3-0.7-0.6c-0.2-0.2-0.3-0.5-0.3-0.8c0-0.2,0.1-0.5,0.2-0.7c0.1-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.4-0.1,0.6-0.1c0.2,0,0.4,0.1,0.5,0.2c0.2,0.1,0.3,0.3,0.3,0.5c0.1,0.2,0.1,0.5,0,0.7c-0.1,0.2-0.2,0.3-0.4,0.4c-0.2,0.1-0.4,0.1-0.6,0.1c-0.3,0-0.6-0.2-0.7-0.5c-0.1-0.2-0.1-0.5,0-0.7c0.1-0.2,0.3-0.3,0.5-0.4c0.2-0.1,0.4-0.1,0.7-0.1c0.4,0.1,0.7,0.3,0.9,0.6c0.2,0.3,0.2,0.7,0.1,1.1c-0.1,0.3-0.3,0.5-0.6,0.7c-0.3,0.2-0.6,0.2-0.9,0.2c-0.5-0.1-0.9-0.3-1.2-0.7c-0.3-0.3-0.4-0.7-0.5-1.1c-0.1-0.6,0.1-1.2,0.4-1.7c0.4-0.5,0.9-0.9,1.5-1.1c0.7-0.3,1.5-0.3,2.2-0.1c0.6,0.2,1.1,0.6,1.5,1.1c0.3,0.4,0.5,1,0.5,1.5c0,0.4-0.1,0.9-0.3,1.3c-0.2,0.4-0.5,0.7-0.9,1c-0.5,0.3-1,0.5-1.6,0.5c-0.5,0-1-0.1-1.4-0.4c-0.4-0.2-0.7-0.6-0.9-1c-0.1-0.3-0.2-0.6-0.2-1c0-0.3,0.1-0.6,0.2-0.9c0.1-0.2,0.3-0.4,0.5-0.5c0.2-0.1,0.4-0.2,0.6-0.2c0.3,0,0.5,0.1,0.7,0.3c0.2,0.1,0.3,0.4,0.3,0.6c0,0.2-0.1,0.5-0.2,0.7c-0.1,0.2-0.3,0.3-0.6,0.3c-0.2,0-0.4-0.1-0.6-0.2c-0.1-0.1-0.2-0.3-0.2-0.5c0-0.2,0.1-0.3,0.2-0.5c0.1-0.1,0.3-0.2,0.5-0.2c0.1,0,0.2,0,0.3,0.1c0.1,0.1,0.1,0.2,0.1,0.3c0,0.1-0.1,0.2-0.2,0.2c-0.1,0.1-0.2,0.1-0.3,0.1c-0.1,0-0.2-0.1-0.3-0.2c-0.1-0.1-0.1-0.2-0.1-0.4c0-0.1,0.1-0.2,0.2-0.2c0.1-0.1,0.2-0.1,0.3-0.1c0.2,0,0.3,0.1,0.4,0.2c0.1,0.1,0.1,0.3,0.1,0.5c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.5,0.1c-0.2,0-0.3-0.1-0.4-0.3c-0.1-0.1-0.1-0.3-0.1-0.5c0-0.2,0.1-0.4,0.3-0.5c0.2-0.1,0.4-0.2,0.6-0.1c0.3,0,0.5,0.2,0.7,0.4c0.2,0.2,0.2,0.5,0.2,0.8c-0.1,0.3-0.2,0.5-0.5,0.7c-0.2,0.2-0.5,0.2-0.8,0.2c-0.3,0-0.6-0.2-0.8-0.4c-0.2-0.3-0.3-0.6-0.3-0.9c0-0.4,0.1-0.8,0.4-1.1c0.3-0.3,0.6-0.5,1-0.6c0.4-0.1,0.8-0.1,1.2,0.1c0.4,0.2,0.7,0.5,0.9,0.8c0.2,0.3,0.3,0.7,0.3,1.1c0,0.4-0.1,0.8-0.3,1.1c-0.2,0.3-0.5,0.6-0.9,0.7c-0.4,0.2-0.8,0.2-1.2,0.1c-0.4-0.1-0.7-0.4-0.9-0.7c-0.2-0.3-0.3-0.7-0.3-1.1c0-0.3,0.1-0.6,0.3-0.9c0.2-0.2,0.5-0.4,0.8-0.5c0.3-0.1,0.6-0.1,0.9,0c0.3,0.1,0.5,0.3,0.7,0.6c0.2,0.3,0.2,0.6,0.2,0.9c0,0.3-0.1,0.6-0.3,0.8c-0.2,0.2-0.5,0.4-0.8,0.4c-0.3,0.1-0.6,0-0.8-0.1c-0.3-0.2-0.5-0.4-0.6-0.7c-0.1-0.2-0.1-0.5,0-0.8c0.1-0.2,0.2-0.4,0.5-0.5c0.2-0.1,0.5-0.1,0.7,0c0.2,0.1,0.4,0.2,0.5,0.4c0.1,0.2,0.1,0.5,0.1,0.7c0,0.2-0.1,0.4-0.3,0.6c-0.1,0.1-0.3,0.2-0.5,0.2c-0.2,0-0.4-0.1-0.6-0.2c-0.1-0.1-0.2-0.3-0.2-0.5c0-0.2,0.1-0.4,0.2-0.5c0.1-0.1,0.3-0.2,0.5-0.2c0.2,0,0.3,0.1,0.4,0.2c0.1,0.1,0.2,0.3,0.2,0.5c0,0.1-0.1,0.3-0.2,0.4c-0.1,0.1-0.2,0.1-0.4,0.1c-0.1,0-0.2-0.1-0.3-0.2c-0.1-0.1-0.1-0.2-0.1-0.3c0-0.1,0-0.2,0.1-0.3c0.1-0.1,0.2-0.1,0.3-0.1c0.1,0,0.2,0.1,0.3,0.1c0.1,0.1,0.1,0.2,0.1,0.3c0,0.1,0,0.2-0.1,0.2c-0.1,0.1-0.1,0.1-0.2,0.1c-0.1,0-0.2,0-0.3-0.1c-0.1-0.1-0.1-0.2-0.1-0.3c0-0.1,0.1-0.2,0.2-0.2c0.1-0.1,0.2-0.1,0.3-0.1c0.1,0,0.2,0.1,0.2,0.2c0,0.1,0,0.2-0.1,0.3c-0.1,0.1-0.1,0.1-0.2,0.1c-0.1,0-0.2,0-0.2-0.1C5.3,3.6,5.2,3.5,5.2,3.4z" fill="#00f3ff"/>
+                </svg>
+                <div class="terminal-body" id="terminal-output">
+                    <div class="output">
+                        <span class="text-primary">Kali GNU/Linux Rolling</span><br>
+                        <span class="output">Type 'help' to see available commands.</span>
                     </div>
-                    <span class="output">cyber_student</span>
-
-                    <div>
-                        <span class="path">student@kali:~$</span> <span class="cmd">cat current_focus.txt</span>
+                    <!-- Dynamic input line -->
+                    <div class="input-line">
+                        <span class="path">guest@rl_void:~$</span>
+                        <input type="text" id="term-input" autocomplete="off" spellcheck="false">
                     </div>
-                    <span class="output">
-                        - Cloud Security Posture (CSPM)<br>
-                        - Python for Security Automation<br>
-                        - Kernel Level Hardening<br>
-                        - TryHackMe/HTB Focus: Advanced Lateral Movement
-                    </span>
-
-                    <div>
-                        <span class="path">student@kali:~$</span> <span class="cmd">./status.sh</span>
-                    </div>
-                    <span class="output" style="color: #27c93f">Running... [Learning Mode: ON]</span>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Stats Counter Section -->
+    <div class="stats-section container reveal">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <i class="fas fa-bug stat-icon"></i>
+                <span class="stat-number" data-target="37">0</span>
+                <div class="stat-label">Bugs Found</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-shield-alt stat-icon"></i>
+                <span class="stat-number" data-target="12">0</span>
+                <div class="stat-label">CVEs Reported</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-flag stat-icon"></i>
+                <span class="stat-number" data-target="47">0</span>
+                <div class="stat-label">CTF Challenges</div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-code stat-icon"></i>
+                <span class="stat-number" data-target="28">0</span>
+                <div class="stat-label">Scripts Written</div>
+            </div>
+        </div>
+    </div>
 
     <section id="learning" class="container">
         <div class="section-header">
@@ -721,62 +1256,129 @@
         </div>
         <div class="grid-3">
             <div class="card reveal">
-                <div class="card-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Networking</h3>
-                <p>Understanding TCP/IP, OSI Model, Subnetting, and analyzing traffic with Wireshark.</p>
+                <div class="card-icon"><i class="fas fa-globe"></i></div>
+                <h3>Web Exploitation & OWASP</h3>
+                <p>Deep diving into OWASP Top 10, advanced vulnerabilities (SQLi, XSS, SSRF), and bypassing WAFs.</p>
                 <div class="tags">
-                    <span class="tag">Wireshark</span>
-                    <span class="tag">Cisco Packet Tracer</span>
+                    <span class="tag">Burp Suite</span>
+                    <span class="tag">OWASP</span>
                 </div>
             </div>
             <div class="card reveal">
-                <div class="card-icon"><i class="fab fa-linux"></i></div>
-                <h3>Linux & SysAdmin</h3>
-                <p>Command line proficiency, permissions, bash scripting, and system hardening.</p>
+                <div class="card-icon"><i class="fas fa-bug"></i></div>
+                <h3>Bug Bounty Methodology</h3>
+                <p>Mastering reconnaissance, asset discovery, content discovery, and effective vulnerability reporting.</p>
                 <div class="tags">
-                    <span class="tag">Kali</span>
-                    <span class="tag">Ubuntu</span>
-                    <span class="tag">Bash</span>
+                    <span class="tag">Recon</span>
+                    <span class="tag">Triage</span>
+                    <span class="tag">HackerOne</span>
+                </div>
+            </div>
+             <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-code-branch"></i></div>
+                <h3>API Security & Fuzzing</h3>
+                <p>Testing REST and GraphQL APIs for IDORs, broken authentication, and mass assignment vulnerabilities.</p>
+                <div class="tags">
+                    <span class="tag">Postman</span>
+                    <span class="tag">Fuzzing</span>
                 </div>
             </div>
             <div class="card reveal">
                 <div class="card-icon"><i class="fab fa-python"></i></div>
-                <h3>Python Scripting</h3>
-                <p>Writing basic tools for automation, port scanning, and data parsing.</p>
+                <h3>Recon Automation Tools</h3>
+                <p>Developing custom scripts in Python and Bash to automate the boring stuff and speed up discovery.</p>
                 <div class="tags">
-                    <span class="tag">Automation</span>
-                    <span class="tag">Requests</span>
-                    <span class="tag">Socket</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Bash</span>
                 </div>
             </div>
             <div class="card reveal">
-                <div class="card-icon"><i class="fas fa-user-secret"></i></div>
-                <h3>Ethical Hacking</h3>
-                <p>Learning the methodology: Reconnaissance, Scanning, Exploitation, and Reporting.</p>
+                <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Networking for Pentesters</h3>
+                <p>Understanding HTTP/S, DNS, TCP/IP, and analyzing traffic patterns to find anomalies.</p>
                 <div class="tags">
+                    <span class="tag">Wireshark</span>
                     <span class="tag">Nmap</span>
-                    <span class="tag">Burp Suite</span>
-                    <span class="tag">Metasploit</span>
                 </div>
             </div>
             <div class="card reveal">
-                <div class="card-icon"><i class="fas fa-globe"></i></div>
-                <h3>Web Security</h3>
-                <p>Studying OWASP Top 10 vulnerabilities like SQLi, XSS, and IDOR.</p>
+                <div class="card-icon"><i class="fab fa-linux"></i></div>
+                <h3>Linux Mastery</h3>
+                <p>Advanced command line usage, piping, grep/sed/awk manipulation for large data sets.</p>
                 <div class="tags">
-                    <span class="tag">OWASP</span>
-                    <span class="tag">HTML/JS</span>
-                    <span class="tag">DVWA</span>
+                    <span class="tag">Kali</span>
+                    <span class="tag">Shell</span>
                 </div>
             </div>
-            <div class="card reveal">
-                <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Blue Teaming</h3>
-                <p>Basics of log analysis, SIEM concepts, and defensive strategies.</p>
-                <div class="tags">
-                    <span class="tag">Splunk</span>
-                    <span class="tag">Snort</span>
-                </div>
+        </div>
+    </section>
+
+    <!-- Skills Grid Section -->
+    <section class="skills-section container reveal">
+        <div class="section-header">
+            <h2 class="section-title">Tech Arsenal</h2>
+            <p class="section-desc">Tools and technologies I work with daily</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fab fa-python"></i></div>
+                <div class="skill-name">Python</div>
+                <div class="skill-level">Advanced</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fas fa-terminal"></i></div>
+                <div class="skill-name">Bash</div>
+                <div class="skill-level">Advanced</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fab fa-js"></i></div>
+                <div class="skill-name">JavaScript</div>
+                <div class="skill-level">Intermediate</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fas fa-fire"></i></div>
+                <div class="skill-name">Burp Suite</div>
+                <div class="skill-level">Expert</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                <div class="skill-name">Nmap</div>
+                <div class="skill-level">Advanced</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fas fa-database"></i></div>
+                <div class="skill-name">SQLMap</div>
+                <div class="skill-level">Advanced</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fas fa-bomb"></i></div>
+                <div class="skill-name">Metasploit</div>
+                <div class="skill-level">Intermediate</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fas fa-search"></i></div>
+                <div class="skill-name">Recon-ng</div>
+                <div class="skill-level">Advanced</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fab fa-github"></i></div>
+                <div class="skill-name">Git</div>
+                <div class="skill-level">Intermediate</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fab fa-docker"></i></div>
+                <div class="skill-name">Docker</div>
+                <div class="skill-level">Intermediate</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fab fa-linux"></i></div>
+                <div class="skill-name">Kali Linux</div>
+                <div class="skill-level">Expert</div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon"><i class="fas fa-shield-virus"></i></div>
+                <div class="skill-name">Wireshark</div>
+                <div class="skill-level">Advanced</div>
             </div>
         </div>
     </section>
@@ -797,17 +1399,25 @@
                     <span class="tag">Full Audit</span>
                 </div>
             </div>
-            
+
             <div class="card reveal">
                 <h3><i class="fas fa-lock text-primary"></i> Local Password Strength Checker</h3>
-                <p>A real-time, local Streamlit application providing immediate visual feedback and actionable entropy suggestions for users creating more secure passwords offline.</p>
+                <p>A real-time Streamlit app that analyzes password strength, provides actionable suggestions, and visual feedback to help users create secure passwords that run fully on local infrastructure.</p>
                 <div class="tags">
                     <span class="tag">Streamlit</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Cryptography</span>
+                    <span class="tag">Data Analysis</span>
                 </div>
             </div>
-            
+
+            <div class="card reveal">
+                <h3><i class="fas fa-search-location text-primary"></i> OSINT Reconnaissance Tool</h3>
+                <p>A Python-based OSINT scanner that consolidates features from multiple tools like Sherlock to find and map deep digital footprints across various platforms and social media sites.</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">API Scraping</span>
+                </div>
+            </div>
+
             <div class="card reveal">
                 <h3><i class="fas fa-flag text-primary"></i> CTF Writeups</h3>
                 <p>Detailed walkthroughs of machines I've solved on TryHackMe and HackTheBox. Documenting my thought
@@ -825,15 +1435,6 @@
                     <span class="tag">Networking</span>
                 </div>
             </div>
-            <div class="card reveal">
-                <h3><i class="fas fa-server text-primary"></i> Home Lab Setup</h3>
-                <p>Configured a virtualized environment with Kali Linux, Metasploitable, and Windows Active Directory.
-                </p>
-                <div class="tags">
-                    <span class="tag">VirtualBox</span>
-                    <span class="tag">AD</span>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -843,10 +1444,10 @@
             <p class="section-desc">Have a question or want to work together? Send a transmission.</p>
         </div>
         <div class="contact-wrapper reveal">
-            <form class="contact-form" id="contactForm">
-                <input type="text" id="nameInput" class="form-input" placeholder="Codename / Name" required>
-                <input type="email" id="emailInput" class="form-input" placeholder="Secure Frequency / Email" required>
-                <textarea id="messageInput" class="form-input" rows="5" placeholder="Encrypted Message..." required></textarea>
+            <form class="contact-form" id="contact-form">
+                <input type="text" class="form-input" id="contact-name" placeholder="Codename / Name" required>
+                <input type="email" class="form-input" id="contact-email" placeholder="Secure Frequency / Email" required>
+                <textarea class="form-input" id="contact-message" rows="5" placeholder="Encrypted Message..." required></textarea>
                 <button type="submit" class="btn btn-primary">Send Transmission</button>
             </form>
         </div>
@@ -856,91 +1457,321 @@
         <p>&copy; 2025 RL_V0ID. Securing the future, one byte at a time.</p>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <script>
-        // Contact Form Logic
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('nameInput').value;
-            const email = document.getElementById('emailInput').value;
-            const message = document.getElementById('messageInput').value;
-            
-            const subject = `Transmission from ${name}`;
-            const body = `Sender: ${name} (${email})\n\nMessage:\n${message}`;
-            
-            // !!! IMPORTANT: REPLACE THIS PLACEHOLDER EMAIL WITH YOUR ACTUAL CONTACT ADDRESS !!!
-            const recipientEmail = 'rl.void.contact@example.com';
-            
-            window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // Hacker Loading Screen
+        function initHackerLoader() {
+            const loader = document.getElementById('hackerLoader');
+            const content = document.getElementById('loaderContent');
+            const status = document.getElementById('loaderStatus');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercent = document.getElementById('progressPercent');
+            const progressLabel = document.getElementById('progressLabel');
+
+            const logs = [
+                { text: 'Initializing secure connection...', type: 'info', delay: 200 },
+                { text: 'Checking system integrity...', type: '', delay: 400 },
+                { text: 'Loading encryption modules...', type: '', delay: 300 },
+                { text: 'Verifying SSL certificates...', type: 'info', delay: 500 },
+                { text: 'Establishing VPN tunnel...', type: '', delay: 350 },
+                { text: 'Bypassing firewall protocols...', type: 'warning', delay: 450 },
+                { text: 'Scanning for vulnerabilities...', type: '', delay: 300 },
+                { text: 'Loading exploit database...', type: 'info', delay: 400 },
+                { text: 'Initializing Kali tools...', type: '', delay: 350 },
+                { text: 'Configuring Burp Suite...', type: '', delay: 300 },
+                { text: 'Loading Metasploit Framework...', type: 'info', delay: 400 },
+                { text: 'Setting up Nmap scanner...', type: '', delay: 350 },
+                { text: 'Preparing SQLmap injection tools...', type: '', delay: 300 },
+                { text: 'Initializing payload generators...', type: 'warning', delay: 450 },
+                { text: 'Loading XSS detection modules...', type: '', delay: 300 },
+                { text: 'Configuring network interfaces...', type: '', delay: 350 },
+                { text: 'Establishing anonymous routing...', type: 'info', delay: 400 },
+                { text: 'Decrypting secure vault...', type: 'warning', delay: 500 },
+                { text: 'Loading portfolio data...', type: 'info', delay: 350 },
+                { text: 'All systems ready.', type: 'info', delay: 300 }
+            ];
+
+            let progress = 0;
+            let logIndex = 0;
+
+            function addLog(log) {
+                const line = document.createElement('div');
+                line.className = `loader-line ${log.type}`;
+                const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false });
+                line.innerHTML = `<span>[${timestamp}]</span> ${log.text}`;
+                content.appendChild(line);
+                content.scrollTop = content.scrollHeight;
+            }
+
+            function updateProgress() {
+                progress += Math.random() * 8 + 2;
+                if (progress > 100) progress = 100;
+                
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = Math.floor(progress) + '%';
+
+                if (progress < 30) {
+                    status.textContent = 'CONNECTING';
+                    progressLabel.textContent = 'Establishing connection...';
+                } else if (progress < 60) {
+                    status.textContent = 'LOADING';
+                    progressLabel.textContent = 'Loading modules...';
+                } else if (progress < 90) {
+                    status.textContent = 'CONFIGURING';
+                    progressLabel.textContent = 'Configuring environment...';
+                } else {
+                    status.textContent = 'COMPLETE';
+                    progressLabel.textContent = 'System ready!';
+                }
+
+                if (progress >= 100) {
+                    setTimeout(() => {
+                        loader.classList.add('fade-out');
+                        setTimeout(() => {
+                            loader.remove();
+                        }, 800);
+                    }, 500);
+                }
+            }
+
+            function runLoader() {
+                if (logIndex < logs.length) {
+                    addLog(logs[logIndex]);
+                    updateProgress();
+                    logIndex++;
+                    setTimeout(runLoader, logs[logIndex - 1]?.delay || 300);
+                }
+            }
+
+            setTimeout(runLoader, 500);
+        }
+
+        // Initialize loader on page load
+        initHackerLoader();
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
         });
 
-        // Matrix Effect
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Stats Counter Animation
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.getAttribute('data-target'));
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                entry.target.textContent = Math.floor(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                entry.target.textContent = target;
+                            }
+                        };
+
+                        updateCounter();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            stats.forEach(stat => observer.observe(stat));
+        }
+
+        // Initialize stats counter
+        animateStats();
+
+        (function() { // Start IIFE
+
+        // Active Recon Hex-Grid Background
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
 
-        let width, height;
+        let w, h;
+        let columns, rows;
+        const fontSize = 14;
+        const hexChars = "0123456789ABCDEF";
+        let grid = [];
+        
+        // Mouse State
+        let mouse = { x: null, y: null };
+        const hoverRadius = 150; // Radius of "flashlight"
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
 
         function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            columns = Math.ceil(w / fontSize);
+            rows = Math.ceil(h / fontSize);
+            initGrid();
+        }
+        
+        function initGrid() {
+            grid = [];
+            for (let i = 0; i < columns; i++) {
+                grid[i] = [];
+                for (let j = 0; j < rows; j++) {
+                    // Each cell has value, and update timer
+                    grid[i][j] = {
+                        char: hexChars.charAt(Math.floor(Math.random() * hexChars.length)),
+                        updateTime: Math.random() * 100,
+                        isRed: Math.random() > 0.995 // Rare red glitch
+                    };
+                }
+            }
         }
 
-        resize();
         window.addEventListener('resize', resize);
-
-        const chars = '01';
-        const fontSize = 14;
-        const columns = width / fontSize;
-        const drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
+        resize();
 
         function draw() {
-            ctx.fillStyle = 'rgba(3, 3, 5, 0.05)';
-            ctx.fillRect(0, 0, width, height);
+            // Semi-transparent black to create trail effect is okay, but simple clear is cleaner for grid
+            ctx.clearRect(0, 0, w, h);
+            
+            ctx.font = `${fontSize}px monospace`;
+            
+            for (let i = 0; i < columns; i++) {
+                for (let j = 0; j < rows; j++) {
+                    const cell = grid[i][j];
+                    const x = i * fontSize;
+                    const y = j * fontSize;
 
-            ctx.fillStyle = '#00f3ff';
-            ctx.font = fontSize + 'px monospace';
+                    // Check distance to mouse
+                    let dist = 9999;
+                    if (mouse.x != null) {
+                        const dx = mouse.x - x;
+                        const dy = mouse.y - y;
+                        dist = Math.sqrt(dx*dx + dy*dy);
+                    }
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars.charAt(Math.floor(Math.random() * chars.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    // Logic for Cell Appearance
+                    if (dist < hoverRadius) {
+                        // Active State (Near Mouse)
+                        
+                        // Update rapidly when active
+                        if (Math.random() > 0.8) {
+                             cell.char = hexChars.charAt(Math.floor(Math.random() * hexChars.length));
+                        }
 
-                if (drops[i] * fontSize > height && Math.random() > 0.975)
-                    drops[i] = 0;
-                drops[i]++;
+                        const opacity = 1 - (dist / hoverRadius);
+                        
+                        if (cell.isRed) {
+                            ctx.fillStyle = `rgba(255, 0, 60, ${opacity})`; // Active Red
+                            
+                            // Connect line to mouse for red cells
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(255, 0, 60, ${opacity * 0.8})`;
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(x + fontSize/2, y - fontSize/2);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.stroke();
+                        } else {
+                            ctx.fillStyle = `rgba(0, 243, 255, ${opacity})`; // Active Cyan
+                        }
+                        
+                        // Draw active character
+                        ctx.fillText(cell.char, x, y);
+
+                    } else {
+                        // Passive State (Background)
+                        
+                        // Slower updates
+                        cell.updateTime--;
+                        if (cell.updateTime <= 0) {
+                            cell.char = hexChars.charAt(Math.floor(Math.random() * hexChars.length));
+                            cell.updateTime = Math.random() * 100 + 50;
+                            // Re-roll red chance
+                            cell.isRed = Math.random() > 0.998;
+                        }
+                        
+                        // Very faint color
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+                        ctx.fillText(cell.char, x, y);
+                    }
+                }
             }
             requestAnimationFrame(draw);
         }
-
+        
         draw();
 
-        // Typing Effect
+        // Typing Effect - Realistic Typewriter
         const textElement = document.getElementById('typing-text');
-        const texts = ['Student @ Cybersecurity', 'Learning Python', 'CTF Player', 'Linux Enthusiast'];
+        const texts = ['Web Penetration Tester', 'Bug Bounty Hunter', 'Red Teamer', 'Python Developer'];
         let count = 0;
         let index = 0;
         let currentText = '';
         let letter = '';
+        let isDeleting = false;
+        let typeSpeed = 100;
 
         (function type() {
-            if (count === texts.length) {
-                count = 0;
-            }
-            currentText = texts[count];
-            letter = currentText.slice(0, ++index);
-
-            textElement.textContent = letter + '|';
-
-            if (letter.length === currentText.length) {
-                count++;
-                index = 0;
-                setTimeout(type, 2000);
+            const currentWord = texts[count];
+            
+            if (isDeleting) {
+                // Backspacing
+                letter = currentWord.substring(0, index - 1);
+                index--;
+                typeSpeed = 40; // Faster deletion
             } else {
-                setTimeout(type, 100);
+                // Typing
+                letter = currentWord.substring(0, index + 1);
+                index++;
+                // Randomize typing speed slightly for realism
+                typeSpeed = 100 + Math.random() * 50;
             }
+
+            textElement.textContent = letter;
+
+            // Logic for switching states
+            if (!isDeleting && letter === currentWord) {
+                // Finished typing word
+                typeSpeed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && letter === '') {
+                // Finished deleting word
+                isDeleting = false;
+                count++;
+                if (count === texts.length) {
+                    count = 0;
+                }
+                typeSpeed = 500; // Pause before next word
+            }
+
+            setTimeout(type, typeSpeed);
         }());
 
         // Mobile Menu
@@ -985,10 +1816,10 @@
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
 
-                const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg rotation
-                const rotateY = ((x - centerX) / centerX) * 10;
+                const rotateX = ((y - centerY) / centerY) * -5; // Reduced max rotation
+                const rotateY = ((x - centerX) / centerX) * 5;
 
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
             });
 
             card.addEventListener('mouseleave', () => {
@@ -1014,9 +1845,10 @@
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
+                // Adjust sensitivity: check if scroll position is past the section start, minus a buffer
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - sectionHeight / 3) {
+                const buffer = 150; // 150px buffer for section activation
+                if (window.scrollY >= sectionTop - buffer) {
                     current = section.getAttribute('id');
                 }
             });
@@ -1028,15 +1860,111 @@
                 }
             });
         });
-
-        // Dynamic Title
+        
+        // Dynamic Tab Title - Enhancement
         const originalTitle = document.title;
         window.addEventListener('blur', () => {
-            document.title = 'Signal Lost...';
+            document.title = 'Signal Lost... ⚠️';
         });
         window.addEventListener('focus', () => {
             document.title = originalTitle;
         });
+
+        // --- DYNAMIC TERMINAL LOGIC ---
+        const termInput = document.getElementById('term-input');
+        const termOutput = document.getElementById('terminal-output');
+        const inputLine = document.querySelector('.input-line'); // The div containing the input
+
+        // Auto-focus input when clicking anywhere in terminal
+        document.querySelector('.terminal-window').addEventListener('click', () => {
+            termInput.focus();
+        });
+
+        const commands = {
+            help: "Available commands: <span class='text-primary'>help, whoami, projects, socials, scan, clear</span>",
+            whoami: "RL_V0ID. Bug Hunter. Breaker of things. Fixing the web one vuln at a time.",
+            projects: "Listing Projects...<br>- CyberSentinel Pro [Interactive Suite]<br>- Password Strength Checker<br>- OSINT Recon Tool<br>- Port Scanner",
+            socials: "Contact: <a href='mailto:itzmerl588@gmail.com' style='color:var(--primary)'>itzmerl588@gmail.com</a>",
+            clear: "clear",
+            scan: "scanning" 
+        };
+
+        termInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const input = this.value.trim().toLowerCase();
+                let response = "";
+
+                // Create previous line element
+                const prevLine = document.createElement('div');
+                prevLine.innerHTML = `<span class="path">guest@rl_void:~$</span> ${this.value}`;
+                
+                // Handle command
+                if (input in commands) {
+                    if (input === 'clear') {
+                        // Remove all previous output except banner
+                        const banner = document.querySelector('.output'); 
+                        termOutput.innerHTML = ''; 
+                        if(banner) termOutput.appendChild(banner);
+                        // Add input line back
+                        termOutput.appendChild(inputLine); 
+                        this.value = '';
+                        return;
+                    } else if (input === 'scan') {
+                        response = "<span style='color:#e0e0e0'>Initializing masscan...</span><br>";
+                        // Simulated delay effect could be added here, keeping it simple for now
+                        response += "<span style='color:var(--primary)'>[+] Target Acquired: 192.168.1.1</span><br>";
+                        response += "<span style='color:var(--secondary)'>[*] Scanning ports... </span><br>";
+                        response += "<span style='color:#27c93f'>[!] Open Port: 80 (HTTP) - VULNERABLE</span>";
+                    } else {
+                        response = `<span class="output">${commands[input]}</span>`;
+                    }
+                } else if (input !== "") {
+                     response = `<span class="output" style="color:#ff5f56">bash: ${input}: command not found</span>`;
+                }
+
+                // Insert previous line before input line
+                termOutput.insertBefore(prevLine, inputLine);
+                
+                // Insert response before input line
+                if (response) {
+                    const respDiv = document.createElement('div');
+                    respDiv.innerHTML = response;
+                    termOutput.insertBefore(respDiv, inputLine);
+                }
+
+                // Reset input and scroll
+                this.value = '';
+                termOutput.scrollTop = termOutput.scrollHeight;
+            }
+        });
+
+
+        // Contact Form Mailto Handler
+        const contactForm = document.getElementById('contact-form');
+        const recipientEmail = 'itzmerl588@gmail.com'; // <<< UPDATE THIS EMAIL ADDRESS
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
+
+            // Construct the subject and body
+            const subject = `[RL_V0ID Portfolio Contact] New Transmission from ${name}`;
+            const body = `
+Codename: ${name}
+Email: ${email}
+--- Message Transmission ---
+${message}
+            `;
+
+            window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Optionally clear the form after submission attempt
+            contactForm.reset();
+        });
+        })(); // End IIFE
     </script>
 </body>
 
